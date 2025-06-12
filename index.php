@@ -23,7 +23,7 @@
 				<div class="d-flex justify-content-center mt-2 align-items-center w-100">
 				<img src="img/CenNormandie.png" style="max-width:80px;max-height: 40px;opacity:0.8;"/>
 					<div class="text-light mx-2">
-						<h1 class="text-light mx-2 moonflower">CEN Normandie</h1>
+						<h1 class="text-light mx-2 moonflower">Qsync</h1>
 					</div>
 				</div>
 			</div>
