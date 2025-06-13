@@ -35,7 +35,7 @@ $insert_s = pg_execute($dbconn_nx, "sql",array()) or die ( pg_last_error());
 while($row = pg_fetch_row($insert_s))
 {
   $insert = pg_execute($dbconn_geo, "sql_insert",array($row[0], $row[1], $row[2])) or die ( pg_last_error());
-  echo $row[0].' - '.$row[1].' - '.$row[2].'</br>';
+  //echo $row[0].' - '.$row[1].' - '.$row[2].'</br>';
 }
 
 ///////////////////////////////////////////////////////////////////
@@ -59,12 +59,10 @@ $select = pg_prepare($dbconn_geo, "sql_select", "select courriel, gn_user_name, 
 $personne = pg_execute($dbconn_geo, "sql_select",array()) or die ( pg_last_error());
 while($row = pg_fetch_row($personne))
 {
-  echo $row[0].' - '.$row[1].' - '.$row[2].'</br>';
-  //FAUNE + AUTRE POINT
   $observations_gpkg = '/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/observations.gpkg';
   //if file_exists
   if (file_exists($observations_gpkg)) {
-    echo '</br>' .$row[0]. ' - ' . filemtime($observations_gpkg) . '</br>';
+    echo '</br>' .$row[0]. ' - ' . date('d-m-Y', filemtime($observations_gpkg)) . '</br>';
   }
 }
 
