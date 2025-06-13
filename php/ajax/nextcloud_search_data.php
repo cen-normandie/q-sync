@@ -67,13 +67,19 @@ while($row = pg_fetch_row($personne))
     $db = new SQLite3('/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/observations.gpkg');
     $db->loadExtension('mod_spatialite.so');
     $results_obs_faune_gpkg = $db->query("select fid, id_dataset, id_digitiser from  obs_faune where date_import is null;"); //
-    while ($row = $results_obs_faune_gpkg->fetchArray()) {
-            echo '</br> nb faune' .var_dump($row). '</br>';
+    $i_faune= 0;
+    while ($row_ = $results_obs_faune_gpkg->fetchArray()) {
+            //var_dump($row_);
+            $i_faune++;
     }
+    echo '</br> nb faune :' . $i_faune . '</br>';
     $results_obs_flore_gpkg = $db->query("select fid, id_dataset, id_digitiser from  obs_flore where date_import is null;"); //
-    while ($row = $results_obs_flore_gpkg->fetchArray()) {
-            echo '</br> nb flore' .var_dump($row). '</br>';
+    $i_flore= 0;
+    while ($row_ = $results_obs_flore_gpkg->fetchArray()) {
+            //var_dump($row_);
+            $i_flore++;
     }
+    echo '</br> nb flore :' . $i_flore . '</br>';
 
 
   }
