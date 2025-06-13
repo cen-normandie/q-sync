@@ -63,7 +63,18 @@ while($row = pg_fetch_row($personne))
   //if file_exists
   if (file_exists($observations_gpkg)) {
     echo '</br>' .$row[0]. ' - ' . date('d-m-Y', filemtime($observations_gpkg)) . '</br>';
+
+    $db = new SQLite3('/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/observations.gpkg');
+    $db->loadExtension('mod_spatialite.so');
+    $results_obs_faune_gpkg = $db->query("select fid, id_dataset, id_digitiser from  obs_faune where date_import is null;"); //
+    while ($row = $results_obs_faune_gpkg->fetchArray()) {
+            echo var_dump($row);
+        }
+
+
   }
+
+
 }
 
 /* $file_size = pg_prepare($dbconn_geo, "sql_insert", "SELECT ");
