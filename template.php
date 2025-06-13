@@ -37,13 +37,13 @@ if (in_array($_SESSION['email'], $admins)) {
     <link href="js/plugins/bs5-datepicker/css/bootstrap-datepicker.standalone.min.css" rel="stylesheet">
 	<link href="bootstrap-5.0.0/css/bootstrap.min.css" rel="stylesheet">
     <!--Datatable-->
-	<!--<link href="js/plugins/datatable/datatables.min.css" rel="stylesheet">-->
+	<link href="js/plugins/datatable/datatables.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="css/cennormandie.css" rel="stylesheet">
     <!--FONT AWESOME-->
     <link href="fontawesome-free-5.15.2-web/css/all.css" rel="stylesheet" type="text/css">
     <!--Datatable bs5-->
-    <!--<link href="css/plugins/twitter_bs5.css" rel="stylesheet">-->
+    <link href="css/plugins/twitter_bs5.css" rel="stylesheet">
     <link href="css/plugins/dataTables.bootstrap5.min.css" rel="stylesheet">
   </head>
   <body>
