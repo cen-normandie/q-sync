@@ -68,8 +68,12 @@ while($row = pg_fetch_row($personne))
     $db->loadExtension('mod_spatialite.so');
     $results_obs_faune_gpkg = $db->query("select fid, id_dataset, id_digitiser from  obs_faune where date_import is null;"); //
     while ($row = $results_obs_faune_gpkg->fetchArray()) {
-            echo var_dump($row);
-        }
+            echo '</br> nb faune' .var_dump($row). '</br>';
+    }
+    $results_obs_flore_gpkg = $db->query("select fid, id_dataset, id_digitiser from  obs_flore where date_import is null;"); //
+    while ($row = $results_obs_flore_gpkg->fetchArray()) {
+            echo '</br> nb flore' .var_dump($row). '</br>';
+    }
 
 
   }
