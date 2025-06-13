@@ -56,16 +56,14 @@ if (in_array($_SESSION['email'], $admins)) {
 		</div>
         <div class="d-flex flex-column justify-content-end" style="">
             <div class="d-flex justify-content-start bg-light m-2 border-bottom ">
-                <h2 class="bebas">Empty</h2>
+                <h2 class="bebas">Dashboard</h2>
                 <div id="loader" class=" bg-success loader mx-4 d-flex flex-wrap align-content-center flex-grow-1 visible_s" style="margin-bottom: .5rem"></div>
             </div>
             
-            <div class="d-flex bg-light ">
-                
-            <div class="d-flex bg-light mb-2">
-                <div class="d-flex flex-column text-secondary col-md-6 col-lg-6 px-4"> <!--bg-dark-->
-                    <div class="d-flex w-100 justify-content-center bg-light text-secondary m-2"><h4 class="bebas">observations.gpkg:</h4></div>
-                    <div class="d-flex flex-column w-100 bg-light mb-2">
+            <div class="d-flex flex-column w-100">
+                <div class="d-flex justify-content-center bg-light text-secondary m-2"><h4 class="bebas">observations.gpkg:</h4></div>
+                <div class="d-flex w-100 p-2">
+                    <div class="d-flex flex-column col-6 p-2">
                         <table id="QSync" class="table table-hover table-sm" style="width:100%"> <!--table-dark-->
                             <thead>
                                 <tr>
@@ -81,13 +79,9 @@ if (in_array($_SESSION['email'], $admins)) {
                             </tbody>
                         </table>
                     </div>
-                    <div class="d-flex col-md-6">
+                    <div class="d-flex flex-column bg-dark col-6 p-2">
                     </div>
-                    
                 </div>
-            </div>
-
-                
             </div>	
 		</div>
 

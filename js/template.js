@@ -14,12 +14,7 @@ const dtQSync =$('#QSync').DataTable({
         "sZeroRecords":    "Aucun &eacute;l&eacute;ment &agrave; afficher",
         "sEmptyTable":     "Aucune donn&eacute;e disponible dans le tableau"
     },
-    dom: '<"top"<"d-flex justify-content-between align-items-center"Bf>>t', // export excel -->B :<"top"<"d-flex justify-content-end align-items-center"fB>>t
-    buttons: [
-    {
-    }
-    ],
-
+    dom: '<"top"<"d-flex justify-content-between align-items-center"f>>t', // export excel -->B :<"top"<"d-flex justify-content-end align-items-center"fB>>t
     scrollY: '400px',
     scrollCollapse: true,
     paging: false
