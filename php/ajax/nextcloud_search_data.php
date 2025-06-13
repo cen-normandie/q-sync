@@ -47,13 +47,26 @@ left join utilisateurs.t_roles on t_roles.email = courriel
 group by 1,2,3,4
 order by 1
 )
-update nextcloud.users set gn_user_name = a_.id_role from a_ where a_.courriel = users.email;
+update nextcloud.users set gn_user_name = a_.id_role::text from a_ where a_.email = users.courriel;
 ");
 $update_ = pg_execute($dbconn_geo, "sql_update",array()) or die ( pg_last_error());
 
 ///////////////////////////////////////////////////////////////////
 // C. Mise à jour du champ uuid_nx dans la table suivi_faune
 ///////////////////////////////////////////////////////////////////
+
+$select = pg_prepare($dbconn_geo, "sql_select", "select courriel, gn_user_name, nom_ad, uuid_nx from $nx_users;");
+$personne = pg_execute($dbconn_geo, "sql_select",array()) or die ( pg_last_error());
+while($row = pg_fetch_row($personne))
+{
+  echo $row[0].' - '.$row[1].' - '.$row[2].'</br>';
+  //FAUNE + AUTRE POINT
+  $observations_gpkg = '/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/observations.gpkg';
+  //if file_exists
+  if (file_exists($observations_gpkg)) {
+    echo '</br>' .$row[0]. ' - ' . filemtime($observations_gpkg) . '</br>';
+  }
+}
 
 /* $file_size = pg_prepare($dbconn_geo, "sql_insert", "SELECT ");
 $observations_gpkg = '/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/observations.gpkg';
