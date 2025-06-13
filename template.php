@@ -13,7 +13,7 @@ if (!isset($_SESSION['session'])) {
     exit();
 };
 $_SESSION['is_admin'] = false;
-$admins = array("n.moreira@cen-normandie.fr", "c.bouteiller@cen-normandie.fr", "f.buissart@cen-normandie.fr", "b.perceval@cen-normandie.fr");
+$admins = array("b.perceval@cen-normandie.fr");
 if (in_array($_SESSION['email'], $admins)) {
     $_SESSION['is_admin'] = true;
 }
@@ -31,9 +31,7 @@ if (in_array($_SESSION['email'], $admins)) {
     <script>L_PREFER_CANVAS = true;</script>
     
     
-    <!--LEAFLET-->
-    <link href="css/leaflet.css" rel="stylesheet" type="text/css">
-    <link href="js/leaflet/plugins/leaflet_label/css/leafleat_label.css" rel="stylesheet" type="text/css">
+
     <!-- Bootstrap Core CSS -->
     <!--<link href="css/bootstrap.min.css" rel="stylesheet">-->
     <link href="js/plugins/bs5-datepicker/css/bootstrap-datepicker.standalone.min.css" rel="stylesheet">
@@ -108,9 +106,7 @@ if (in_array($_SESSION['email'], $admins)) {
 <script src="js/plugins/bs5-datepicker/locales/bootstrap-datepicker.fr.min.js"></script>
 <!-- FONT AWESOME -->
 <script src="fontawesome-free-5.15.2-web/js/fontawesome.min.js" ></script>
-<!-- LEAFLET -->
-<script type="text/javascript" src="js/leaflet/leaflet.js"></script>
-<script type="text/javascript" src="js/leaflet/plugins/leaflet_label/js/leaflet_label.js" ></script>
+
 <!-- HIGHCHARTS -->
 <script type="text/javascript" src="js/plugins/highcharts/code/highstock.js"></script>
 <script type="text/javascript" src="js/plugins/highcharts/code/modules/exporting.js"></script>  
