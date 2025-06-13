@@ -24,3 +24,31 @@ const dtQSync =$('#QSync').DataTable({
     scrollCollapse: true,
     paging: false
 });
+
+function load_qsync () {
+    change_load('Chargement');
+    $.ajax({
+        url      : "php/ajax/dashboard.js.php",
+        data     : {},
+        method   : "POST",
+        dataType : "json",
+        async    : true,
+        error    : function(request, error) { alert("Erreur : responseText: "+request.responseText);change_load();},
+        success  : function(data) {
+            qsync_liste = data ;
+            console.log(data);
+            for (const ele in qsync_liste) {
+                let rowNode = dtPaniers.row.add( [
+                    qsync_liste[ele].uuid,
+                    qsync_liste[ele].personne, 
+                    qsync_liste[ele].nb_faune,
+                    qsync_liste[ele].nb_flore,
+                    qsync_liste[ele].update,
+                    qsync_liste[ele].version
+                ] ).node().id = qsync_liste[ele].uuid;
+            }
+            dtQSync.draw();
+            change_load();
+            }
+    });
+}
