@@ -52,3 +52,4 @@ function load_qsync () {
             }
     });
 }
+load_qsync();
