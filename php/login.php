@@ -93,22 +93,6 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
                         }
                         sort($list_responsable);
                     }
-                    /* $ii = 0;
-                    //liste des responables projets triés
-                    $responsables= array();
-                    //liste des responables projets triés html
-                    $responsables_html = '';
-                    //liste des responables projets triés html
-                    $responsables_html_wo_id = '';
-                    foreach($list_responsable as $resp) {
-                        $responsables[$resp] = $ii." - ".$resp;
-                        $responsables_html = $responsables_html.'<option value = "'.$ii.' - '.$resp.'">'.$ii.' - '.$resp.'</option>';
-                        $responsables_html_wo_id = $responsables_html_wo_id.'<option value = "'.$resp.'">'.$resp.'</option>';
-                        $ii ++;
-                    }
-                    $_SESSION['responsables']=$responsables;
-                    $_SESSION['responsables_html']=$responsables_html;
-                    $_SESSION['responsables_html_wo_id']=$responsables_html_wo_id ; */
 
                 echo "Success";
             } else {
