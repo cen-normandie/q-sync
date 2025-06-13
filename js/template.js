@@ -48,3 +48,24 @@ function load_qsync () {
     });
 }
 load_qsync();
+
+function read_files_nx_cloud() {
+    change_load('Chargement');
+    $.ajax({
+        url      : "php/ajax/dashboard.js.php",
+        data     : {},
+        method   : "POST",
+        dataType : "json",
+        async    : true,
+        error    : function(request, error) { alert("Erreur : responseText: "+request.responseText);change_load();},
+        success  : function(data) {
+            console.log(data);
+            if (data.length > 0) {
+                $('#nx_cloud').html('<i class="bi bi-cloud-check-fill"></i> '+data.length+' fichiers trouvés');
+            } else {
+                $('#nx_cloud').html('<i class="bi bi-cloud-slash-fill"></i> Aucun fichier trouvé');
+            }
+            change_load();
+            }
+    });
+}
