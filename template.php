@@ -67,10 +67,10 @@ if (in_array($_SESSION['email'], $admins)) {
                         <table id="QSync" class="table table-hover table-sm" style="width:100%"> <!--table-dark-->
                             <thead>
                                 <tr>
-                                    <th>ID</th>
                                     <th>Personne</th>
                                     <th>nb obs faune</th>
                                     <th>nb obs flore</th>
+                                    <th>nb obs cc</th>
                                     <th>date update .gpkg</th>
                                     <th>version</th>
                                 </tr>

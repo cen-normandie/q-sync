@@ -8,7 +8,6 @@ $result = pg_prepare($dbconn, "sql",
 SELECT array_to_json(array_agg(row_to_json(t))) FROM 
 (
 SELECT 
-    uuid,
 	personne, 
 	obs_faune,
 	obs_flore,

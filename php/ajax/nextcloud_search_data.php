@@ -14,7 +14,9 @@ $delete = pg_execute($dbconn_geo, "sql",array()) or die ( pg_last_error());
 // suppression des données sur dashboard
 $delete = pg_prepare($dbconn_geo, "sql_dashboard", "DELETE FROM $nx_dashboard;");
 $delete = pg_execute($dbconn_geo, "sql_dashboard",array()) or die ( pg_last_error());
-$insert_dashboard = pg_prepare($dbconn_geo, "sql_insert_dashboard", "INSERT INTO $nx_dashboard (uuid, personne, obs_faune, obs_flore, update) VALUES ($1, $2, $3,$4,$5);");
+
+// INSERTION DANS LA TABLE NEXTCLOUD.DASHBOARD
+$insert_dashboard = pg_prepare($dbconn_geo, "sql_insert_dashboard", "INSERT INTO $nx_dashboard (uuid, personne, obs_faune, obs_flore, update, obs_cc, version) VALUES ($1, $2, $3,$4,$5,$6,$7);");
 
 $insert_s = pg_prepare($dbconn_nx, "sql", "
 with a_ as (
@@ -84,7 +86,7 @@ while($row = pg_fetch_row($personne))
             $i_flore++;
     }
     echo '</br> nb flore :' . $i_flore . '</br>';
-    $insert_dashboard = pg_execute($dbconn_geo, "sql_insert_dashboard",array($row[3], $row[0], $i_faune, $i_flore, date('d-m-Y', filemtime($observations_gpkg)) )) or die ( pg_last_error());
+    $insert_dashboard = pg_execute($dbconn_geo, "sql_insert_dashboard",array($row[3], $row[1], $i_faune, $i_flore, date('d-m-Y', filemtime($observations_gpkg)), 0, '0.0' )) or die ( pg_last_error());
   }
 
 
