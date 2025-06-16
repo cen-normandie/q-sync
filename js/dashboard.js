@@ -17,7 +17,13 @@ const dtQSync =$('#QSync').DataTable({
     dom: '<"top"<"d-flex justify-content-between align-items-center"f>>t', // export excel -->B :<"top"<"d-flex justify-content-end align-items-center"fB>>t
     scrollY: '400px',
     scrollCollapse: true,
-    paging: false
+    paging: false,
+    columnDefs: [
+        {
+            target: 1,
+            visible: false
+        }
+    ]
 });
 
 function load_qsync () {
@@ -34,7 +40,7 @@ function load_qsync () {
             console.log(data);
             for (const ele in qsync_liste) {
                 let rowNode = dtQSync.row.add( [
-                    //qsync_liste[ele].uuid,
+                    qsync_liste[ele].uuid,
                     qsync_liste[ele].personne, 
                     qsync_liste[ele].obs_faune,
                     qsync_liste[ele].obs_flore,
