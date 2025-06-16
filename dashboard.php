@@ -55,13 +55,14 @@ if (in_array($_SESSION['email'], $admins)) {
 			<div class="m-2"><a class="logout text-light" href="php/logout.php" ><i class="fa fa-fw fa-power-off"></i> Déconnexion</a></div>
 		</div>
         <div class="d-flex flex-column justify-content-end" style="">
-            <div class="d-flex justify-content-start bg-light m-2 border-bottom ">
-                <h2 class="bebas">Dashboard</h2>
-                <div id="loader" class=" bg-success loader mx-4 d-flex flex-wrap align-content-center flex-grow-1 visible_s" style="margin-bottom: .5rem"></div>
-            </div>
-            
             <div class="d-flex flex-column w-100">
-                <div class="d-flex justify-content-center bg-light text-secondary m-2"><h4 class="bebas">Observations.gpkg:</h4></div>
+                <div class="d-flex align-items-center justify-content-between bg-light text-dark m-2">
+                    <h4 class="bebas">Fichiers observations.gpkg sur Nextcloud :</h4>
+                    <div id="loader" class=" bg-success loader mx-4 d-flex flex-wrap align-content-center flex-grow-1 visible_s" style="margin-bottom: .5rem"></div>
+                    <button class="input-group-text justify-content-center mx-2" id="refresh">
+                        <i class="fas fa-sync-alt text-dark"></i><span class="p-2 bebas">Update</span>
+                    </button>       
+                </div>
                 <div class="d-flex w-100 p-2">
                     <div class="d-flex flex-column col-12 p-2">
                         <table id="QSync" class="table table-hover table-sm" style="width:100%"> <!--table-dark-->
