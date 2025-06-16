@@ -86,7 +86,7 @@ while($row = pg_fetch_row($personne))
             $i_flore++;
     }
     echo '</br> nb flore :' . $i_flore . '</br>';
-    $insert_dashboard = pg_execute($dbconn_geo, "sql_insert_dashboard",array($row[3], $row[1], $i_faune, $i_flore, date('d-m-Y', filemtime($observations_gpkg)), 0, '0.0' )) or die ( pg_last_error());
+    $insert_dashboard = pg_execute($dbconn_geo, "sql_insert_dashboard",array($row[3], $row[2], $i_faune, $i_flore, date('d-m-Y', filemtime($observations_gpkg)), 0, '0.0' )) or die ( pg_last_error());
   }
 
 
