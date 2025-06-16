@@ -63,7 +63,7 @@ if (in_array($_SESSION['email'], $admins)) {
             <div class="d-flex flex-column w-100">
                 <div class="d-flex justify-content-center bg-light text-secondary m-2"><h4 class="bebas">observations.gpkg:</h4></div>
                 <div class="d-flex w-100 p-2">
-                    <div class="d-flex flex-column col-6 p-2">
+                    <div class="d-flex flex-column col-12 p-2">
                         <table id="QSync" class="table table-hover table-sm" style="width:100%"> <!--table-dark-->
                             <thead>
                                 <tr>
@@ -79,8 +79,7 @@ if (in_array($_SESSION['email'], $admins)) {
                             </tbody>
                         </table>
                     </div>
-                    <div class="d-flex flex-column bg-dark col-6 p-2">
-                    </div>
+
                 </div>
             </div>	
 		</div>
