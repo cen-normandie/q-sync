@@ -25,7 +25,7 @@ const dtQSync =$('#QSync').DataTable({
         }
     ]
 });
-dtQSync.column( 1 ).visible(false);
+dtQSync.column( 0 ).visible(false);
 
 function uuid_event_click (uuid) {
     console.log(uuid);
