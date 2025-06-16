@@ -27,7 +27,7 @@ if (in_array($_SESSION['email'], $admins)) {
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Q-Sync</title>
-    <link rel="shortcut icon" href="img/CenNormandie.ico" />
+    <link rel="shortcut icon" href="img/qgis.ico" />
     <script>L_PREFER_CANVAS = true;</script>
     
     
