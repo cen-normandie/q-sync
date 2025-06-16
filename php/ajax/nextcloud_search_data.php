@@ -68,7 +68,7 @@ while($row = pg_fetch_row($personne))
   $observations_gpkg = '/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/observations.gpkg';
   //if file_exists
   if (file_exists($observations_gpkg)) {
-    echo '</br>' .$row[0]. ' - ' . date('d-m-Y', filemtime($observations_gpkg)) . '</br>';
+    echo '</br>' .$row[0]. ' - ' . date('Y-m-d', filemtime($observations_gpkg)) . '</br>';
 
     $db = new SQLite3('/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/observations.gpkg');
     $db->loadExtension('mod_spatialite.so');
@@ -86,7 +86,7 @@ while($row = pg_fetch_row($personne))
             $i_flore++;
     }
     echo '</br> nb flore :' . $i_flore . '</br>';
-    $insert_dashboard = pg_execute($dbconn_geo, "sql_insert_dashboard",array($row[3], $row[2], $i_faune, $i_flore, date('d-m-Y', filemtime($observations_gpkg)), 0, '0.0' )) or die ( pg_last_error());
+    $insert_dashboard = pg_execute($dbconn_geo, "sql_insert_dashboard",array($row[3], $row[2], $i_faune, $i_flore, date('Y-m-d', filemtime($observations_gpkg)), 0, '0.0' )) or die ( pg_last_error());
   }
 
 
