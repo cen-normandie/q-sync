@@ -26,6 +26,11 @@ const dtQSync =$('#QSync').DataTable({
     ]
 });
 
+function uuid_event_click (uuid) {
+    console.log(uuid);
+}
+
+
 function load_qsync () {
     change_load('Chargement');
     $.ajax({
@@ -46,7 +51,8 @@ function load_qsync () {
                     qsync_liste[ele].obs_flore,
                     qsync_liste[ele].obs_cc,
                     qsync_liste[ele].update,
-                    qsync_liste[ele].version
+                    qsync_liste[ele].version,
+                    '<button class="btn btn-primary btn-sm" onclick="uuid_event_click(\''+qsync_liste[ele].uuid+'\')"><i class="bi bi-eye"></i> Voir</button>'
                 ] ).node().id = qsync_liste[ele].uuid;
             }
             dtQSync.draw();
