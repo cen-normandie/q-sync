@@ -26,7 +26,7 @@ if (in_array($_SESSION['email'], $admins)) {
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>CEN Normandie</title>
+    <title>Q-Sync</title>
     <link rel="shortcut icon" href="img/CenNormandie.ico" />
     <script>L_PREFER_CANVAS = true;</script>
     
