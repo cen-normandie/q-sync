@@ -7,6 +7,10 @@ $dbconn_nx = pg_connect("hostaddr=$DBHOST_nextcloud port=$PORT_nextcloud dbname=
 ///////////////////////////////////////////////////////////////////
 // A. Insertion des nouveaux utilisateurs dans la table nextcloud.users
 ///////////////////////////////////////////////////////////////////
+$setval = pg_prepare($dbconn_geo, "sql_setval", "SELECT setval('$1', 1);");
+$setval = pg_execute($dbconn_geo, "sql_setval",array($users_id_seq)) or die ( pg_last_error());
+$setval = pg_execute($dbconn_geo, "sql_setval",array($dashboard_id_seq)) or die ( pg_last_error());
+
 
 $delete = pg_prepare($dbconn_geo, "sql", "DELETE FROM $nx_users;");
 $delete = pg_execute($dbconn_geo, "sql",array()) or die ( pg_last_error());
@@ -72,18 +76,34 @@ while($row = pg_fetch_row($personne))
 
     $db = new SQLite3('/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/observations.gpkg');
     $db->loadExtension('mod_spatialite.so');
-    $results_obs_faune_gpkg = $db->query("select fid, id_dataset, id_digitiser from  obs_faune where date_import is null;"); //
+
+    // Decompte des obs faunes à importer
+    $results_obs_faune_gpkg = $db->query("select fid, id_dataset, id_digitiser from  $faune where date_import is null;"); //
     $i_faune= 0;
     while ($row_ = $results_obs_faune_gpkg->fetchArray()) {
             //var_dump($row_);
             $i_faune++;
     }
+    // Decompte des obs faunes importées
+    $results_obs_faune_gpkg = $db->query("select count(*) from  $faune where date_import is not null;"); //
+    $i_faune_imported= 0;
+    while ($row_ = $results_obs_faune_gpkg->fetchArray()) {
+            $i_faune_imported=$row_[0];
+    }
     echo '</br> nb faune :' . $i_faune . '</br>';
-    $results_obs_flore_gpkg = $db->query("select fid, id_dataset, id_digitiser from  obs_flore where date_import is null;"); //
+
+    // Decompte des obs flores à importer
+    $results_obs_flore_gpkg = $db->query("select fid, id_dataset, id_digitiser from  $flore where date_import is null;"); //
     $i_flore= 0;
     while ($row_ = $results_obs_flore_gpkg->fetchArray()) {
-            //var_dump($row_);
             $i_flore++;
+    }
+    // Decompte des obs flores importées
+    $results_obs_flore_gpkg = $db->query("select count(*) from  $flore where date_import is not null;"); //
+    $i_flore_imported= 0;
+    while ($row_ = $results_obs_flore_gpkg->fetchArray()) {
+            //var_dump($row_);
+            $i_flore_imported=$row_[0];
     }
     echo '</br> nb flore :' . $i_flore . '</br>';
     $insert_dashboard = pg_execute($dbconn_geo, "sql_insert_dashboard",array($row[3], $row[2], $i_faune, $i_flore, date('Y-m-d', filemtime($observations_gpkg)), 0, '0.0' )) or die ( pg_last_error());

@@ -70,3 +70,18 @@ function read_files_nx_cloud() {
             }
     });
 }
+
+$('#refresh').on('click', function() {
+    $.ajax({
+        url      : "php/ajax/nextcloud_search_data.php",
+        data     : {},
+        method   : "POST",
+        dataType : "text",
+        async    : true,
+        error    : function(request, error) { alert("Erreur : responseText: "+request.responseText);change_load();},
+        success  : function(data) {
+            //console.log(data);
+            change_load();
+            }
+    });
+});
