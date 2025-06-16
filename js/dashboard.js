@@ -25,7 +25,7 @@ const dtQSync =$('#QSync').DataTable({
         }
     ]
 });
-//dtQSync.column( 0 ).visible(false);
+dtQSync.column( 0 ).visible(false);
 
 function uuid_event_click (uuid) {
     console.log(uuid);
@@ -48,9 +48,9 @@ function load_qsync () {
                 let rowNode = dtQSync.row.add( [
                     qsync_liste[ele].uuid,
                     qsync_liste[ele].personne, 
-                    '<span class="badge bg-warning text-dark">'+qsync_liste[ele].obs_faune+'</span>',
-                    '<span class="badge bg-warning text-dark">'+qsync_liste[ele].obs_flore+'</span>',
-                    '<span class="badge bg-warning text-dark">'+qsync_liste[ele].obs_cc+'</span>',
+                    '<span class="">'+qsync_liste[ele].obs_faune+'</span>',
+                    '<span class="">'+qsync_liste[ele].obs_flore+'</span>',
+                    '<span class="">'+qsync_liste[ele].obs_cc+'</span>',
                     qsync_liste[ele].update,
                     qsync_liste[ele].version,
                     '<button class="btn btn-primary btn-sm" onclick="uuid_event_click(\''+qsync_liste[ele].uuid+'\')"><i class="fas fa-file-import pr-1"></i> Import</button>'
@@ -73,7 +73,7 @@ $('#refresh').on('click', function() {
         async    : true,
         error    : function(request, error) { alert("Erreur : responseText: "+request.responseText);change_load();},
         success  : function(data) {
-            //console.log(data);
+            console.log(data);
             change_load();
             }
     });
