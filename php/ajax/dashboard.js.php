@@ -10,9 +10,9 @@ SELECT array_to_json(array_agg(row_to_json(t))) FROM
 SELECT 
 	uuid,
 	personne, 
-	obs_faune,
-	obs_flore,
-	obs_cc,
+	obs_faune || '/' || obs_faune_imported as obs_faune,
+	obs_flore || '/' || obs_flore_imported as obs_flore,
+	obs_cc || '/' || obs_cc_imported as obs_cc,
 	update,
 	version
 	FROM $nx_dashboard 
