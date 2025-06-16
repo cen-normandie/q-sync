@@ -48,9 +48,9 @@ function load_qsync () {
                 let rowNode = dtQSync.row.add( [
                     qsync_liste[ele].uuid,
                     qsync_liste[ele].personne, 
-                    qsync_liste[ele].obs_faune,
-                    qsync_liste[ele].obs_flore,
-                    qsync_liste[ele].obs_cc,
+                    '<span class="badge badge-info">'+qsync_liste[ele].obs_faune+'</span>',
+                    '<span class="badge badge-info">'+qsync_liste[ele].obs_flore+'</span>',
+                    '<span class="badge badge-info">'+qsync_liste[ele].obs_cc+'</span>',
                     qsync_liste[ele].update,
                     qsync_liste[ele].version,
                     '<button class="btn btn-primary btn-sm" onclick="uuid_event_click(\''+qsync_liste[ele].uuid+'\')"><i class="fas fa-file-import pr-1"></i> Import</button>'
