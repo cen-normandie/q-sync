@@ -64,7 +64,12 @@ if (in_array($_SESSION['email'], $admins)) {
                     </button>       
                 </div>
                 <div class="d-flex w-100 p-2">
-                    <div class="d-flex flex-column col-12 p-2">
+                    <p>Ci-dessous les données présentes au sein des geopackages.
+                    Lecture : <span class="fw-bold" > A intégrer / Intégrées dans Géonature </span>
+                    </p>
+                </div>
+                <div class="d-flex w-100 p-2">
+                    <div class="d-flex flex-column col-9 p-2">
                         <table id="QSync" class="table table-hover table-sm" style="width:100%"> <!--table-dark-->
                             <thead>
                                 <tr>
@@ -82,7 +87,8 @@ if (in_array($_SESSION['email'], $admins)) {
                             </tbody>
                         </table>
                     </div>
-
+                    <div class="d-flex flex-column col-3 p-2">
+                    </div>
                 </div>
             </div>	
 		</div>
