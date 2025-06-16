@@ -7,7 +7,7 @@ $dbconn_nx = pg_connect("hostaddr=$DBHOST_nextcloud port=$PORT_nextcloud dbname=
 ///////////////////////////////////////////////////////////////////
 // A. Insertion des nouveaux utilisateurs dans la table nextcloud.users
 ///////////////////////////////////////////////////////////////////
-$setval = pg_prepare($dbconn_geo, "sql_setval", "SELECT setval('$1', 1);");
+$setval = pg_prepare($dbconn_geo, "sql_setval", "SELECT setval( $1, 1);");
 $setval = pg_execute($dbconn_geo, "sql_setval",array($users_id_seq)) or die ( pg_last_error());
 $setval = pg_execute($dbconn_geo, "sql_setval",array($dashboard_id_seq)) or die ( pg_last_error());
 
