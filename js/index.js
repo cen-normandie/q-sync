@@ -73,7 +73,7 @@ $("#signin").click( function () {
             success  : function(data) {
                 if (data == "Success")
                 {   
-                    window.location.href = 'dashboard.php';
+                    window.location.href = 'imports.php';
                 }
                 else /*(data == "Failed")*/
                 {

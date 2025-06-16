@@ -12,10 +12,16 @@
 <?php 
  if ($_SESSION['is_equipe_si']) {
     echo '        <a class="nav-link py-1';
-    $t = ((($_POST['page']) == 'dashboard.php') ? ' active' : '' ); echo $t;
-    echo '"  href="dashboard.php">
+    $t = ((($_POST['page']) == 'imports.php') ? ' active' : '' ); echo $t;
+    echo '"  href="imports.php">
           <span data-feather=""></span>
-          <i class="fas fa-tachometer-alt"></i> dashboard
+          <i class="fa-solid fa-file-import"></i> imports
+        </a>';
+    echo '        <a class="nav-link py-1';
+    $t = ((($_POST['page']) == 'write_table.php') ? ' active' : '' ); echo $t;
+    echo '"  href="write_table.php">
+          <span data-feather=""></span>
+          <i class="fas fa-table"></i> tables GPKG
         </a>';
   } 
 ?>
