@@ -10,11 +10,12 @@ SELECT array_to_json(array_agg(row_to_json(t))) FROM
 SELECT 
     uuid,
 	personne, 
-	nb_faune,
-	nb_flore,
+	obs_faune,
+	obs_flore,
+	obs_cc,
 	update,
 	version
-	FROM $nx_view_dashboard 
+	FROM $nx_dashboard 
 ) t
 "
 );

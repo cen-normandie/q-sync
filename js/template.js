@@ -36,8 +36,9 @@ function load_qsync () {
                 let rowNode = dtQSync.row.add( [
                     qsync_liste[ele].uuid,
                     qsync_liste[ele].personne, 
-                    qsync_liste[ele].nb_faune,
-                    qsync_liste[ele].nb_flore,
+                    qsync_liste[ele].obs_faune,
+                    qsync_liste[ele].obs_flore,
+                    qsync_liste[ele].obs_cc,
                     qsync_liste[ele].update,
                     qsync_liste[ele].version
                 ] ).node().id = qsync_liste[ele].uuid;
