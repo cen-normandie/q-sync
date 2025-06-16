@@ -20,7 +20,7 @@ const dtQSync =$('#QSync').DataTable({
     paging: false,
     columnDefs: [
         {
-            target: 1,
+            target: 0,
             visible: false
         }
     ]
@@ -52,7 +52,7 @@ function load_qsync () {
                     qsync_liste[ele].obs_cc,
                     qsync_liste[ele].update,
                     qsync_liste[ele].version,
-                    '<button class="btn btn-primary btn-sm" onclick="uuid_event_click(\''+qsync_liste[ele].uuid+'\')"><i class="fas fa-file-import px-2"></i> Import</button>'
+                    '<button class="btn btn-primary btn-sm" onclick="uuid_event_click(\''+qsync_liste[ele].uuid+'\')"><i class="fas fa-file-import pr-1"></i> Import</button>'
                 ] ).node().id = qsync_liste[ele].uuid;
             }
             dtQSync.draw();
