@@ -61,7 +61,7 @@ if (in_array($_SESSION['email'], $admins)) {
             </div>
             
             <div class="d-flex flex-column w-100">
-                <div class="d-flex justify-content-center bg-light text-secondary m-2"><h4 class="bebas">observations.gpkg:</h4></div>
+                <div class="d-flex justify-content-center bg-light text-secondary m-2"><h4 class="bebas">Observations.gpkg:</h4></div>
                 <div class="d-flex w-100 p-2">
                     <div class="d-flex flex-column col-12 p-2">
                         <table id="QSync" class="table table-hover table-sm" style="width:100%"> <!--table-dark-->
@@ -72,7 +72,7 @@ if (in_array($_SESSION['email'], $admins)) {
                                     <th>nb obs flore</th>
                                     <th>nb obs cc</th>
                                     <th>date update .gpkg</th>
-                                    <th>version</th>
+                                    <th>.gpkg version</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -116,7 +116,7 @@ if (in_array($_SESSION['email'], $admins)) {
 <!-- general.js -->
 <script type="text/javascript" src="js/general/general.js" ></script>
 <!-- Empty.js -->
-<script type="text/javascript" src="js/template.js" ></script>
+<script type="text/javascript" src="js/dashboard.js" ></script>
 <script type="text/javascript">
 
 
