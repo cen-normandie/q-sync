@@ -15,7 +15,7 @@
     $t = ((($_POST['page']) == 'imports.php') ? ' active' : '' ); echo $t;
     echo '"  href="imports.php">
           <span data-feather=""></span>
-          <i class="fa-solid fa-file-import"></i> imports
+          <i class="fas fa-file-import"></i> imports
         </a>';
     echo '        <a class="nav-link py-1';
     $t = ((($_POST['page']) == 'write_table.php') ? ' active' : '' ); echo $t;
