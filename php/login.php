@@ -69,7 +69,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
                         if( str_contains($group, 'CGU_Foncier')) {
                             $_SESSION['cgu'] = true;
                         }
-                        if( str_contains($group, 'FILIERE_GEOMATIQUE')) {
+                        if( str_contains($group, 'si_web')) {
                             $_SESSION['is_equipe_si'] = true;
                         }
                         if( str_contains($group, 'FILIERE_RESSOURCES_HUMAINE')) {
