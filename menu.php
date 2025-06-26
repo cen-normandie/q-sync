@@ -1,8 +1,9 @@
-<div class="d-flex flex-column col-md-3 col-lg-2 h-100 bg-dark sticky-top " style="min-height:100vh;">
-<div class="d-flex justify-content-center mt-2 align-iems-center w-100">
-<div class="text-light mx-2"><img id='cen_n_img' src="img/CenNormandie.png" style="max-width:80px;max-height: 40px;opacity:0.8;"/></div>
-<h1 class="text-light mx-2 moonflower">Qsync</h1>
-</div>
+<div class="d-flex flex-column col-sm-2 col-md-3 col-lg-2 h-100 bg-dark sticky-top " style="min-height:100vh;">
+		<div class="d-flex flex-column w-100" style="min-height:100vh;">
+				<div class="d-flex justify-content-center mt-2  w-100">
+					<img src="img/QGIS_logo_minimal.png" style="max-width:80px;max-height: 40px;opacity:0.8;"/>
+					<h1 class="text-light mx-2 moonflower">Qsync</h1>
+				</div>
 <ul class="nav flex-column">
     
   <div class="ml-2">
@@ -28,4 +29,5 @@
 
   </div>
 </ul>
+</div>
 </div>

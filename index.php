@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="fr">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,7 +7,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <title>Cen Normandie</title>
-    <link rel="shortcut icon" href="img/CenNormandie.ico" />
+    <link rel="shortcut icon" href="img/qgis.ico" />
     <!-- Bootstrap Core CSS -->
     <!--<link href="css/bootstrap.min.css" rel="stylesheet">-->
     <link href="bootstrap-5.0.0/css/bootstrap.min.css" rel="stylesheet">
@@ -17,14 +17,12 @@
 </head>
 <body>
 <div class="d-flex w-100 h-100 bg-light" style="min-height:100vh;">
-	<div class="d-flex flex-column col-md-3 col-lg-2 h-100 bg-dark sticky-top " style="min-height:100vh;">
+	<div class="d-flex flex-column col-sm-2 col-md-3 col-lg-2 h-100 bg-dark sticky-top " style="min-height:100vh;">
 		<div class="d-flex flex-column justify-content-between align-items-between w-100" style="min-height:100vh;">
 			<div class="d-flex ">
-				<div class="d-flex justify-content-center mt-2 align-items-center w-100">
-				<img src="img/CenNormandie.png" style="max-width:80px;max-height: 40px;opacity:0.8;"/>
-					<div class="text-light mx-2">
-						<h1 class="text-light mx-2 moonflower">Qsync</h1>
-					</div>
+				<div class="d-flex justify-content-center mt-2  w-100">
+					<img src="img/QGIS_logo_minimal.png" style="max-width:80px;max-height: 40px;opacity:0.8;"/>
+					<h1 class="text-light mx-2 moonflower">Qsync</h1>
 				</div>
 			</div>
 			<div class="d-flex flex-grow-1 ">
@@ -40,20 +38,20 @@
 			</div>
 		</div>
 	</div>
-	<div class="d-flex flex-column col-md-9 col-lg-10 bg-light " >
-		<div class="d-flex justify-content-end  bg-dark sticky-top">
+	<div class="d-flex flex-column w-100 bg-light " >
+		<div class="d-flex justify-content-end bg-dark sticky-top">
 			<p>.</p>
 		</div>
         <div class="d-flex flex-column justify-content-end" style="">
 			<div class="d-flex align-items-start flex-column" style="">
 				<div class="p-4 w-100"><h2>Qsync</h2></div>
-				<div class="p-4 col-6">
+				<div class="p-4 col-sm-12 col-md-6 col-lg-4">
 					<form role="form">
-						<div class="input-group w-50">
+						<div class="input-group w-100">
 							<span class="input-group-text justify-content-center col-2" id="user"><i class="fas fa-user"></i></span>
                             <input id="courriel" type="text" class="form-control col-10 " placeholder="Identifiant de session " aria-label="courriel@mail.com" aria-describedby="user" tabindex="1">
                         </div>
-						<div class="input-group w-50 my-2">
+						<div class="input-group w-100 my-2">
 							<span class="input-group-text justify-content-center col-2" id="passwordLabel"><i class="fas fa-key"></i></span>
                             <input id="pwd" type="password" class="form-control col-10 " placeholder="MoTDePassE" aria-label="MoTDePassE" aria-describedby="passwordLabel" tabindex="2" >
                         </div>
