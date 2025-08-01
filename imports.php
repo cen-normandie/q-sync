@@ -65,7 +65,7 @@ if (in_array($_SESSION['email'], $admins)) {
                 </div>
                 <div class="d-flex w-100 p-2">
                     <p>Ci-dessous les données présentes au sein des geopackages.
-                    Lecture : <span class="fw-bold" > A intégrer / Intégrées dans Géonature </span>
+                    Lecture : <span class="fw-bold" > En attente / Intégrées dans Géonature </span>
                     </p>
                 </div>
                 <div class="d-flex w-100 p-2">
@@ -88,6 +88,7 @@ if (in_array($_SESSION['email'], $admins)) {
                         </table>
                     </div>
                     <div class="d-flex flex-column col-3 p-2">
+                        <div id="container_sum" class="d-flex w-100"></div>
                     </div>
                 </div>
             </div>	

@@ -62,9 +62,9 @@ update nextcloud.users set gn_user_name = a_.id_role::text from a_ where a_.emai
 ");
 $update_ = pg_execute($dbconn_geo, "sql_update",array()) or die ( pg_last_error());
 
-///////////////////////////////////////////////////////////////////
-// C. Mise à jour du champ uuid_nx dans la table suivi_faune
-///////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////
+// C. Mise à jour du champ uuid_nx dans la table suivi_faune du geopackage
+//////////////////////////////////////////////////////////////////////////
 
 $select = pg_prepare($dbconn_geo, "sql_select", "select courriel, gn_user_name, nom_ad, uuid_nx from $nx_users;");
 $personne = pg_execute($dbconn_geo, "sql_select",array()) or die ( pg_last_error());

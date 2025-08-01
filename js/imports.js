@@ -43,8 +43,23 @@ function load_qsync () {
         error    : function(request, error) { alert("Erreur : responseText: "+request.responseText);change_load();},
         success  : function(data) {
             qsync_liste = data ;
+            data_json =[{
+                flore_a_integrer: 0,
+                flore_en_attente: 0,
+                faune_a_integrer: 0,
+                faune_en_attente: 0,
+                cc_a_integrer: 0,
+                cc_en_attente: 0,
+                color: '#007bff'
+            }];
             console.log(data);
             for (const ele in qsync_liste) {
+                data_json[0].flore_a_integrer += parseInt(qsync_liste[ele].obs_flore.split(' / ')[0]);
+                data_json[0].flore_en_attente += parseInt(qsync_liste[ele].obs_flore.split(' / ')[1]);
+                data_json[0].faune_a_integrer += parseInt(qsync_liste[ele].obs_faune.split(' / ')[0]);
+                data_json[0].faune_en_attente += parseInt(qsync_liste[ele].obs_faune.split(' / ')[1]);
+                data_json[0].cc_a_integrer += parseInt(qsync_liste[ele].obs_cc.split(' / ')[0]);
+                data_json[0].cc_en_attente += parseInt(qsync_liste[ele].obs_cc.split(' / ')[1]);
                 let rowNode = dtQSync.row.add( [
                     qsync_liste[ele].uuid,
                     qsync_liste[ele].personne, 
@@ -57,6 +72,7 @@ function load_qsync () {
                 ] ).node().id = qsync_liste[ele].uuid;
             }
             dtQSync.draw();
+            graph_sum('Flore', data_json[0].flore_a_integrer, data_json[0].flore_en_attente);
             change_load();
             }
     });
@@ -79,3 +95,75 @@ $('#refresh').on('click', function() {
             }
     });
 });
+
+
+
+//////////////////////////////////////////////////////
+//Gestion des dom et evenement pour le graphique general
+//////////////////////////////////////////////////////
+function graph_sum( nom_projet_, a_integrer, integrer) {
+    chart_global = new Highcharts.chart('container_sum', {
+        chart: {
+            type: 'bar',
+            height: 100,
+            backgroundColor:'#f8f9fa'
+        },
+        title: {
+            text: ``,//Importé / En attente 
+            align: 'center'
+        },
+        subtitle: {
+            text: '',
+            align: 'center'
+        },
+        plotOptions: {
+            series: {
+                grouping: false,
+                borderWidth: 0
+            }
+        },
+        legend: {
+            enabled: false
+        },
+        credits: {
+            enabled: false
+        },
+        tooltip: {
+            shared: true,
+            headerFormat: '<span style="font-size: 15px">{point.point.name}</span><br/>',
+            pointFormat: '<span style="color:{point.color}">\u25CF</span> {series.name}: {point.y}<br/>'
+        },
+        xAxis: {
+            type: 'category',
+            accessibility: {
+                description: ''
+            }
+        },
+        yAxis: [{
+            title: {
+                text: 'nb obs'
+            },
+            showFirstLabel: false
+        }],
+        series: [{
+            color: 'rgba(0,0,0,.2)',
+            pointPlacement: 0,
+            data: [a_integrer],
+            name: 'En attente'
+        }, {
+            name: 'Intégrées',
+            id: 'main',
+            dataLabels: [{
+                enabled: true,
+                inside: true,
+                style: {
+                    fontSize: '10px'
+                }
+            }],
+            data: [integrer]
+        }],
+        exporting: {
+            allowHTML: true
+        }
+    });
+}
