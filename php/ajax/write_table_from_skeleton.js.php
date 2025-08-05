@@ -15,7 +15,7 @@ while($row = pg_fetch_row($personne))
   if (file_exists($observations_gpkg)) {
     echo '</br>' .$row[0]. ' - ' . date('Y-m-d', filemtime($observations_gpkg)) . '</br>';
 
-    echo("sqlite3 '/var/www/html/q-sync/_qfield_skeleton/observations.gpkg' .dump \"$table_name\" | sqlite3 '/var/www/html/nextcloud/data/\"$row[3]\"/files/_qfield/observations.gpkg'");
+    echo("sqlite3 '/var/www/html/q-sync/_qfield_skeleton/observations.gpkg' .dump ".$_POST['table_name']." | sqlite3 '/var/www/html/nextcloud/data/".$row[3]."/files/_qfield/observations.gpkg'");
     echo '</br>';
   }
 
