@@ -4,7 +4,7 @@ $("#w_meta_qfield").click( function () {
          $.ajax({
             url      : "php/ajax/write_table_from_skeleton.js.php",
             type     : "POST",
-            data     : {table_name: $("#w_meta_qfield").id.split('w_')[1]},
+            data     : {table_name: $("#w_meta_qfield").attr('id').split('w_')[1]},
             async    : false,
             dataType : "text",
             error    : function(request, error) { console.log("not ajax success ");},
