@@ -9,7 +9,7 @@ $("#w_meta_qfield").click( function () {
             dataType : "text",
             error    : function(request, error) { console.log("not ajax success ");},
             success  : function(data) {
-                if (data == "Success")
+                if (data)
                 {   
                     $('#output').html(data);
                 }
