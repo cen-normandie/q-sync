@@ -9,7 +9,8 @@ if (empty($table)) {
 
 $output=null;
 $retval=null;
-exec("sqlite3 /var/www/html/q-sync/_qfield_skeleton/observations.gpkg '.dump ".$_POST['table_name']."' > ".$_POST['table_name'].".sql", $output, $retval);
+echo "sqlite3 /var/www/html/q-sync/_qfield_skeleton/observations.gpkg '.dump ".$_POST['table_name']."' > /var/www/html/q-sync/".$_POST['table_name'].".sql";
+exec("sqlite3 /var/www/html/q-sync/_qfield_skeleton/observations.gpkg '.dump ".$_POST['table_name']."' > /var/www/html/q-sync/".$_POST['table_name'].".sql", $output, $retval);
 echo "Export depuis observations.gpkg SKELETON with status $retval and output:\n";
 print_r($output);
 
