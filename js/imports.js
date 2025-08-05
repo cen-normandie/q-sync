@@ -72,7 +72,9 @@ function load_qsync () {
                 ] ).node().id = qsync_liste[ele].uuid;
             }
             dtQSync.draw();
-            graph_sum('Flore', data_json[0].flore_a_integrer, data_json[0].flore_en_attente);
+            graph_sum('Flore', data_json[0].flore_a_integrer, data_json[0].flore_en_attente, 'rgba(39, 196, 60, 0.75)');
+            graph_sum('Faune', data_json[0].faune_a_integrer, data_json[0].faune_en_attente, 'rgba(236, 214, 14, 0.75)');
+            graph_sum('CC', data_json[0].cc_a_integrer, data_json[0].cc_en_attente, 'rgba(196, 39, 162, 0.75)');
             change_load();
             }
     });
@@ -101,25 +103,29 @@ $('#refresh').on('click', function() {
 //////////////////////////////////////////////////////
 //Gestion des dom et evenement pour le graphique general
 //////////////////////////////////////////////////////
-function graph_sum( nom_projet_, a_integrer, integrer) {
-    chart_global = new Highcharts.chart('container_sum', {
+function graph_sum( nom_projet_, a_integrer, integrer, color_) {
+
+    chart_global = new Highcharts.chart('container_' + nom_projet_, {
         chart: {
             type: 'bar',
-            height: 100,
+            height: 170,
             backgroundColor:'#f8f9fa'
         },
         title: {
-            text: ``,//Importé / En attente 
+            text: ``,//Importé / En attente
             align: 'center'
         },
         subtitle: {
-            text: '',
+            text: `${nom_projet_}`,
             align: 'center'
         },
         plotOptions: {
             series: {
                 grouping: false,
                 borderWidth: 0
+            },
+            bar: {
+                colorByPoint: true
             }
         },
         legend: {
@@ -137,31 +143,23 @@ function graph_sum( nom_projet_, a_integrer, integrer) {
             type: 'category',
             accessibility: {
                 description: ''
-            }
+            },
+            categories: ['En attente', 'Intégrées']
         },
         yAxis: [{
             title: {
-                text: 'nb obs'
+                text: '',
             },
             showFirstLabel: false
         }],
-        series: [{
-            color: 'rgba(0,0,0,.2)',
-            pointPlacement: 0,
-            data: [a_integrer],
-            name: 'En attente'
-        }, {
-            name: 'Intégrées',
-            id: 'main',
-            dataLabels: [{
-                enabled: true,
-                inside: true,
-                style: {
-                    fontSize: '10px'
-                }
-            }],
-            data: [integrer]
-        }],
+        colors: ['rgba(0,0,0,.2)', color_ ],
+        series: 
+        [
+            {
+            data: [a_integrer, integrer],
+            name: ''
+            }
+        ],
         exporting: {
             allowHTML: true
         }
