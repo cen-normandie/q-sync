@@ -64,17 +64,17 @@ if (in_array($_SESSION['email'], $admins)) {
                 </div>
                 <div class="d-flex w-100 p-2">
                     <ul class="list-group">
-                    <li class="list-group-item">meta_qfield</li>
-                    <li class="list-group-item">faune (obs_faune)</li>
-                    <li class="list-group-item">flore (obs_flore)</li>
-                    <li class="list-group-item">carré contact (obs_cc)</li>
-                    <li class="list-group-item">liste des observateurs (observateurs)</li>
-                    <li class="list-group-item">liste des taxons faune (tx_faune)</li>
-                    <li class="list-group-item">liste des taxons flore (tx_flore)</li>
-                    <li class="list-group-item">JDD faune (jdd_faune)</li>
-                    <li class="list-group-item">JDD flore (jdd_flore)</li>
+                    <li class="list-group-item d-flex justify-content-between align-items-center">meta_qfield <span><button id="w_meta_qfield" type="button" class="btn btn-dark"><i class="fas fa-file-import text-light px-1 fs-4"></i></button></li><!--<i class="fas fa-eye text-success px-1"></i>-->
+                    <li class="list-group-item d-flex justify-content-between">faune (obs_faune) <span id="w_obs_faune"><i class="fas fa-file-import text-dark px-1 fs-4"></i></span></li>
+                    <li class="list-group-item d-flex justify-content-between">flore (obs_flore) <span id="w_obs_flore"><i class="fas fa-file-import text-dark px-1 fs-4"></i></span></li>
+                    <li class="list-group-item d-flex justify-content-between">carré contact (obs_cc) <span id="w_obs_cc"><i class="fas fa-file-import text-dark px-1 fs-4"></i></span></li>
+                    <li class="list-group-item d-flex justify-content-between">liste des observateurs (observateurs) <span id="w_observateurs"><i class="fas fa-file-import text-dark px-1 fs-4"></i></span></li>
+                    <li class="list-group-item d-flex justify-content-between">liste des taxons faune (tx_faune) <span id="w_tx_faune"><i class="fas fa-file-import text-dark px-1 fs-4"></i></span></li>
+                    <li class="list-group-item d-flex justify-content-between">liste des taxons flore (tx_flore) <span id="w_tx_flore"><i class="fas fa-file-import text-dark px-1 fs-4"></i></span></li>
+                    <li class="list-group-item d-flex justify-content-between">JDD faune (jdd_faune) <span id="w_jdd_faune"><i class="fas fa-file-import text-dark px-1 fs-4"></i></span></li>
+                    <li class="list-group-item d-flex justify-content-between">JDD flore (jdd_flore) <span id="w_jdd_flore"><i class="fas fa-file-import text-dark px-1 fs-4"></i></span></li>
                     </ul>
-                    <div class="d-flex flex-column col-3 p-2">
+                    <div id="output" class="d-flex flex-column col-3 p-2 bg-dark text-light">
                     </div>
                 </div>
             </div>	
