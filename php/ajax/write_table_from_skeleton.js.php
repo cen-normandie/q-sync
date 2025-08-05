@@ -11,8 +11,9 @@ $output=null;
 $retval=null;
 echo "sqlite3 /var/www/html/q-sync/_qfield_skeleton/observations.gpkg '.dump ".$_POST['table_name']."' > /var/www/html/q-sync/".$_POST['table_name'].".sql";
 exec("sqlite3 /var/www/html/q-sync/_qfield_skeleton/observations.gpkg '.dump ".$_POST['table_name']."' > /var/www/html/q-sync/".$_POST['table_name'].".sql", $output, $retval);
-echo "Export depuis observations.gpkg SKELETON with status $retval and output:\n";
-print_r($output);
+echo "</br>Export depuis observations.gpkg SKELETON with status $retval and output:\n";
+echo($output);
+echo "</br>";
 
 
 $dbconn_geo = pg_connect("hostaddr=$DBHOST_geonature port=$PORT_geonature dbname=$DBNAME_geonature user=$LOGIN_geonature password=$PASS_geonature") or die ('Connexion impossible :'. pg_last_error());
