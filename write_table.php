@@ -74,8 +74,8 @@ if (in_array($_SESSION['email'], $admins)) {
                     <li class="list-group-item d-flex justify-content-between align-items-center">JDD faune (jdd_faune) <button id="w_jdd_faune" type="button" class="btn btn-dark"><i class="fas fa-file-import text-light px-1 fs-4"></i></button></li>
                     <li class="list-group-item d-flex justify-content-between align-items-center">JDD flore (jdd_flore) <button id="w_jdd_flore" type="button" class="btn btn-dark"><i class="fas fa-file-import text-light px-1 fs-4"></i></button></li>
                     </ul>
-                    <div id="output" class="d-flex flex-column col-3 p-2 bg-dark text-light">
-                    </div>
+                    <p id="output" class="d-flex flex-column col-md-9 col-lg-10 p-2 bg-dark text-light">
+                    </p>
                 </div>
             </div>	
 		</div>

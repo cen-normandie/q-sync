@@ -33,6 +33,8 @@ while($row = pg_fetch_row($personne))
     print_r($output);
 
     echo '</br>';
+    echo "sqlite3 ".$observations_gpkg."  < ".$_POST['table_name'].".sql";
+    echo '</br>';
     exec("sqlite3 ".$observations_gpkg."  < ".$_POST['table_name'].".sql", $output, $retval);
     echo "Importation de la table ".$_POST['table_name']." dans ".$observations_gpkg." avec status $retval et output:\n";
     print_r($output);
