@@ -57,8 +57,8 @@ if (in_array($_SESSION['email'], $admins)) {
         <div class="d-flex flex-column justify-content-end" style="">
             <div class="d-flex flex-column w-100">
                 <div class="d-flex align-items-center justify-content-between bg-light text-dark m-2">
-                    <h4 class="bebas">Gestion des tables du geopackage observation :</h4>
-                    <div id="loader" class=" bg-success loader mx-4 d-flex flex-wrap align-content-center flex-grow-1 visible_s" style="margin-bottom: .5rem"></div>    
+                    <h4 class="bebas my-0">Gestion des tables du geopackage observation :</h4>
+                    <div id="loader" class=" bg-success loader my-0 mx-4 d-flex flex-wrap align-content-center flex-grow-1 visible_s" style="min-height: 1rem;"></div>    
                 </div>
                 <div class="d-flex w-100 p-2">
                 </div>
