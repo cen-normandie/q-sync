@@ -76,6 +76,33 @@ function load_qsync () {
             graph_sum('Faune', data_json[0].faune_a_integrer, data_json[0].faune_en_attente, 'rgba(236, 214, 14, 0.75)');
             graph_sum('CC', data_json[0].cc_a_integrer, data_json[0].cc_en_attente, 'rgba(196, 39, 162, 0.75)');
             change_load();
+
+            $('button[id^="faune_import_"]').click( function () {
+                change_load();
+                console.log("write " + $(this).attr('id').split('faune_import_')[1]);
+                /* $.ajax({
+                    url      : "php/ajax/import_faune.js.php",
+                    type     : "POST",
+                    data     : {uuid_user: $(this).attr('id').split('faune_import_')[1]},
+                    async    : false,
+                    dataType : "text",
+                    error    : function(request, error) { console.log("not ajax success ");},
+                    success  : function(data) {
+                        if (data)
+                        {   
+                            $('#output_'+$(this).attr('id').split('faune_import_')[1]).html(data);
+                            change_load();
+                        }
+                        else
+                        {
+                            alert('Connexion impossible... Vérifiez votre identifiant et votre mot de passe');
+                        }
+                    }
+                }); */
+            });
+
+
+
             }
     });
 }
@@ -98,29 +125,7 @@ $('#refresh').on('click', function() {
     });
 });
 
-$('button[id^="faune_import_"]').click( function () {
-     change_load();
-     console.log("write " + $(this).attr('id').split('w_')[1]);
-     $.ajax({
-         url      : "php/ajax/import_faune.js.php",
-         type     : "POST",
-         data     : {uuid_user: $(this).attr('id').split('faune_import_')[1]},
-         async    : false,
-         dataType : "text",
-         error    : function(request, error) { console.log("not ajax success ");},
-         success  : function(data) {
-             if (data)
-             {   
-                 $('#output_'+$(this).attr('id').split('faune_import_')[1]).html(data);
-                 change_load();
-             }
-             else
-             {
-                 alert('Connexion impossible... Vérifiez votre identifiant et votre mot de passe');
-             }
-         }
-     });
-});
+
 
 //////////////////////////////////////////////////////
 //Gestion des dom et evenement pour le graphique general
