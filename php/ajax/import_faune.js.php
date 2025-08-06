@@ -2,7 +2,7 @@
 include '../properties.php';
 $uuid_user = $_POST['uuid_user'];
 
-$dbconn = pg_connect("hostaddr=$DBHOST port=$PORT dbname=$DBNAME user=$LOGIN password=$PASS") or die ('Connexion impossible :'. pg_last_error());
+$dbconn = pg_connect("hostaddr=$DBHOST_geonature port=$PORT_geonature dbname=$DBNAME_geonature user=$LOGIN_geonature password=$PASS_geonature") or die ('Connexion impossible :'. pg_last_error());
 $result = pg_prepare($dbconn, "sql", "SELECT id, courriel, gn_user_name, uuid_nx, active FROM $nx_users where uuid_nx = $1;");
 $personne = pg_execute($dbconn, "sql",array($uuid_user)) or die ( pg_last_error());
 
