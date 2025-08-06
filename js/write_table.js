@@ -22,6 +22,9 @@
 
 }); */
 $('button[id^="w_"]').click( function () {
+var r=confirm("Êtes-vous sûr de sûr ?");
+if (r==true)
+  {
      change_load();
      console.log("write " + $(this).attr('id').split('w_')[1]);
      $.ajax({
@@ -43,6 +46,11 @@ $('button[id^="w_"]').click( function () {
              }
          }
      });
+  }
+else
+  {
+
+  }
 });
 
 $("#gpkg").click( function () {
