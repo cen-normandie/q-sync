@@ -77,10 +77,11 @@ function load_qsync () {
             graph_sum('CC', data_json[0].cc_a_integrer, data_json[0].cc_en_attente, 'rgba(196, 39, 162, 0.75)');
             change_load();
 
+            //Ajout des evenements sur les boutons d'import faune
             $('button[id^="faune_import_"]').click( function () {
                 change_load();
                 console.log("write " + $(this).attr('id').split('faune_import_')[1]);
-                /* $.ajax({
+                $.ajax({
                     url      : "php/ajax/import_faune.js.php",
                     type     : "POST",
                     data     : {uuid_user: $(this).attr('id').split('faune_import_')[1]},
@@ -98,7 +99,7 @@ function load_qsync () {
                             alert('Connexion impossible... Vérifiez votre identifiant et votre mot de passe');
                         }
                     }
-                }); */
+                });
             });
 
 
