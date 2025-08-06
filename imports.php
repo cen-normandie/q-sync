@@ -92,11 +92,6 @@ if (in_array($_SESSION['email'], $admins)) {
                             </tbody>
                         </table>
                     </div>
-                    <div class="d-flex flex-column col-3 p-2">
-                        <div id="container_Flore" class="d-flex w-100"></div>
-                        <div id="container_Faune" class="d-flex w-100"></div>
-                        <div id="container_CC" class="d-flex w-100"></div>
-                    </div>
                 </div>
             </div>	
 		</div>

@@ -63,12 +63,12 @@ function load_qsync () {
                 let rowNode = dtQSync.row.add( [
                     qsync_liste[ele].uuid,
                     qsync_liste[ele].personne, 
-                    '<span class="">'+qsync_liste[ele].obs_faune+'</span>',
-                    '<span class="">'+qsync_liste[ele].obs_flore+'</span>',
-                    '<span class="">'+qsync_liste[ele].obs_cc+'</span>',
+                    '<span class="">'+qsync_liste[ele].obs_faune+'</span><button style="color:rgba(236, 214, 14, 0.75);" class="btn btn-sm" uuid="'+qsync_liste[ele].uuid+'" id="faune_import_'+qsync_liste[ele].uuid+'"><i class="fas fa-file-import"></i></button>',
+                    '<span class="">'+qsync_liste[ele].obs_flore+'</span><button style="color:rgba(39, 196, 60, 0.75);" class="btn btn-sm" uuid="'+qsync_liste[ele].uuid+'" id="flore_import_'+qsync_liste[ele].uuid+'"><i class="fas fa-file-import"></i></button>',
+                    '<span class="">'+qsync_liste[ele].obs_cc+'</span><button style="color:rgba(196, 39, 162, 0.75);" class="btn btn-sm" uuid="'+qsync_liste[ele].uuid+'" id="cc_import_'+qsync_liste[ele].uuid+'"><i class="fas fa-file-import"></i></button>',
                     qsync_liste[ele].update,
                     qsync_liste[ele].version,
-                    '<button class="btn btn-primary btn-sm" onclick="uuid_event_click(\''+qsync_liste[ele].uuid+'\')"><i class="fas fa-file-import pr-1"></i> Import</button>'
+                    '<span id="output_'+qsync_liste[ele].uuid+'"></span>'
                 ] ).node().id = qsync_liste[ele].uuid;
             }
             dtQSync.draw();
@@ -98,7 +98,29 @@ $('#refresh').on('click', function() {
     });
 });
 
-
+$('button[id^="faune_import_"]').click( function () {
+     change_load();
+     console.log("write " + $(this).attr('id').split('w_')[1]);
+     $.ajax({
+         url      : "php/ajax/import_faune.js.php",
+         type     : "POST",
+         data     : {uuid_user: $(this).attr('id').split('faune_import_')[1]},
+         async    : false,
+         dataType : "text",
+         error    : function(request, error) { console.log("not ajax success ");},
+         success  : function(data) {
+             if (data)
+             {   
+                 $('#output_'+$(this).attr('id').split('faune_import_')[1]).html(data);
+                 change_load();
+             }
+             else
+             {
+                 alert('Connexion impossible... Vérifiez votre identifiant et votre mot de passe');
+             }
+         }
+     });
+});
 
 //////////////////////////////////////////////////////
 //Gestion des dom et evenement pour le graphique general
