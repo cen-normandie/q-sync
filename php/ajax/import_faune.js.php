@@ -15,7 +15,7 @@ while($row = pg_fetch_row($personne))
   if (file_exists($observations_gpkg)) {
 		$cmd='ogr2ogr -f PostgreSQL "PG:user='.$LOGIN_geonature.' host='.$DBHOST_geonature.' dbname='.$DBNAME_geonature.' password='.$PASS_geonature.'" /var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/observations.gpkg -nln sandbox.obs_faune -append -sql "SELECT *, \''.$row[1].'\' as courriel, \''.$row[3].'\' as uuid_nx from obs_faune where date_import is null" 2>&1';
 		exec($cmd, $output);
-		if (!$output) {
+		if ($output != 2) {
 			/* pg_prepare($dbconn, "sql_u", "UPDATE $point_faune set uuid_nx = $1, courriel = $2  where uuid_nx is null;");
             $update = pg_execute($dbconn, "sql_u",array($row[3], $row[1])) or die ( pg_last_error()); */
 			
