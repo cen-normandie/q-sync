@@ -69,7 +69,12 @@ if (in_array($_SESSION['email'], $admins)) {
                     </p>
                 </div>
                 <div class="d-flex w-100 p-2">
-                    <div class="d-flex flex-column col-9 p-2">
+                    <div id="container_Flore" class="col-4"></div>
+                    <div id="container_Faune" class="col-4"></div>
+                    <div id="container_CC" class="col-4"></div>
+                </div>
+                <div class="d-flex w-100 p-2">
+                    <div class="d-flex flex-column w-100 col-10">
                         <table id="QSync" class="table table-hover table-sm" style="width:100%"> <!--table-dark-->
                             <thead>
                                 <tr>
