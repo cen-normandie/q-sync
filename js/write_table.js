@@ -21,9 +21,9 @@
         }); 
 
 }); */
-$('div[id^="w_"]').click( function () {
+$('button[id^="w_"]').click( function () {
      console.log("write " + $(this).attr('id').split('w_')[1]);
-     $.ajax({
+     /* $.ajax({
          url      : "php/ajax/write_table_from_skeleton.js.php",
          type     : "POST",
          data     : {table_name: $(this).attr('id').split('w_')[1]},
@@ -40,7 +40,7 @@ $('div[id^="w_"]').click( function () {
                  alert('Connexion impossible... Vérifiez votre identifiant et votre mot de passe');
              }
          }
-     });
+     }); */
 });
 
 $("#gpkg").click( function () {
