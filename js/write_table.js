@@ -35,12 +35,12 @@ $('button[id^="w_"]').click( function () {
              if (data)
              {   
                  $('#output').html(data);
+                 change_load();
              }
              else
              {
                  alert('Connexion impossible... Vérifiez votre identifiant et votre mot de passe');
              }
-             change_load();
          }
      });
 });
