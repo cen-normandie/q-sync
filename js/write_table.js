@@ -22,6 +22,7 @@
 
 }); */
 $('button[id^="w_"]').click( function () {
+     change_load();
      console.log("write " + $(this).attr('id').split('w_')[1]);
      $.ajax({
          url      : "php/ajax/write_table_from_skeleton.js.php",
@@ -39,6 +40,7 @@ $('button[id^="w_"]').click( function () {
              {
                  alert('Connexion impossible... Vérifiez votre identifiant et votre mot de passe');
              }
+             change_load();
          }
      });
 });
@@ -62,6 +64,7 @@ $("#gpkg").click( function () {
                 {
                     alert('Connexion impossible... Vérifiez votre identifiant et votre mot de passe');
                 }
+                change_load();
             }
         }); 
 
