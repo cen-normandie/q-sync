@@ -9,10 +9,11 @@ if (empty($table)) {
 
 $output=null;
 $retval=null;
-echo "sqlite3 /var/www/html/q-sync/_qfield_skeleton/observations.gpkg '.dump ".$_POST['table_name']."' > /var/www/html/q-sync/".$_POST['table_name'].".sql";
-exec("sqlite3 /var/www/html/q-sync/_qfield_skeleton/observations.gpkg '.dump ".$_POST['table_name']."' > /var/www/html/q-sync/".$_POST['table_name'].".sql", $output, $retval);
+echo "sqlite3 /var/www/html/q-sync/_qfield_skeleton/observations.gpkg '.dump ".$_POST['table_name']."' > /var/www/html/q-sync/_qfield_skeleton/dumps/".$_POST['table_name'].".sql";
+exec("sqlite3 /var/www/html/q-sync/_qfield_skeleton/observations.gpkg '.dump ".$_POST['table_name']."' > /var/www/html/q-sync/_qfield_skeleton/dumps/".$_POST['table_name'].".sql", $output, $retval);
 echo "</br>Export depuis observations.gpkg SKELETON with status $retval and output:\n";
 echo($output);
+echo "</br>";
 echo "</br>";
 
 
@@ -29,29 +30,18 @@ while($row = pg_fetch_row($personne))
   $observations_gpkg = '/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/observations.gpkg';
   if (file_exists($observations_gpkg)) {
     //echo '</br>' .$row[0]. ' - ' . date('Y-m-d', filemtime($observations_gpkg)) . '</br>';
-
     exec("sqlite3 ".$observations_gpkg." 'DROP TABLE ".$_POST['table_name'].";'", $output, $retval);
-    echo "Suppression de la table ".$_POST['table_name']." dans ".$observations_gpkg." avec status $retval et output:\n";
-    print_r($output);
-
+    echo "Suppression de la table ".$_POST['table_name']." dans ".$observations_gpkg." avec status $retval et output:";
     echo '</br>';
-    echo "sqlite3 ".$observations_gpkg."  < ".$_POST['table_name'].".sql";
-    echo '</br>';
-    exec("sqlite3 ".$observations_gpkg."  < ".$_POST['table_name'].".sql", $output, $retval);
-    echo "Importation de la table ".$_POST['table_name']." dans ".$observations_gpkg." avec status $retval et output:\n";
-    print_r($output);
-    echo '</br>';
-
-    //SCAN
-    exec("sudo -u www-data php occ files:scan --all", $output, $retval);
-    echo "Scan des fichiers Nextcloud avec status $retval et output:\n";
-    print_r($output);
-
+    exec("sqlite3 ".$observations_gpkg."  < /var/www/html/q-sync/_qfield_skeleton/dumps/".$_POST['table_name'].".sql", $output, $retval);
+    echo "Importation de la table ".$_POST['table_name']." dans ".$observations_gpkg." avec status $retval et output:";
     echo '</br>';
   }
-
-
 }
+
+//SCAN
+exec("sudo -u www-data php occ files:scan --all", $output, $retval);
+echo "Scan des fichiers Nextcloud avec status $retval et output:\n";
 
 pg_close($dbconn_geo);
 pg_close($dbconn_nx);
