@@ -64,6 +64,7 @@ if (in_array($_SESSION['email'], $admins)) {
                 </div>
                 <div class="d-flex w-100 p-2">
                     <ul class="list-group">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">remplacer le geopackage complet <button id="gpkg" type="button" class="btn btn-danger"><i class="fas fa-file-import text-light px-1 fs-5"></i></button></li><!--<i class="fas fa-eye text-success px-1"></i>-->
                     <li class="list-group-item d-flex justify-content-between align-items-center">meta_qsync <button id="w_meta_qsync" type="button" class="btn btn-dark"><i class="fas fa-file-import text-light px-1 fs-5"></i></button></li><!--<i class="fas fa-eye text-success px-1"></i>-->
                     <li class="list-group-item d-flex justify-content-between align-items-center">faune (obs_faune) <button id="w_obs_faune" type="button" class="btn btn-dark"><i class="fas fa-file-import text-light px-1 fs-4"></i></button></li>
                     <li class="list-group-item d-flex justify-content-between align-items-center">flore (obs_flore) <button id="w_obs_flore" type="button" class="btn btn-dark"><i class="fas fa-file-import text-light px-1 fs-4"></i></button></li>

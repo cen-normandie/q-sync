@@ -11,9 +11,7 @@ $output=null;
 $retval=null;
 echo "sqlite3 /var/www/html/q-sync/_qfield_skeleton/observations.gpkg '.dump ".$_POST['table_name']."' > /var/www/html/q-sync/_qfield_skeleton/dumps/".$_POST['table_name'].".sql";
 exec("sqlite3 /var/www/html/q-sync/_qfield_skeleton/observations.gpkg '.dump ".$_POST['table_name']."' > /var/www/html/q-sync/_qfield_skeleton/dumps/".$_POST['table_name'].".sql", $output, $retval);
-echo "</br>Export depuis observations.gpkg SKELETON with status $retval and output:\n";
-echo($output);
-echo "</br>";
+echo "</br>Export depuis observations.gpkg SKELETON with status $retval and output:";
 echo "</br>";
 
 

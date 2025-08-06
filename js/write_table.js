@@ -22,6 +22,30 @@ $("#w_meta_qsync").click( function () {
 
 });
 
+$("#gpkg").click( function () {
+
+        console.log("write gpkg");
+         $.ajax({
+            url      : "php/ajax/write_gpkg.js.php",
+            type     : "POST",
+            data     : {},
+            async    : false,
+            dataType : "text",
+            error    : function(request, error) { console.log("not ajax success ");},
+            success  : function(data) {
+                if (data)
+                {   
+                    $('#output').html(data);
+                }
+                else
+                {
+                    alert('Connexion impossible... Vérifiez votre identifiant et votre mot de passe');
+                }
+            }
+        }); 
+
+});
+
 
 
 
