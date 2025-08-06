@@ -11,9 +11,9 @@ $output=null;
 $retval=null;
 echo "INITIALISATION";
 echo "</br>";
-echo "sqlite3 /var/www/html/q-sync/_qfield_skeleton/observations.gpkg '.dump ".$_POST['table_name']."' > /var/www/html/q-sync/_qfield_skeleton/dumps/".$_POST['table_name'].".sql";
+echo "sqlite3 /var/www/html/q-sync/_qfield_skeleton/observations.gpkg '.dump ".$table."' > /var/www/html/q-sync/_qfield_skeleton/dumps/".$table.".sql";
 
-exec("sqlite3 /var/www/html/q-sync/_qfield_skeleton/observations.gpkg '.dump ".$_POST['table_name']."' > /var/www/html/q-sync/_qfield_skeleton/dumps/".$_POST['table_name'].".sql", $output, $retval);
+exec("sqlite3 /var/www/html/q-sync/_qfield_skeleton/observations.gpkg '.dump ".$table."' > /var/www/html/q-sync/_qfield_skeleton/dumps/".$table.".sql", $output, $retval);
 echo "</br>Export depuis observations.gpkg SKELETON with status $retval and output:";
 echo "</br>";
 echo '</br>#########';
@@ -43,7 +43,7 @@ while($row = pg_fetch_row($personne))
 
 //SCAN
 exec("sudo -u www-data php occ files:scan --all", $output, $retval);
-echo "Scan des fichiers Nextcloud avec status $retval et output:\n";
+echo "Scan des fichiers Nextcloud avec status $retval ";
 
 pg_close($dbconn_geo);
 pg_close($dbconn_nx);
