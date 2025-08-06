@@ -134,6 +134,32 @@ if (in_array($_SESSION['email'], $admins)) {
 
 $(document).ready(function() {
 
+
+    $('button[id^="faune_import_"]').click( function () {
+     change_load();
+     console.log("write " + $(this).attr('id').split('faune_import_')[1]);
+     /* $.ajax({
+         url      : "php/ajax/import_faune.js.php",
+         type     : "POST",
+         data     : {uuid_user: $(this).attr('id').split('faune_import_')[1]},
+         async    : false,
+         dataType : "text",
+         error    : function(request, error) { console.log("not ajax success ");},
+         success  : function(data) {
+             if (data)
+             {   
+                 $('#output_'+$(this).attr('id').split('faune_import_')[1]).html(data);
+                 change_load();
+             }
+             else
+             {
+                 alert('Connexion impossible... Vérifiez votre identifiant et votre mot de passe');
+             }
+         }
+     }); */
+});
+
+
 });
 
 
