@@ -107,7 +107,14 @@ while($row = pg_fetch_row($personne))
             $i_flore_imported=$row_[0];
     }
     echo '</br> nb flore :' . $i_flore . '</br>';
-    $insert_dashboard = pg_execute($dbconn_geo, "sql_insert_dashboard",array($row[3], $row[2], $i_faune, $i_faune_imported, $i_flore, $i_flore_imported, date('Y-m-d', filemtime($observations_gpkg)), 0, 0, '0.0' )) or die ( pg_last_error());
+    //recuperation de la version
+    $results_version = $db->query("select value_ from $meta_qsync where info_ = 'version';");
+    $version = '';
+    while ($row_ = $results_version->fetchArray()) {
+        $version = $row_[0];
+    }
+
+    $insert_dashboard = pg_execute($dbconn_geo, "sql_insert_dashboard",array($row[3], $row[2], $i_faune, $i_faune_imported, $i_flore, $i_flore_imported, date('Y-m-d', filemtime($observations_gpkg)), 0, 0, $version )) or die ( pg_last_error());
   }
 
 
