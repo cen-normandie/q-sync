@@ -54,7 +54,9 @@ else
 });
 
 $("#gpkg").click( function () {
-
+var r=confirm("Êtes-vous sûr de sûr | Ceci effacera toutes les données dans les geopackages ?");
+if (r==true)
+  {
         console.log("write gpkg");
          $.ajax({
             url      : "php/ajax/write_gpkg.js.php",
@@ -75,6 +77,11 @@ $("#gpkg").click( function () {
                 change_load();
             }
         }); 
+  }
+else
+  {
+
+  }
 
 });
 
