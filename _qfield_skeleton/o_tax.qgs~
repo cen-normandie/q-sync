@@ -1,5 +1,5 @@
 <!DOCTYPE qgis PUBLIC 'http://mrcc.com/qgis.dtd' 'SYSTEM'>
-<qgis saveUserFull="Benoit Perceval" saveDateTime="2025-08-08T09:42:34" projectname="" version="3.40.5-Bratislava" saveUser="BP">
+<qgis saveUserFull="Benoit Perceval" saveDateTime="2025-08-08T11:00:40" projectname="" version="3.40.5-Bratislava" saveUser="BP">
   <homePath path=""/>
   <title></title>
   <transaction mode="Disabled"/>
@@ -337,10 +337,10 @@
   <mapcanvas annotationsVisible="1" name="theMapCanvas">
     <units>meters</units>
     <extent>
-      <xmin>579317.95085202483460307</xmin>
-      <ymin>6906773.41987382713705301</ymin>
-      <xmax>579448.57798894378356636</xmax>
-      <ymax>6906871.2474084859713912</ymax>
+      <xmin>518396.69325000001117587</xmin>
+      <ymin>6808422.25981508288532495</ymin>
+      <xmax>518498.61675000004470348</xmax>
+      <ymax>6808628.60293134022504091</ymax>
     </extent>
     <rotation>0</rotation>
     <destinationsrs>
@@ -19174,7 +19174,7 @@ def my_form_open(dialog, layer, feature):
   <Sensors/>
   <ProjectViewSettings rotation="0" UseProjectScales="0">
     <Scales/>
-    <DefaultViewExtent xmax="579459.21107533411122859" ymin="6906773.41987382713705301" ymax="6906871.2474084859713912" xmin="579307.31776563450694084">
+    <DefaultViewExtent xmax="518607.84578356286510825" ymin="6808422.25981508288532495" ymax="6808628.60293134022504091" xmin="518287.4642164371907711">
       <spatialrefsys nativeFormat="Wkt">
         <wkt>PROJCRS["RGF93 v1 / Lambert-93",BASEGEOGCRS["RGF93 v1",DATUM["Reseau Geodesique Francais 1993 v1",ELLIPSOID["GRS 1980",6378137,298.257222101,LENGTHUNIT["metre",1]]],PRIMEM["Greenwich",0,ANGLEUNIT["degree",0.0174532925199433]],ID["EPSG",4171]],CONVERSION["Lambert-93",METHOD["Lambert Conic Conformal (2SP)",ID["EPSG",9802]],PARAMETER["Latitude of false origin",46.5,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8821]],PARAMETER["Longitude of false origin",3,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8822]],PARAMETER["Latitude of 1st standard parallel",49,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8823]],PARAMETER["Latitude of 2nd standard parallel",44,ANGLEUNIT["degree",0.0174532925199433],ID["EPSG",8824]],PARAMETER["Easting at false origin",700000,LENGTHUNIT["metre",1],ID["EPSG",8826]],PARAMETER["Northing at false origin",6600000,LENGTHUNIT["metre",1],ID["EPSG",8827]]],CS[Cartesian,2],AXIS["easting (X)",east,ORDER[1],LENGTHUNIT["metre",1]],AXIS["northing (Y)",north,ORDER[2],LENGTHUNIT["metre",1]],USAGE[SCOPE["Engineering survey, topographic mapping."],AREA["France - onshore and offshore, mainland and Corsica (France métropolitaine including Corsica)."],BBOX[41.15,-9.86,51.56,10.38]],ID["EPSG",2154]]</wkt>
         <proj4>+proj=lcc +lat_0=46.5 +lon_0=3 +lat_1=49 +lat_2=44 +x_0=700000 +y_0=6600000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs</proj4>
@@ -19239,7 +19239,7 @@ def my_form_open(dialog, layer, feature):
       </spatialrefsys>
     </CoordinateCustomCrs>
   </ProjectDisplaySettings>
-  <ProjectGpsSettings autoAddTrackVertices="0" destinationLayer="obs_autre_89e94000_4168_4e01_9839_9a067fcc2dec" destinationLayerSource="C:/wamp64/www/git/q-sync/_qfield_skeleton/observations.gpkg|layername=obs_faune" autoCommitFeatures="0" destinationLayerName="obs_faune" destinationLayerProvider="ogr" destinationFollowsActiveLayer="1">
+  <ProjectGpsSettings autoAddTrackVertices="0" destinationLayer="obs_releve_occurrence_denombrement_119aa62f_016e_4a89_93b2_320f37ac6322" destinationLayerSource="C:/wamp64/www/git/q-sync/_qfield_skeleton/observations.gpkg|layername=obs_flore" autoCommitFeatures="0" destinationLayerName="obs_flore" destinationLayerProvider="ogr" destinationFollowsActiveLayer="1">
     <timeStampFields/>
   </ProjectGpsSettings>
 </qgis>
