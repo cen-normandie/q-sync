@@ -1,4 +1,4 @@
-const dtQSync =$('#QSync').DataTable({
+const dtQSync =$('#QSync_observations').DataTable({
     "language": {
         "paginate": {
             "previous": "Préc.",

@@ -57,26 +57,39 @@ if (in_array($_SESSION['email'], $admins)) {
         <div class="d-flex flex-column justify-content-end" style="">
             <div class="d-flex flex-column w-100">
                 <div class="d-flex align-items-center justify-content-start bg-light text-dark m-2">
-                    <h4 class="bebas my-0">Gestion des tables du geopackage observation :</h4>
+                    <h4 class="bebas my-0">Gestion des tables des geopackages :</h4>
                     <div id="loader" class=" bg-success loader my-0 mx-4 d-flex flex-wrap align-content-center flex-grow-1 visible_s" style="min-height: 1rem;"></div>    
                 </div>
-                <div class="d-flex w-100 p-2">
+                <div class="d-flex w-100 p-2 text-light bg-dark">
+                    <h4 class="bebas my-0" >Observations.gpkg</h4>
                 </div>
-                <div class="d-flex w-100 p-2">
-                    <ul class="list-group">
-                    <li class="list-group-item d-flex justify-content-between align-items-center">remplacer le geopackage complet       <button id="gpkg" type="button" class="btn btn-danger"><i class="fas fa-file-import text-light px-1 fs-5"></i></button></li><!--<i class="fas fa-eye text-success px-1"></i>-->
-                    <li class="list-group-item d-flex justify-content-between align-items-center">meta_qsync                            <button id="w_meta_qsync" type="button" class="btn btn-dark"><i class="fas fa-file-import text-light px-1 fs-5"></i></button></li><!--<i class="fas fa-eye text-success px-1"></i>-->
-                    <li class="list-group-item d-flex justify-content-between align-items-center">faune (obs_faune)                     <button id="w_obs_faune" type="button" class="btn btn-dark"><i class="fas fa-file-import text-light px-1 fs-5"></i></button></li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">flore (obs_flore)                     <button id="w_obs_flore" type="button" class="btn btn-dark"><i class="fas fa-file-import text-light px-1 fs-5"></i></button></li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">carré contact (c_contact)             <button id="w_c_contact" type="button" class="btn btn-dark"><i class="fas fa-file-import text-light px-1 fs-5"></i></button></li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">liste des observateurs (observateurs) <button id="w_observateurs" type="button" class="btn btn-dark"><i class="fas fa-file-import text-light px-1 fs-5"></i></button></li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">liste des taxons faune (tx_faune)     <button id="w_tx_faune" type="button" class="btn btn-dark"><i class="fas fa-file-import text-light px-1 fs-5"></i></button></li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">liste des taxons flore (tx_flore)     <button id="w_tx_flore" type="button" class="btn btn-dark"><i class="fas fa-file-import text-light px-1 fs-5"></i></button></li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">JDD faune (jdd_faune_)                <button id="w_jdd_faune_" type="button" class="btn btn-dark"><i class="fas fa-file-import text-light px-1 fs-5"></i></button></li>
-                    <li class="list-group-item d-flex justify-content-between align-items-center">JDD flore (jdd_flore_)                <button id="w_jdd_flore_" type="button" class="btn btn-dark"><i class="fas fa-file-import text-light px-1 fs-5"></i></button></li>
+                <div class="d-flex w-100">
+                    <ul class="list-group col-4">
+                        <li class="list-group-item d-flex justify-content-between align-items-center"><span class="fw-bolder">remplacer observation.gpkg</span>     <button id="observations_gpkg" type="button" class="btn btn-danger"><i class="fas fa-file-import text-light px-1 fs-5"></i></button></li><!--<i class="fas fa-eye text-success px-1"></i>-->
+                        <li class="list-group-item d-flex justify-content-between align-items-center">meta_qsync                            <button id="wobs_meta_qsync" type="button" class="btn btn-dark"><i class="fas fa-file-import text-light px-1 fs-5"></i></button></li><!--<i class="fas fa-eye text-success px-1"></i>-->
+                        <li class="list-group-item d-flex justify-content-between align-items-center">faune (obs_faune)                     <button id="wobs_obs_faune" type="button" class="btn btn-dark"><i class="fas fa-file-import text-light px-1 fs-5"></i></button></li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">flore (obs_flore)                     <button id="wobs_obs_flore" type="button" class="btn btn-dark"><i class="fas fa-file-import text-light px-1 fs-5"></i></button></li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">liste des observateurs (observateurs) <button id="wobs_observateurs" type="button" class="btn btn-dark"><i class="fas fa-file-import text-light px-1 fs-5"></i></button></li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">liste des taxons faune (tx_faune)     <button id="wobs_tx_faune" type="button" class="btn btn-dark"><i class="fas fa-file-import text-light px-1 fs-5"></i></button></li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">liste des taxons flore (tx_flore)     <button id="wobs_tx_flore" type="button" class="btn btn-dark"><i class="fas fa-file-import text-light px-1 fs-5"></i></button></li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">JDD faune (jdd_faune_)                <button id="wobs_jdd_faune_" type="button" class="btn btn-dark"><i class="fas fa-file-import text-light px-1 fs-5"></i></button></li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">JDD flore (jdd_flore_)                <button id="wobs_jdd_flore_" type="button" class="btn btn-dark"><i class="fas fa-file-import text-light px-1 fs-5"></i></button></li>
                     </ul>
-                    <p id="output" class="d-flex flex-column col-md-9 col-lg-10 m-0 bg-dark text-light">
+                    <p id="output_observations" class="d-flex flex-column col-8 m-0 bg-dark text-light" style="overflow-y: auto;max-height: 100%;">
                     </p>
+                </div>
+                <div class="d-flex w-100 p-2 text-light bg-dark">
+                    <h4 class="bebas my-0" >n2k.gpkg</h4>
+                </div>
+                <div class="d-flex w-100">
+                    <ul class="list-group col-4">
+                        <li class="list-group-item d-flex justify-content-between align-items-center"><span class="fw-bolder">remplacer n2k.gpkg</span>     <button id="n2k_gpkg" type="button" class="btn btn-danger"><i class="fas fa-file-import text-light px-1 fs-5"></i></button></li>
+                    </ul>
+                    <p id="output_n2k" class="d-flex flex-column col-8 m-0 bg-dark text-light">
+                    </p>
+                </div>
+                <div class="d-flex w-100 p-2 text-light bg-dark justify-content-end">
+                    <h4 class="bebas my-0" >...</h4>
                 </div>
             </div>	
 		</div>

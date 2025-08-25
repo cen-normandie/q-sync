@@ -68,6 +68,9 @@ if (in_array($_SESSION['email'], $admins)) {
                     Lecture : <span class="fw-bold" > En attente / Intégrées dans Géonature </span>
                     </p>
                 </div>
+                <div class="d-flex w-100 p-2 text-light bg-dark">
+                    <h4 class="bebas my-0" >Observations.gpkg</h4>
+                </div>
                 <div class="d-flex w-100 p-2">
                     <div id="container_Flore" class="col-4"></div>
                     <div id="container_Faune" class="col-4"></div>
@@ -75,7 +78,7 @@ if (in_array($_SESSION['email'], $admins)) {
                 </div>
                 <div class="d-flex w-100 p-2">
                     <div class="d-flex flex-column w-100 col-10">
-                        <table id="QSync" class="table table-hover table-sm" style="width:100%"> <!--table-dark-->
+                        <table id="QSync_observations" class="table table-hover table-sm" style="width:100%"> <!--table-dark-->
                             <thead>
                                 <tr>
                                     <th>uuid</th>
@@ -83,6 +86,27 @@ if (in_array($_SESSION['email'], $admins)) {
                                     <th>nb obs faune</th>
                                     <th>nb obs flore</th>
                                     <th>nb obs cc</th>
+                                    <th>date update .gpkg</th>
+                                    <th>.gpkg version</th>
+                                    <th>imports</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="d-flex w-100 p-2 text-light bg-dark">
+                    <h4 class="bebas my-0" >n2k.gpkg</h4>
+                </div>
+                <div class="d-flex w-100 p-2">
+                    <div class="d-flex flex-column w-100 col-10">
+                        <table id="QSync_n2k" class="table table-hover table-sm" style="width:100%"> <!--table-dark-->
+                            <thead>
+                                <tr>
+                                    <th>uuid</th>
+                                    <th>Personne</th>
+                                    <th>n2k</th>
                                     <th>date update .gpkg</th>
                                     <th>.gpkg version</th>
                                     <th>imports</th>

@@ -21,7 +21,7 @@
         }); 
 
 }); */
-$('button[id^="w_"]').click( function () {
+$('button[id^="wobs_"]').click( function () {
 var r=confirm("Êtes-vous sûr de sûr ?");
 if (r==true)
   {
@@ -37,7 +37,7 @@ if (r==true)
          success  : function(data) {
              if (data)
              {   
-                 $('#output').html(data);
+                 $('#output_observations').html(data);
                  change_load();
              }
              else
@@ -53,7 +53,7 @@ else
   }
 });
 
-$("#gpkg").click( function () {
+$("#observations_gpkg").click( function () {
 var r=confirm("Êtes-vous sûr de sûr | Ceci effacera toutes les données dans les geopackages ?");
 if (r==true)
   {
@@ -61,14 +61,14 @@ if (r==true)
          $.ajax({
             url      : "php/ajax/write_gpkg.js.php",
             type     : "POST",
-            data     : {},
+            data     : {gpkg_name: "observations.gpkg"},
             async    : false,
             dataType : "text",
             error    : function(request, error) { console.log("not ajax success ");},
             success  : function(data) {
                 if (data)
                 {   
-                    $('#output').html(data);
+                    $('#output_observations').html(data);
                 }
                 else
                 {
@@ -86,6 +86,36 @@ else
 });
 
 
+$("#n2k_gpkg").click( function () {
+var r=confirm("Êtes-vous sûr de sûr | Ceci effacera toutes les données dans les geopackages ?");
+if (r==true)
+  {
+        console.log("write gpkg");
+         $.ajax({
+            url      : "php/ajax/write_gpkg.js.php",
+            type     : "POST",
+            data     : {gpkg_name: "n2k.gpkg"},
+            async    : false,
+            dataType : "text",
+            error    : function(request, error) { console.log("not ajax success ");},
+            success  : function(data) {
+                if (data)
+                {   
+                    $('#output_n2k').html(data);
+                }
+                else
+                {
+                    alert('Connexion impossible... Vérifiez votre identifiant et votre mot de passe');
+                }
+                change_load();
+            }
+        }); 
+  }
+else
+  {
 
+  }
+
+});
 
 

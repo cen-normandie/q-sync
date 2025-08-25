@@ -4,6 +4,8 @@ include '../properties.php';
 $output=null;
 $retval=null;
 
+$gpkg = $_POST['gpkg_name'];
+
 $dbconn_geo = pg_connect("hostaddr=$DBHOST_geonature port=$PORT_geonature dbname=$DBNAME_geonature user=$LOGIN_geonature password=$PASS_geonature") or die ('Connexion impossible :'. pg_last_error());
 $dbconn_nx = pg_connect("hostaddr=$DBHOST_nextcloud port=$PORT_nextcloud dbname=$DBNAME_nextcloud user=$LOGIN_nextcloud password=$PASS_nextcloud") or die ('Connexion impossible :'. pg_last_error());
 
@@ -14,10 +16,10 @@ $select = pg_prepare($dbconn_geo, "sql_select", "select courriel, gn_user_name, 
 $personne = pg_execute($dbconn_geo, "sql_select",array()) or die ( pg_last_error());
 while($row = pg_fetch_row($personne))
 {
-  $observations_gpkg = '/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/observations.gpkg';
-  if (file_exists($observations_gpkg)) {
+  $path_gpkg = '/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/'.$gpkg.'';
+  if (file_exists($path_gpkg)) {
     echo '</br>#########' .$row[0].'</br>';
-    exec("cp /var/www/html/q-sync/_qfield_skeleton/observations.gpkg ".$observations_gpkg, $output, $retval);
+    exec("cp /var/www/html/q-sync/_qfield_skeleton/".$gpkg." ".$path_gpkg, $output, $retval);
     echo "status $retval ";
     echo '</br>';
   }

@@ -4,6 +4,11 @@ include '../properties.php';
 $dbconn_geo = pg_connect("hostaddr=$DBHOST_geonature port=$PORT_geonature dbname=$DBNAME_geonature user=$LOGIN_geonature password=$PASS_geonature") or die ('Connexion impossible :'. pg_last_error());
 $dbconn_nx = pg_connect("hostaddr=$DBHOST_nextcloud port=$PORT_nextcloud dbname=$DBNAME_nextcloud user=$LOGIN_nextcloud password=$PASS_nextcloud") or die ('Connexion impossible :'. pg_last_error());
 
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Observations
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 ///////////////////////////////////////////////////////////////////
 // A. Insertion des nouveaux utilisateurs dans la table nextcloud.users
 ///////////////////////////////////////////////////////////////////
@@ -22,7 +27,7 @@ $delete = pg_execute($dbconn_geo, "sql_dashboard",array()) or die ( pg_last_erro
 
 // INSERTION DANS LA TABLE NEXTCLOUD.DASHBOARD
 $insert_dashboard = pg_prepare($dbconn_geo, "sql_insert_dashboard", "INSERT INTO $nx_dashboard (uuid, personne, obs_faune, obs_faune_imported, obs_flore, obs_flore_imported, update, obs_cc, obs_cc_imported, version) VALUES ($1, $2, $3,$4,$5,$6,$7,$8,$9,$10);");
-
+$insert_dashboard = pg_prepare($dbconn_geo, "sql_insert_dashboard_n2k", "INSERT INTO $nx_dashboard_n2k (uuid, personne, n2k, n2k_imported, version) VALUES ($1, $2, $3,$4,$5);");
 $insert_s = pg_prepare($dbconn_nx, "sql", "
 with a_ as (
 SELECT id, uid, value as name_
@@ -53,12 +58,12 @@ while($row = pg_fetch_row($insert_s))
 // B. Mise à jour du champ gn_user_name dans la table nextcloud.users
 ///////////////////////////////////////////////////////////////////
 $update = pg_prepare($dbconn_geo, "sql_update", "
-with a_ as (select courriel, nom_ad, id_role, email from nextcloud.users 
+with a_ as (select courriel, nom_ad, id_role, email from $nx_users
 left join utilisateurs.t_roles on t_roles.email = courriel
 group by 1,2,3,4
 order by 1
 )
-update nextcloud.users set gn_user_name = a_.id_role::text from a_ where a_.email = users.courriel;
+update $nx_users set gn_user_name = a_.id_role::text from a_ where a_.email = users.courriel;
 ");
 $update_ = pg_execute($dbconn_geo, "sql_update",array()) or die ( pg_last_error());
 
@@ -113,6 +118,7 @@ while($row = pg_fetch_row($personne))
     while ($row_ = $results_version->fetchArray()) {
         $version = $row_[0];
     }
+    $db->close();
 
     $insert_dashboard = pg_execute($dbconn_geo, "sql_insert_dashboard",array($row[3], $row[2], $i_faune, $i_faune_imported, $i_flore, $i_flore_imported, date('Y-m-d', filemtime($observations_gpkg)), 0, 0, $version )) or die ( pg_last_error());
   }
@@ -137,7 +143,35 @@ $observations_gpkg = '/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/obs
 							exec($cmd2, $output);
 						} */
 
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// N2K
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+$select = pg_prepare($dbconn_geo, "sql_select", "select courriel, gn_user_name, nom_ad, uuid_nx from $nx_users;");
+$personne = pg_execute($dbconn_geo, "sql_select",array()) or die ( pg_last_error());
+while($row = pg_fetch_row($personne))
+{
+  $n2k_gpkg = '/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg';
+  //if file_exists
+  if (file_exists($n2k_gpkg)) {
+    echo '</br>' .$row[0]. ' - ' . date('Y-m-d', filemtime($n2k_gpkg)) . '</br>';
 
+    $cmd='ogr2ogr -f PostgreSQL "PG:user='.$LOGIN_geonature.' host='.$DBHOST_geonature.' dbname='.$DBNAME_geonature.' password='.$PASS_geonature.'" /var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg -nln '.$n2k_polygone.' -append -sql "SELECT *, \''.$row[1].'\' as courriel, \''.$row[3].'\' as uuid_nx from '.$faune.' where import is null" 2>&1';
+		exec($cmd, $output);
+
+    $db = new SQLite3('/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg');
+    $db->loadExtension('mod_spatialite.so');
+
+    // Decompte des operations n2k à importer
+    $results_n2k_gpkg = $db->query("select fid, numerisateur from  $n2k_polygone where importe is null;"); //
+    $i_n2k= 0;
+    while ($row_ = $results_n2k_gpkg->fetchArray()) {
+            //var_dump($row_);
+            $i_n2k++;
+    }
+  }
+
+
+}
 
 pg_close($dbconn_geo);
 pg_close($dbconn_nx);
