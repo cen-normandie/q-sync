@@ -132,7 +132,7 @@ while($row = pg_fetch_row($personne))
   // N2K
   ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   if (file_exists($n2k_gpkg)) {
-    echo '</br>N2K ###### ' .$row[0]. ' - ' . date('Y-m-d', filemtime($n2k_gpkg)) . '</br>';
+    echo '</br>############</br>N2K</br>############ ' .$row[0]. ' - ' . date('Y-m-d', filemtime($n2k_gpkg)) . '</br>';
 
     //$cmd='ogr2ogr -f PostgreSQL "PG:user='.$LOGIN_geonature.' host='.$DBHOST_geonature.' dbname='.$DBNAME_geonature.' password='.$PASS_geonature.'" /var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg -nln '.$n2k_real_polygone.' -append -sql "SELECT *, \''.$row[1].'\' as courriel, \''.$row[3].'\' as uuid_nx from '.$n2k_previ_polygone_gpkg.' where importe is null" 2>&1';
 		//exec($cmd, $output);
