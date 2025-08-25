@@ -10,6 +10,10 @@ $select = pg_prepare($dbconn_geo, "sql_select", "select courriel, gn_user_name, 
 $personne = pg_execute($dbconn_geo, "sql_select",array()) or die ( pg_last_error());
 while($row = pg_fetch_row($personne))
 {
+  echo 'courriel :'.$row[0].'</br>';
+  echo 'gn_user_name :'.$row[1].'</br>';
+  echo 'nom_ad :'.$row[2].'</br>';
+  echo 'uuid_nx :'.$row[3].'</br>';
   $observations_gpkg = '/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/observations.gpkg';
   //if file_exists
   if (file_exists($observations_gpkg)) {
