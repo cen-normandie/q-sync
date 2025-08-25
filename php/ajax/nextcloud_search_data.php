@@ -146,8 +146,6 @@ $observations_gpkg = '/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/obs
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // N2K
 /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-$select = pg_prepare($dbconn_geo, "sql_select", "select courriel, gn_user_name, nom_ad, uuid_nx from $nx_users;");
-$personne = pg_execute($dbconn_geo, "sql_select",array()) or die ( pg_last_error());
 while($row = pg_fetch_row($personne))
 {
   $n2k_gpkg = '/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg';
@@ -155,8 +153,8 @@ while($row = pg_fetch_row($personne))
   if (file_exists($n2k_gpkg)) {
     echo '</br>' .$row[0]. ' - ' . date('Y-m-d', filemtime($n2k_gpkg)) . '</br>';
 
-    $cmd='ogr2ogr -f PostgreSQL "PG:user='.$LOGIN_geonature.' host='.$DBHOST_geonature.' dbname='.$DBNAME_geonature.' password='.$PASS_geonature.'" /var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg -nln '.$n2k_polygone.' -append -sql "SELECT *, \''.$row[1].'\' as courriel, \''.$row[3].'\' as uuid_nx from '.$faune.' where import is null" 2>&1';
-		exec($cmd, $output);
+    //$cmd='ogr2ogr -f PostgreSQL "PG:user='.$LOGIN_geonature.' host='.$DBHOST_geonature.' dbname='.$DBNAME_geonature.' password='.$PASS_geonature.'" /var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg -nln '.$n2k_real_polygone.' -append -sql "SELECT *, \''.$row[1].'\' as courriel, \''.$row[3].'\' as uuid_nx from '.$n2k_previ_polygone_gpkg.' where importe is null" 2>&1';
+		//exec($cmd, $output);
 
     $db = new SQLite3('/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg');
     $db->loadExtension('mod_spatialite.so');
