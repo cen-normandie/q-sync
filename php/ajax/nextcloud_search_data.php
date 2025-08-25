@@ -25,6 +25,10 @@ $delete = pg_execute($dbconn_geo, "sql",array()) or die ( pg_last_error());
 $delete = pg_prepare($dbconn_geo, "sql_dashboard", "DELETE FROM $nx_dashboard;");
 $delete = pg_execute($dbconn_geo, "sql_dashboard",array()) or die ( pg_last_error());
 
+// suppression des données sur dashboard_n2k
+$delete = pg_prepare($dbconn_geo, "sql_dashboard_n2k", "DELETE FROM $nx_dashboard_n2k;");
+$delete = pg_execute($dbconn_geo, "sql_dashboard_n2k",array()) or die ( pg_last_error());
+
 // INSERTION DANS LA TABLE NEXTCLOUD.DASHBOARD
 $insert_dashboard = pg_prepare($dbconn_geo, "sql_insert_dashboard", "INSERT INTO $nx_dashboard (uuid, personne, obs_faune, obs_faune_imported, obs_flore, obs_flore_imported, update, obs_cc, obs_cc_imported, version) VALUES ($1, $2, $3,$4,$5,$6,$7,$8,$9,$10);");
 $insert_dashboard_n2k = pg_prepare($dbconn_geo, "sql_insert_dashboard_n2k", "INSERT INTO $nx_dashboard_n2k (uuid, personne, n2k_previ_polygone, n2k_previ_polygone_imported) VALUES ($1, $2, $3,$4);");
