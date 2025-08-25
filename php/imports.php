@@ -13,7 +13,7 @@ while($row = pg_fetch_row($personne))
   $observations_gpkg = '/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/observations.gpkg';
   //if file_exists
   if (file_exists($observations_gpkg)) {
-    $cmd='ogr2ogr -f PostgreSQL "PG:user=postgres host=192.168.1.244 dbname=geonature password='.$PASS.'" /var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/observations.gpkg -nln sandbox.obs_faune -append -sql "SELECT *, \''.$row[1].'\' from obs_faune where date_import is null" 2>&1';
+    $cmd='ogr2ogr -f PostgreSQL "PG:user='.$LOGIN_geonature.' host='.$DBHOST_geonature.' dbname='.$DBNAME_geonature.' password='.$PASS_geonature.'" /var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/observations.gpkg -nln sandbox.obs_faune -append -sql "SELECT *, \''.$row[1].'\' as courriel, \''.$row[3].'\' as uuid_nx from '.$faune.'  where date_import is null" 2>&1';
     echo '</br>'.$cmd.'</br>';
     exec($cmd, $output);
     if (!$output) {
