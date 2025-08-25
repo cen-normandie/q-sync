@@ -23,7 +23,7 @@ while($row = pg_fetch_row($personne))
     echo '</br>'.$output[0].'</br>';
     if ($output != 2) {
         echo '<span style="font-weight:900;color:#056e15">DONE</span></br>';
-        pg_prepare($dbconn_geo, "sql_up", "SELECT id, uuid_nx, uuid_obs, date_import FROM $suivi_faune where gpkg_updated is false and uuid_nx = $1 ;");
+        pg_prepare($dbconn_geo, "sql_up", "SELECT id, uuid_nx, uuid_obs, date_import FROM $suivi_point_faune where gpkg_updated is false and uuid_nx = $1 ;");
         $to_up = pg_execute($dbconn_geo, "sql_up",array($row[3])) or die ( pg_last_error());
         while($row_ = pg_fetch_row($to_up))
             {
@@ -31,7 +31,7 @@ while($row = pg_fetch_row($personne))
                 $db->loadExtension('mod_spatialite.so');
                 echo '</br>'."UPDATE $faune set date_import = datetime('now') where date_import is null and uuid_obs = '".$row_[2]."';".'</br>'; //
                 $results_write_gpkg = $db->query("UPDATE $faune set date_import = datetime('now') where date_import is null and uuid_obs = '".$row_[2]."';"); //
-                pg_prepare($dbconn, "sql_down", "UPDATE $suivi_faune set gpkg_updated = true where uuid_obs = $1;");
+                pg_prepare($dbconn, "sql_down", "UPDATE $suivi_point_faune set gpkg_updated = true where uuid_obs = $1;");
                 if ($results_write_gpkg) {
                     pg_execute($dbconn, "sql_down",array($row_[2])) or die ( pg_last_error());
                     $cmd2 = 'sudo -u www-data php /var/www/html/nextcloud/occ files:scan -p "'.$row[3].'"';
