@@ -36,6 +36,7 @@ while($row = pg_fetch_row($personne))
                     pg_execute($dbconn, "sql_down",array($row_[2])) or die ( pg_last_error());
                     $cmd2 = 'sudo -u www-data php /var/www/html/nextcloud/occ files:scan -p "'.$row[3].'"';
                     exec($cmd2, $output);
+                    echo '</br>END : '.$output[0].'</br>';
                 }
             }
     } else {
