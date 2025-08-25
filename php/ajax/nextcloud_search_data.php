@@ -76,9 +76,12 @@ $personne = pg_execute($dbconn_geo, "sql_select",array()) or die ( pg_last_error
 while($row = pg_fetch_row($personne))
 {
   $observations_gpkg = '/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/observations.gpkg';
-  //if file_exists
+  $n2k_gpkg = '/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg';
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // OBSERVATION
+  /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   if (file_exists($observations_gpkg)) {
-    echo '</br>' .$row[0]. ' - ' . date('Y-m-d', filemtime($observations_gpkg)) . '</br>';
+    echo '</br>Observations.gpkg ' .$row[0]. ' - ' . date('Y-m-d', filemtime($observations_gpkg)) . '</br>';
 
     $db = new SQLite3('/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/observations.gpkg');
     $db->loadExtension('mod_spatialite.so');
@@ -124,6 +127,30 @@ while($row = pg_fetch_row($personne))
   }
 
 
+
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  // N2K
+  ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  if (file_exists($n2k_gpkg)) {
+    echo '</br>N2K ###### ' .$row[0]. ' - ' . date('Y-m-d', filemtime($n2k_gpkg)) . '</br>';
+
+    //$cmd='ogr2ogr -f PostgreSQL "PG:user='.$LOGIN_geonature.' host='.$DBHOST_geonature.' dbname='.$DBNAME_geonature.' password='.$PASS_geonature.'" /var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg -nln '.$n2k_real_polygone.' -append -sql "SELECT *, \''.$row[1].'\' as courriel, \''.$row[3].'\' as uuid_nx from '.$n2k_previ_polygone_gpkg.' where importe is null" 2>&1';
+		//exec($cmd, $output);
+
+    $db = new SQLite3('/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg');
+    $db->loadExtension('mod_spatialite.so');
+
+    // Decompte des operations n2k à importer
+    $results_n2k_gpkg = $db->query("select fid, numerisateur from  $n2k_polygone where importe is null;"); //
+    $i_n2k= 0;
+    while ($row_ = $results_n2k_gpkg->fetchArray()) {
+            //var_dump($row_);
+            $i_n2k++;
+    }
+    $insert_dashboard_n2k = pg_execute($dbconn_geo, "sql_insert_dashboard_n2k",array($row[3], $row[2], $i_n2k, $i_n2k_imported)) or die ( pg_last_error());
+    $db->close();
+  }
+
 }
 
 /* $file_size = pg_prepare($dbconn_geo, "sql_insert", "SELECT ");
@@ -143,35 +170,7 @@ $observations_gpkg = '/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/obs
 							exec($cmd2, $output);
 						} */
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// N2K
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-while($row = pg_fetch_row($personne))
-{
-  $n2k_gpkg = '/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg';
-  //if file_exists
-  if (file_exists($n2k_gpkg)) {
-    echo '</br>' .$row[0]. ' - ' . date('Y-m-d', filemtime($n2k_gpkg)) . '</br>';
 
-    //$cmd='ogr2ogr -f PostgreSQL "PG:user='.$LOGIN_geonature.' host='.$DBHOST_geonature.' dbname='.$DBNAME_geonature.' password='.$PASS_geonature.'" /var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg -nln '.$n2k_real_polygone.' -append -sql "SELECT *, \''.$row[1].'\' as courriel, \''.$row[3].'\' as uuid_nx from '.$n2k_previ_polygone_gpkg.' where importe is null" 2>&1';
-		//exec($cmd, $output);
-
-    $db = new SQLite3('/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg');
-    $db->loadExtension('mod_spatialite.so');
-
-    // Decompte des operations n2k à importer
-    $results_n2k_gpkg = $db->query("select fid, numerisateur from  $n2k_polygone where importe is null;"); //
-    $i_n2k= 0;
-    while ($row_ = $results_n2k_gpkg->fetchArray()) {
-            //var_dump($row_);
-            $i_n2k++;
-    }
-    $insert_dashboard_n2k = pg_execute($dbconn_geo, "sql_insert_dashboard_n2k",array($row[3], $row[2], $i_n2k, $i_n2k_imported)) or die ( pg_last_error());
-    $db->close();
-  }
-
-
-}
 
 pg_close($dbconn_geo);
 pg_close($dbconn_nx);
