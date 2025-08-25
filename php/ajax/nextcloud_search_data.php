@@ -141,7 +141,7 @@ while($row = pg_fetch_row($personne))
     $db->loadExtension('mod_spatialite.so');
 
     // Decompte des operations n2k à importer
-    $results_n2k_gpkg = $db->query("select fid, numerisateur from  $n2k_polygone where importe is null;"); //
+    $results_n2k_gpkg = $db->query("select fid, numerisateur from  $n2k_previ_polygone where importe is null;"); //
     $i_n2k= 0;
     while ($row_ = $results_n2k_gpkg->fetchArray()) {
             //var_dump($row_);
