@@ -39,6 +39,7 @@ while($row = pg_fetch_row($personne))
                     echo '</br>'."UPDATE $faune set date_import = datetime('now') where date_import is null and uuid_obs = '".$row_[2]."';".'</br>'; //
                     $results_write_gpkg = $db->query("UPDATE $faune set date_import = datetime('now') where date_import is null and uuid_obs = '".$row_[2]."';"); //
                     if ($results_write_gpkg) {
+                        echo $db->changes();
                         pg_execute($dbconn_geo, "sql_down",array($row_[2])) or die ( pg_last_error());
                         $cmd2 = 'sudo -u www-data php /var/www/html/nextcloud/occ files:scan -p "'.$row[3].'"';
                         $output2=[];
