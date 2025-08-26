@@ -102,7 +102,7 @@ if (in_array($_SESSION['email'], $admins)) {
                             <button id="import_cc" type="button" class="btn btn-sm m-2" style="background-color:rgba(196, 39, 162, 0.75);"><i class="fas fa-file-import text-dark px-1 fs-5"></i> Import Carré Contact</button>
                         </div>
                         <div class="d-flex w-100 bg-dark text-light flex-grow-1">
-                            <div id="console_observations" class="d-flex align-self-stretch"></div>
+                            <div id="console_observations" class="d-flex flex-column align-self-stretch" style="overflow-y: auto;"></div>
                         </div>
 
                     </div>
