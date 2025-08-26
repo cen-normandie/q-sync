@@ -145,7 +145,7 @@ $('#import_faune').on('click', function() {
             change_load();
             $('#console_observations').empty();
             $('#console_observations').append( "<p>"+data+"</p>" );
-            file_scan ()
+            file_scan ();
             }
     });
 });
@@ -161,14 +161,14 @@ $('#import_flore').on('click', function() {
             change_load();
             $('#console_observations').empty();
             $('#console_observations').append( "<p>"+data+"</p>" );
-            file_scan ()
+            file_scan ();
             }
     });
 });
 
 function file_scan () {
     $.ajax({
-        url      : "php/ajax/file_scan.php",
+        url      : "php/file_scan.php",
         data     : {},
         method   : "POST",
         dataType : "text",
