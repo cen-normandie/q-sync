@@ -28,7 +28,6 @@ while($row = pg_fetch_row($personne))
         //importe toutes les obs flore de sandbox.obs_flore dans geonature
         $out = pg_execute($dbconn_geo, "sql_import_occtax",array()) or die ( pg_last_error());
         if ($out) {
-            echo '</br>select update : SELECT id, uuid_nx, uuid_obs, date_import FROM $suivi_point_flore where gpkg_updated is false and uuid_nx = \''.$row[3].'\' ;';
             $to_up = pg_execute($dbconn_geo, "sql_up",array($row[3])) or die ( pg_last_error());
             while($row_ = pg_fetch_row($to_up))
                 {
@@ -39,13 +38,6 @@ while($row = pg_fetch_row($personne))
                     if ($results_write_gpkg) {
                         echo $db->changes();
                         pg_execute($dbconn_geo, "sql_down",array($row_[2])) or die ( pg_last_error());
-                        $cmd2 = 'sudo -u www-data php /var/www/html/nextcloud/occ files:scan -p "'.$row[3].'"';
-                        $output2=[];
-                        $return_var2=0;
-                        exec($cmd2, $output2, $return_var2);
-                        if ($return_var2 !== 2) {
-                            echo 'scan OK';
-                        }
                     }
                 }
         }
