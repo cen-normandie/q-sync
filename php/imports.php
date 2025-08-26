@@ -19,9 +19,10 @@ while($row = pg_fetch_row($personne))
   if (file_exists($observations_gpkg)) {
     $cmd='ogr2ogr -f PostgreSQL "PG:user='.$LOGIN_geonature.' host='.$DBHOST_geonature.' dbname='.$DBNAME_geonature.' password='.$PASS_geonature.'" /var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/observations.gpkg -nln sandbox.obs_faune -append -sql "SELECT *, \''.$row[0].'\' as courriel, \''.$row[2].'\' as uuid_nx from '.$faune.'  where date_import is null" 2>&1';
     echo '</br>'.$cmd.'</br>';
-    exec($cmd, $output);
-    echo '</br>'.$output.'</br>';
-    if ($output != 2) {
+    $output=[];
+    $return_var=0;
+    exec($cmd, $output, $return_var);
+    if ($return_var !== 2) {
         echo '<span style="font-weight:900;color:#056e15">DONE</span></br>';
         pg_prepare($dbconn_geo, "sql_up", "SELECT id, uuid_nx, uuid_obs, date_import FROM $suivi_point_faune where gpkg_updated is false and uuid_nx = $1 ;");
         $to_up = pg_execute($dbconn_geo, "sql_up",array($row[3])) or die ( pg_last_error());
@@ -35,8 +36,12 @@ while($row = pg_fetch_row($personne))
                 if ($results_write_gpkg) {
                     pg_execute($dbconn, "sql_down",array($row_[2])) or die ( pg_last_error());
                     $cmd2 = 'sudo -u www-data php /var/www/html/nextcloud/occ files:scan -p "'.$row[3].'"';
-                    exec($cmd2, $output);
-                    echo '</br>END : '.$output[0].'</br>';
+                    $output2=[];
+                    $return_var2=0;
+                    exec($cmd2, $output2, $return_var2);
+                    if ($return_var2 !== 2) {
+                        echo 'scan impossible -_-';
+                    }
                 }
             }
     } else {
