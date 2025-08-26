@@ -1,9 +1,6 @@
 <?php
 include '../../properties.php';
 
-echo '<h2>IMPORT DES OBSERVATIONS faune du serveur nextcloud dans le dossier UUID/files/_qfield/observations.gpkg</h2>';
-echo '<h3>table : obs_faune</h3>';
-
 
 $dbconn_geo = pg_connect("hostaddr=$DBHOST_geonature port=$PORT_geonature dbname=$DBNAME_geonature user=$LOGIN_geonature password=$PASS_geonature") or die ('Connexion impossible :'. pg_last_error());
 $select = pg_prepare($dbconn_geo, "sql_select", "select courriel, gn_user_name, nom_ad, uuid_nx from $nx_users ;");
@@ -35,9 +32,9 @@ while($row = pg_fetch_row($personne))
             $to_up = pg_execute($dbconn_geo, "sql_up",array($row[3])) or die ( pg_last_error());
             while($row_ = pg_fetch_row($to_up))
                 {
+                    echo 'uuid_obs :'.$row_[2].' - date_import : '.$row_[3].' uuid_nx : '.$row_[1].'</br>';
                     $db = new SQLite3('/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/observations.gpkg');
                     $db->loadExtension('mod_spatialite.so');
-                    echo '</br>'."UPDATE $faune set date_import = datetime('now') where date_import is null and uuid_obs = '".$row_[2]."';".'</br>'; //
                     $results_write_gpkg = $db->query("UPDATE $faune set date_import = datetime('now') where date_import is null and uuid_obs = '".$row_[2]."';"); //
                     if ($results_write_gpkg) {
                         echo $db->changes();
