@@ -78,7 +78,7 @@ if (in_array($_SESSION['email'], $admins)) {
                 </div>
                 <div class="d-flex w-100">
                     <div class="d-flex flex-column col-md-6 col-lg-8">
-                        <table id="QSync_observations" class="table table-hover table-sm" style="width:100%;"> <!--table-dark-->
+                        <table id="QSync_observations" class="table table-hover table-sm table-dark" style="width:100%;">
                             <thead>
                                 <tr>
                                     <th>uuid</th>
