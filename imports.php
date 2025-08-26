@@ -96,10 +96,10 @@ if (in_array($_SESSION['email'], $admins)) {
                         </table>
                     </div>
                     <div class="d-flex flex-column col-md-6 col-lg-4 bg-dark text-light">
-                        <div class="d-flex flex-column w-100 justify-content-between p-2">
-                            <button id="import_faune" type="button" class="btn btn-sm" style="background-color:rgba(236, 214, 14, 0.75);"><i class="fas fa-file-import text-dark px-1 fs-5"></i> Import Faune</button>
-                            <button id="import_flore" type="button" class="btn btn-sm" style="background-color:rgba(39, 196, 60, 0.75);"><i class="fas fa-file-import text-dark px-1 fs-5"></i> Import Flore</button>
-                            <button id="import_cc" type="button" class="btn btn-sm" style="background-color:rgba(196, 39, 162, 0.75);"><i class="fas fa-file-import text-dark px-1 fs-5"></i> Import Carré Contact</button>
+                        <div class="d-flex flex-column w-100 justify-content-between ">
+                            <button id="import_faune" type="button" class="btn btn-sm m-2" style="background-color:rgba(236, 214, 14, 0.75);"><i class="fas fa-file-import text-dark px-1 fs-5"></i> Import Faune</button>
+                            <button id="import_flore" type="button" class="btn btn-sm m-2" style="background-color:rgba(39, 196, 60, 0.75);"><i class="fas fa-file-import text-dark px-1 fs-5"></i> Import Flore</button>
+                            <button id="import_cc" type="button" class="btn btn-sm m-2" style="background-color:rgba(196, 39, 162, 0.75);"><i class="fas fa-file-import text-dark px-1 fs-5"></i> Import Carré Contact</button>
                         </div>
                         <div class="d-flex w-100 bg-dark text-light flex-grow-1">
                             <div id="console" class="d-flex align-self-stretch"></div>
