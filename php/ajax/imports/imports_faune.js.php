@@ -44,7 +44,7 @@ while($row = pg_fetch_row($personne))
                         $return_var2=0;
                         exec($cmd2, $output2, $return_var2);
                         if ($return_var2 !== 2) {
-                            echo 'scan impossible -_-';
+                            echo 'scan OK';
                         }
                     }
                 }
