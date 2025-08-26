@@ -99,7 +99,7 @@ if (in_array($_SESSION['email'], $admins)) {
                         </div>
                         <div class="d-flex flex-column w-100">
                             <ul class="list-group">
-                                <li class="list-group-item d-flex justify-content-between align-items-center"><input type="text" class="fw-bolder" value="" >     <button id="delete_file" type="button" class="btn btn-danger"><i class="fa-solid fa-trash"></i></button></li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center"><input id="delete_file_name" type="text" class="fw-bolder" value="" >     <button id="delete_file" type="button" class="btn btn-danger"><i class="fas fa-trash"></i></button></li>
                             </ul>
                         </div>
                     </div>

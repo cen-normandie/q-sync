@@ -70,6 +70,38 @@ else
     }
 });
 
+$('#delete_file').click( function () {
+    var r=confirm("Êtes-vous sûr de vouloir supprimer ce fichier ?");
+    if (r==true)
+    {
+        console.log("delete file: " + $('#delete_file_name').val());
+        $.ajax({
+            url      : "php/ajax/delete_file.js.php",
+            type     : "POST",
+            data     : {file_name: $('#delete_file_name').val()},
+            async    : false,
+            dataType : "text",
+            error    : function(request, error) { console.log("not ajax success ");},
+            success  : function(data) {
+                if (data)
+                {
+                    $('#output_').html(data);
+                    file_scan ();
+                }
+                else
+                {
+                    alert('Connexion impossible... Vérifiez votre identifiant et votre mot de passe');
+                }
+                change_load();
+            }
+        });
+    }
+else
+    {
+
+    }
+});
+
 $('button[id^="qgz__"]').click( function () {
 var r=confirm("Êtes-vous sûr de sûr ?");
 if (r==true)
