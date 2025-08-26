@@ -25,8 +25,8 @@ while($row = pg_fetch_row($personne))
     if ($return_var !== 2) {
         echo '<span style="font-weight:900;color:#056e15">DONE</span></br>';
         //importe toutes les obs faune de sandbox.obs_faune dans geonature
-        pg_prepare($dbconn, "sql_import_occtax", "select sandbox.import_faune();");
-        $out = pg_execute($dbconn, "sql_import_occtax",array()) or die ( pg_last_error());
+        pg_prepare($dbconn_geo, "sql_import_occtax", "select sandbox.import_faune();");
+        $out = pg_execute($dbconn_geo, "sql_import_occtax",array()) or die ( pg_last_error());
         if ($out) {
             pg_prepare($dbconn_geo, "sql_up", "SELECT id, uuid_nx, uuid_obs, date_import FROM $suivi_point_faune where gpkg_updated is false and uuid_nx = $1 ;");
             echo '</br>select update : SELECT id, uuid_nx, uuid_obs, date_import FROM $suivi_point_faune where gpkg_updated is false and uuid_nx = \''.$row[3].'\' ;';
