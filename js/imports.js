@@ -143,11 +143,43 @@ $('#import_faune').on('click', function() {
         error    : function(request, error) { alert("Erreur : responseText: "+request.responseText);change_load();},
         success  : function(data) {
             change_load();
+            $('#console_observations').empty();
             $('#console_observations').append( "<p>"+data+"</p>" );
+            file_scan ()
+            }
+    });
+});
+$('#import_flore').on('click', function() {
+    $.ajax({
+        url      : "php/ajax/imports/imports_flore.js.php",
+        data     : {},
+        method   : "POST",
+        dataType : "text",
+        async    : true,
+        error    : function(request, error) { alert("Erreur : responseText: "+request.responseText);change_load();},
+        success  : function(data) {
+            change_load();
+            $('#console_observations').empty();
+            $('#console_observations').append( "<p>"+data+"</p>" );
+            file_scan ()
             }
     });
 });
 
+function file_scan () {
+    $.ajax({
+        url      : "php/ajax/file_scan.php",
+        data     : {},
+        method   : "POST",
+        dataType : "text",
+        async    : true,
+        error    : function(request, error) { alert("Erreur : responseText: "+request.responseText);change_load();},
+        success  : function(data) {
+            change_load();
+            $('#console_observations').append( "<p>"+data+"</p>" );
+            }
+    });
+}
 
 //////////////////////////////////////////////////////
 //Gestion des dom et evenement pour le graphique general
