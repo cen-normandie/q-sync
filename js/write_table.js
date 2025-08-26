@@ -1,14 +1,16 @@
 
-$('button[id^="wobs_"]').click( function () {
+$('button[id^="w_"]').click( function () {
 var r=confirm("Êtes-vous sûr de sûr ?");
 if (r==true)
   {
      change_load();
-     console.log("write " + $(this).attr('id').split('wobs_')[1]);
+     console.log("write table in gpkg : " + $(this).attr('gpkg')+ ' table_name '+$(this).attr('table'));
      $.ajax({
          url      : "php/ajax/write_table_from_skeleton.js.php",
          type     : "POST",
-         data     : {table_name: $(this).attr('id').split('wobs_')[1]},
+         data     : {
+            table_name: $(this).attr('table'), 
+            gpkg_name : $(this).attr('gpkg')},
          async    : false,
          dataType : "text",
          error    : function(request, error) { console.log("not ajax success ");},
@@ -16,12 +18,13 @@ if (r==true)
              if (data)
              {   
                  $('#output_').html(data);
-                 change_load();
+                 file_scan ();
              }
              else
              {
                  alert('Connexion impossible... Vérifiez votre identifiant et votre mot de passe');
              }
+             change_load();
          }
      });
   }
@@ -31,37 +34,7 @@ else
   }
 });
 
-$("#observations_gpkg").click( function () {
-var r=confirm("Êtes-vous sûr de sûr | Ceci effacera toutes les données dans les geopackages ?");
-if (r==true)
-  {
-        console.log("write gpkg");
-         $.ajax({
-            url      : "php/ajax/write_gpkg.js.php",
-            type     : "POST",
-            data     : {gpkg_name: "observations.gpkg"},
-            async    : false,
-            dataType : "text",
-            error    : function(request, error) { console.log("not ajax success ");},
-            success  : function(data) {
-                if (data)
-                {   
-                    $('#output_').html(data);
-                }
-                else
-                {
-                    alert('Connexion impossible... Vérifiez votre identifiant et votre mot de passe');
-                }
-                change_load();
-            }
-        }); 
-  }
-else
-  {
 
-  }
-
-});
 
 
 
@@ -81,6 +54,7 @@ if (r==true)
                 if (data)
                 {   
                     $('#output_').html(data);
+                    file_scan ();
                 }
                 else
                 {
@@ -112,6 +86,7 @@ if (r==true)
                 if (data)
                 {   
                     $('#output_').html(data);
+                    file_scan ();
                 }
                 else
                 {
@@ -126,3 +101,20 @@ else
 
     }
 });
+
+
+
+function file_scan () {
+    $.ajax({
+        url      : "php/file_scan.php",
+        data     : {},
+        method   : "POST",
+        dataType : "text",
+        async    : true,
+        error    : function(request, error) { alert("Erreur : responseText: "+request.responseText);change_load();},
+        success  : function(data) {
+            change_load();
+            $('#output_').html(data);
+            }
+    });
+}
