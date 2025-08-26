@@ -26,11 +26,11 @@ var r=confirm("Êtes-vous sûr de sûr ?");
 if (r==true)
   {
      change_load();
-     console.log("write " + $(this).attr('id').split('w_')[1]);
+     console.log("write " + $(this).attr('id').split('wobs_')[1]);
      $.ajax({
          url      : "php/ajax/write_table_from_skeleton.js.php",
          type     : "POST",
-         data     : {table_name: $(this).attr('id').split('w_')[1]},
+         data     : {table_name: $(this).attr('id').split('wobs_')[1]},
          async    : false,
          dataType : "text",
          error    : function(request, error) { console.log("not ajax success ");},
@@ -118,4 +118,33 @@ else
 
 });
 
+$("#o_tax_qgz").click( function () {
+var r=confirm("Êtes-vous sûr de sûr ?");
+if (r==true)
+    {
+        console.log("write o_tax.qgz");
+            $.ajax({
+            url      : "php/ajax/write_o_tax.qgz.js.php",
+            type     : "POST",
+            data     : {qgz_name: "o_tax.qgz"},
+            async    : false,
+            dataType : "text",
+            error    : function(request, error) { console.log("not ajax success ");},
+            success  : function(data) {
+                if (data)
+                {   
+                    $('#output_observations').html(data);
+                }
+                else
+                {
+                    alert('Connexion impossible... Vérifiez votre identifiant et votre mot de passe');
+                }
+                change_load();
+            }
+        }); 
+    }
+else
+    {
 
+    }
+});
