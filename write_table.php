@@ -94,6 +94,14 @@ if (in_array($_SESSION['email'], $admins)) {
                         <div class="d-flex w-100 p-2 text-light bg-dark justify-content-end">
                             <h4 class="bebas my-0" >...</h4>
                         </div>
+                        <div class="d-flex align-items-center justify-content-start bg-dark text-light">
+                            <h4 class="bebas my-0" >Delete files</h4>
+                        </div>
+                        <div class="d-flex flex-column w-100">
+                            <ul class="list-group">
+                                <li class="list-group-item d-flex justify-content-between align-items-center"><input type="text" class="fw-bolder" value="" >     <button id="delete_file" type="button" class="btn btn-danger"><i class="fa-solid fa-trash"></i></button></li>
+                            </ul>
+                        </div>
                     </div>
                     <div class="d-flex flex-column col-sm-6 col-md-8 col-lg-9 bg-dark text-light">
                         <div class="d-flex align-items-center justify-content-start bg-dark text-light">
