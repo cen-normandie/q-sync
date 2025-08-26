@@ -57,7 +57,7 @@ if (in_array($_SESSION['email'], $admins)) {
         <div class="d-flex flex-column justify-content-end" style="">
             <div class="d-flex flex-column w-100">
                 <div class="d-flex align-items-center justify-content-between bg-light text-dark m-2">
-                    <h4 class="bebas">Fichiers observations.gpkg sur Nextcloud :</h4>
+                    <h4 class="bebas">Fichiers sur Nextcloud :</h4>
                     <div id="loader" class=" bg-success loader mx-4 d-flex flex-wrap align-content-center flex-grow-1 visible_s" style="margin-bottom: .5rem"></div>
                     <button class="input-group-text justify-content-center mx-2" id="refresh">
                         <i class="fas fa-sync-alt text-dark"></i><span class="p-2 bebas">Update</span>
@@ -76,9 +76,9 @@ if (in_array($_SESSION['email'], $admins)) {
                     <div id="container_Faune" class="col-4"></div>
                     <div id="container_CC" class="col-4"></div>
                 </div>
-                <div class="d-flex w-100 p-2">
+                <div class="d-flex w-100">
                     <div class="d-flex flex-column w-100 col-10">
-                        <table id="QSync_observations" class="table table-hover table-sm" style="width:100%"> <!--table-dark-->
+                        <table id="QSync_observations" class="table table-hover table-sm" style="width:100%; max-height: 400px; overflow-y: auto;"> <!--table-dark-->
                             <thead>
                                 <tr>
                                     <th>uuid</th>
