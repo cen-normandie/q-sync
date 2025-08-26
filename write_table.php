@@ -65,15 +65,15 @@ if (in_array($_SESSION['email'], $admins)) {
                 </div>
                 <div class="d-flex w-100">
                     <ul class="list-group col-4">
-                        <li class="list-group-item d-flex justify-content-between align-items-center"><span class="fw-bolder">remplacer observation.gpkg</span>     <button id="observations_gpkg" type="button" class="btn btn-danger"><i class="fas fa-file-import text-light px-1 fs-5"></i></button></li><!--<i class="fas fa-eye text-success px-1"></i>-->
-                        <li class="list-group-item d-flex justify-content-between align-items-center">meta_qsync                            <button id="wobs_meta_qsync" type="button" class="btn btn-dark"><i class="fas fa-file-import text-light px-1 fs-5"></i></button></li><!--<i class="fas fa-eye text-success px-1"></i>-->
-                        <li class="list-group-item d-flex justify-content-between align-items-center">faune (obs_faune)                     <button id="wobs_obs_faune" type="button" class="btn btn-dark"><i class="fas fa-file-import text-light px-1 fs-5"></i></button></li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">flore (obs_flore)                     <button id="wobs_obs_flore" type="button" class="btn btn-dark"><i class="fas fa-file-import text-light px-1 fs-5"></i></button></li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">liste des observateurs (observateurs) <button id="wobs_observateurs" type="button" class="btn btn-dark"><i class="fas fa-file-import text-light px-1 fs-5"></i></button></li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">liste des taxons faune (tx_faune)     <button id="wobs_tx_faune" type="button" class="btn btn-dark"><i class="fas fa-file-import text-light px-1 fs-5"></i></button></li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">liste des taxons flore (tx_flore)     <button id="wobs_tx_flore" type="button" class="btn btn-dark"><i class="fas fa-file-import text-light px-1 fs-5"></i></button></li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">JDD faune (jdd_faune_)                <button id="wobs_jdd_faune_" type="button" class="btn btn-dark"><i class="fas fa-file-import text-light px-1 fs-5"></i></button></li>
-                        <li class="list-group-item d-flex justify-content-between align-items-center">JDD flore (jdd_flore_)                <button id="wobs_jdd_flore_" type="button" class="btn btn-dark"><i class="fas fa-file-import text-light px-1 fs-5"></i></button></li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center"><span class="fw-bolder">remplacer observation.gpkg</span>     <button id="observations_gpkg" type="button" class="btn btn-danger"><i class="fas fa-retweet text-light px-1 fs-5"></i></button></li><!--<i class="fas fa-eye text-success px-1"></i>-->
+                        <li class="list-group-item d-flex justify-content-between align-items-center">meta_qsync                            <button id="wobs_meta_qsync" type="button" class="btn btn-dark"><i class="fas fa-retweet text-light px-1 fs-5"></i></button></li><!--<i class="fas fa-eye text-success px-1"></i>-->
+                        <li class="list-group-item d-flex justify-content-between align-items-center">faune (obs_faune)                     <button id="wobs_obs_faune" type="button" class="btn btn-dark"><i class="fas fa-retweet text-light px-1 fs-5"></i></button></li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">flore (obs_flore)                     <button id="wobs_obs_flore" type="button" class="btn btn-dark"><i class="fas fa-retweet text-light px-1 fs-5"></i></button></li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">liste des observateurs (observateurs) <button id="wobs_observateurs" type="button" class="btn btn-dark"><i class="fas fa-retweet text-light px-1 fs-5"></i></button></li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">liste des taxons faune (tx_faune)     <button id="wobs_tx_faune" type="button" class="btn btn-dark"><i class="fas fa-retweet text-light px-1 fs-5"></i></button></li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">liste des taxons flore (tx_flore)     <button id="wobs_tx_flore" type="button" class="btn btn-dark"><i class="fas fa-retweet text-light px-1 fs-5"></i></button></li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">JDD faune (jdd_faune_)                <button id="wobs_jdd_faune_" type="button" class="btn btn-dark"><i class="fas fa-retweet text-light px-1 fs-5"></i></button></li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center">JDD flore (jdd_flore_)                <button id="wobs_jdd_flore_" type="button" class="btn btn-dark"><i class="fas fa-retweet text-light px-1 fs-5"></i></button></li>
                     </ul>
                     <p id="output_observations" class="d-flex flex-column col-8 m-0 bg-dark text-light" style="overflow-y: auto;max-height: 100%;">
                     </p>
@@ -83,7 +83,7 @@ if (in_array($_SESSION['email'], $admins)) {
                 </div>
                 <div class="d-flex w-100">
                     <ul class="list-group col-4">
-                        <li class="list-group-item d-flex justify-content-between align-items-center"><span class="fw-bolder">remplacer n2k.gpkg</span>     <button id="n2k_gpkg" type="button" class="btn btn-danger"><i class="fas fa-file-import text-light px-1 fs-5"></i></button></li>
+                        <li class="list-group-item d-flex justify-content-between align-items-center"><span class="fw-bolder">remplacer n2k.gpkg</span>     <button id="n2k_gpkg" type="button" class="btn btn-danger"><i class="fas fa-retweet text-light px-1 fs-5"></i></button></li>
                     </ul>
                     <p id="output_n2k" class="d-flex flex-column col-8 m-0 bg-dark text-light">
                     </p>
