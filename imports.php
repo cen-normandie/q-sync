@@ -71,14 +71,14 @@ if (in_array($_SESSION['email'], $admins)) {
                 <div class="d-flex w-100 p-2 text-light bg-dark">
                     <h4 class="bebas my-0" >Observations.gpkg</h4>
                 </div>
-                <div class="d-flex w-100 p-2 bg-dark highcharts-dark">
-                    <div id="container_Flore" class="col-4 highcharts-dark"></div>
+                <div class="d-flex w-100 p-2">
+                    <div id="container_Flore" class="col-4"></div>
                     <div id="container_Faune" class="col-4"></div>
                     <div id="container_CC" class="col-4"></div>
                 </div>
                 <div class="d-flex w-100">
-                    <div class="d-flex flex-column col-md-6 col-lg-8">
-                        <table id="QSync_observations" class="table table-hover table-sm table-dark" style="width:100%;">
+                    <div class="d-flex flex-column col-md-4 col-lg-8">
+                        <table id="QSync_observations" class="table table-hover table-sm" style="width:100%;"> <!--table-dark-->
                             <thead>
                                 <tr>
                                     <th>uuid</th>
@@ -87,21 +87,22 @@ if (in_array($_SESSION['email'], $admins)) {
                                     <th>nb obs flore</th>
                                     <th>nb obs cc</th>
                                     <th>date update .gpkg</th>
-<!--                                     <th>.gpkg version</th>
-                                    <th>imports</th> -->
+<!--                                <th>.gpkg version</th>
+                                    <th>imports</th> 
+-->
                                 </tr>
                             <tbody>
                             </tbody>
                         </table>
                     </div>
                     <div class="d-flex flex-column col-md-6 col-lg-4 bg-dark text-light">
-                        <div class="d-flex w-100 justify-content-between p-2">
+                        <div class="d-flex flex-column w-100 justify-content-between p-2">
                             <button id="import_faune" type="button" class="btn btn-sm" style="background-color:rgba(236, 214, 14, 0.75);"><i class="fas fa-file-import text-dark px-1 fs-5"></i> Import Faune</button>
                             <button id="import_flore" type="button" class="btn btn-sm" style="background-color:rgba(39, 196, 60, 0.75);"><i class="fas fa-file-import text-dark px-1 fs-5"></i> Import Flore</button>
                             <button id="import_cc" type="button" class="btn btn-sm" style="background-color:rgba(196, 39, 162, 0.75);"><i class="fas fa-file-import text-dark px-1 fs-5"></i> Import Carré Contact</button>
                         </div>
                         <div class="d-flex w-100 bg-dark text-light flex-grow-1">
-                            <div id="console" class="d-flex align-self-stretch">console ...</div>
+                            <div id="console" class="d-flex align-self-stretch"></div>
                         </div>
 
                     </div>
