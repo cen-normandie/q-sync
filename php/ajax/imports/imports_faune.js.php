@@ -1,5 +1,5 @@
 <?php
-include 'properties.php';
+include '../../properties.php';
 
 echo '<h2>IMPORT DES OBSERVATIONS faune du serveur nextcloud dans le dossier UUID/files/_qfield/observations.gpkg</h2>';
 echo '<h3>table : obs_faune</h3>';
@@ -14,20 +14,20 @@ pg_prepare($dbconn_geo, "sql_up", "SELECT id, uuid_nx, uuid_obs, date_import FRO
 
 while($row = pg_fetch_row($personne))
 {
+  /* 
   echo 'courriel :'.$row[0].'</br>';
   echo 'gn_user_name :'.$row[1].'</br>';
   echo 'nom_ad :'.$row[2].'</br>';
-  echo 'uuid_nx :'.$row[3].'</br>';
+  echo 'uuid_nx :'.$row[3].'</br>'; 
+  */
   $observations_gpkg = '/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/observations.gpkg';
-  //if file_exists
   if (file_exists($observations_gpkg)) {
     $cmd='ogr2ogr -f PostgreSQL "PG:user='.$LOGIN_geonature.' host='.$DBHOST_geonature.' dbname='.$DBNAME_geonature.' password='.$PASS_geonature.'" /var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/observations.gpkg -nln sandbox.obs_faune -append -sql "SELECT *, \''.$row[0].'\' as courriel, \''.$row[3].'\' as uuid_nx from '.$faune.'  where date_import is null" 2>&1';
-    echo '</br>'.$cmd.'</br>';
+    //echo '</br>'.$cmd.'</br>';
     $output=[];
     $return_var=0;
     exec($cmd, $output, $return_var);
     if ($return_var !== 2) {
-        echo '<span style="font-weight:900;color:#056e15">DONE</span></br>';
         //importe toutes les obs faune de sandbox.obs_faune dans geonature
         $out = pg_execute($dbconn_geo, "sql_import_occtax",array()) or die ( pg_last_error());
         if ($out) {

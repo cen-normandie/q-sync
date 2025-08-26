@@ -83,7 +83,7 @@ function load_qsync () {
             change_load();
 
             //Ajout des evenements sur les boutons d'import faune
-            $('button[id^="faune_import_"]').click( function () {
+            /* $('button[id^="faune_import_"]').click( function () {
                 change_load();
                 console.log("write " + $(this).attr('id').split('faune_import_')[1]);
                 $.ajax({
@@ -105,7 +105,9 @@ function load_qsync () {
                         }
                     }
                 });
-            });
+            }); */
+
+
 
 
 
@@ -131,6 +133,20 @@ $('#refresh').on('click', function() {
     });
 });
 
+$('#import_faune').on('click', function() {
+    $.ajax({
+        url      : "php/ajax/imports/imports_faune.js.php",
+        data     : {},
+        method   : "POST",
+        dataType : "text",
+        async    : true,
+        error    : function(request, error) { alert("Erreur : responseText: "+request.responseText);change_load();},
+        success  : function(data) {
+            change_load();
+            $('#console_observations').append( "<p>"+data+"</p>" );
+            }
+    });
+});
 
 
 //////////////////////////////////////////////////////
