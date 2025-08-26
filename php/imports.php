@@ -6,7 +6,7 @@ echo '<h3>table : obs_faune</h3>';
 
 
 $dbconn_geo = pg_connect("hostaddr=$DBHOST_geonature port=$PORT_geonature dbname=$DBNAME_geonature user=$LOGIN_geonature password=$PASS_geonature") or die ('Connexion impossible :'. pg_last_error());
-$select = pg_prepare($dbconn_geo, "sql_select", "select courriel, gn_user_name, nom_ad, uuid_nx from $nx_users where courriel like '%erceval%';");
+$select = pg_prepare($dbconn_geo, "sql_select", "select courriel, gn_user_name, nom_ad, uuid_nx from $nx_users ;");
 $personne = pg_execute($dbconn_geo, "sql_select",array()) or die ( pg_last_error());
 pg_prepare($dbconn_geo, "sql_down", "UPDATE $suivi_point_faune set gpkg_updated = true where uuid_obs = $1;");
 while($row = pg_fetch_row($personne))
