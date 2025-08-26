@@ -25,6 +25,7 @@ while($row = pg_fetch_row($personne))
     if ($return_var !== 2) {
         echo '<span style="font-weight:900;color:#056e15">DONE</span></br>';
         pg_prepare($dbconn_geo, "sql_up", "SELECT id, uuid_nx, uuid_obs, date_import FROM $suivi_point_faune where gpkg_updated is false and uuid_nx = $1 ;");
+        echo '</br>select update : '."SELECT id, uuid_nx, uuid_obs, date_import FROM $suivi_point_faune where gpkg_updated is false and uuid_nx = $row[3] ;";
         $to_up = pg_execute($dbconn_geo, "sql_up",array($row[3])) or die ( pg_last_error());
         while($row_ = pg_fetch_row($to_up))
             {
