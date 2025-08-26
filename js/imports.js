@@ -66,9 +66,9 @@ function load_qsync () {
                     '<span class="">'+qsync_liste[ele].obs_faune+'</span><button style="color:rgba(236, 214, 14, 0.75);" class="btn btn-sm" uuid="'+qsync_liste[ele].uuid+'" id="faune_import_'+qsync_liste[ele].uuid+'"><i class="fas fa-file-import"></i></button>',
                     '<span class="">'+qsync_liste[ele].obs_flore+'</span><button style="color:rgba(39, 196, 60, 0.75);" class="btn btn-sm" uuid="'+qsync_liste[ele].uuid+'" id="flore_import_'+qsync_liste[ele].uuid+'"><i class="fas fa-file-import"></i></button>',
                     '<span class="">'+qsync_liste[ele].obs_cc+'</span><button style="color:rgba(196, 39, 162, 0.75);" class="btn btn-sm" uuid="'+qsync_liste[ele].uuid+'" id="cc_import_'+qsync_liste[ele].uuid+'"><i class="fas fa-file-import"></i></button>',
-                    qsync_liste[ele].update,
+                    qsync_liste[ele].update/* ,
                     qsync_liste[ele].version,
-                    '<span id="output_'+qsync_liste[ele].uuid+'"></span>'
+                    '<span id="output_'+qsync_liste[ele].uuid+'"></span>' */
                 ] ).node().id = qsync_liste[ele].uuid;
             }
             dtQSync.draw();

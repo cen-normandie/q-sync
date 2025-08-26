@@ -87,8 +87,8 @@ if (in_array($_SESSION['email'], $admins)) {
                                     <th>nb obs flore</th>
                                     <th>nb obs cc</th>
                                     <th>date update .gpkg</th>
-                                    <th>.gpkg version</th>
-                                    <th>imports</th>
+<!--                                     <th>.gpkg version</th>
+                                    <th>imports</th> -->
                                 </tr>
                             <tbody>
                             </tbody>
