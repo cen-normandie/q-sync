@@ -65,11 +65,11 @@ if (in_array($_SESSION['email'], $admins)) {
                 </div>
                 <div class="d-flex w-100">
                     <div class="d-flex flex-column col-sm-6 col-md-4 col-lg-3">
-                        <div class="d-flex align-items-center justify-content-start bg-light text-dark">
+                        <div class="d-flex align-items-center justify-content-start bg-dark text-light">
                             <h4 class="bebas my-0" >Observations.gpkg</h4>
                         </div>
-                        <div class="d-flex flex-column">
-                            <ul class="list-group col-4">
+                        <div class="d-flex flex-column w-100">
+                            <ul class="list-group">
                                 <li class="list-group-item d-flex justify-content-between align-items-center"><span class="fw-bolder">remplacer observation.gpkg</span>     <button id="observations_gpkg" type="button" class="btn btn-danger"><i class="fas fa-retweet text-light px-1 fs-5"></i></button></li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center"><span class="fw-bolder">remplacer o_tax.qgz</span>     <button id="o_tax_qgz" type="button" class="btn btn-success"><i class="fas fa-retweet text-light px-1 fs-5"></i></button></li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center">meta_qsync                            <button id="wobs_meta_qsync" type="button" class="btn btn-dark"><i class="fas fa-retweet text-light px-1 fs-5"></i></button></li>
@@ -82,11 +82,11 @@ if (in_array($_SESSION['email'], $admins)) {
                                 <li class="list-group-item d-flex justify-content-between align-items-center">JDD flore (jdd_flore_)                <button id="wobs_jdd_flore_" type="button" class="btn btn-dark"><i class="fas fa-retweet text-light px-1 fs-5"></i></button></li>
                             </ul>
                         </div>
-                        <div class="d-flex align-items-center justify-content-start bg-light text-dark">
+                        <div class="d-flex align-items-center justify-content-start bg-dark text-light">
                             <h4 class="bebas my-0" >n2k.gpkg</h4>
                         </div>
-                        <div>
-                            <ul class="list-group col-4">
+                        <div class="d-flex flex-column w-100">
+                            <ul class="list-group">
                                 <li class="list-group-item d-flex justify-content-between align-items-center"><span class="fw-bolder">remplacer n2k.gpkg</span>     <button id="n2k_gpkg" type="button" class="btn btn-danger"><i class="fas fa-retweet text-light px-1 fs-5"></i></button></li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center"><span class="fw-bolder">remplacer n2k.qgz</span>     <button id="n2k_qgz" type="button" class="btn btn-success"><i class="fas fa-retweet text-light px-1 fs-5"></i></button></li>
                             </ul>
@@ -97,7 +97,7 @@ if (in_array($_SESSION['email'], $admins)) {
                     </div>
                     <div class="d-flex flex-column col-sm-6 col-md-8 col-lg-9">
                         <div class="d-flex align-items-center justify-content-start bg-dark text-light">
-                            <p id="output" class="d-flex flex-column col-8 m-0 bg-dark text-light" style="overflow-y: auto;max-height: 100%;">
+                            <p id="output_" class="d-flex flex-column col-8 m-0 bg-dark text-light" style="overflow-y: auto;max-height: 100%;">
                             </p>
                         </div>
                     </div>
