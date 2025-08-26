@@ -72,7 +72,7 @@ if (in_array($_SESSION['email'], $admins)) {
                     <h4 class="bebas my-0" >Observations.gpkg</h4>
                 </div>
                 <div class="d-flex w-100 p-2 bg-dark">
-                    <div id="container_Flore" class="col-4"></div>
+                    <div id="container_Flore" class="col-4 highcharts-dark"></div>
                     <div id="container_Faune" class="col-4"></div>
                     <div id="container_CC" class="col-4"></div>
                 </div>
