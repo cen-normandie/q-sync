@@ -121,6 +121,7 @@ $('#refresh').on('click', function() {
         success  : function(data) {
             console.log(data);
             change_load();
+            window.location.reload();
             }
     });
 });
