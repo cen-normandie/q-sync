@@ -136,7 +136,7 @@ function graph_sum( nom_projet_, a_integrer, integrer, color_) {
     chart_global = new Highcharts.chart('container_' + nom_projet_, {
         chart: {
             type: 'bar',
-            height: 170,
+            height: 120,
             backgroundColor:'#f8f9fa'
         },
         title: {
