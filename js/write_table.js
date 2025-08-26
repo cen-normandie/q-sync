@@ -114,7 +114,7 @@ function file_scan () {
         error    : function(request, error) { alert("Erreur : responseText: "+request.responseText);change_load();},
         success  : function(data) {
             change_load();
-            $('#output_').html(data);
+            $('#output_').append("<p>"+data+"</p>");
             }
     });
 }
