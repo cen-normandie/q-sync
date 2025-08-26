@@ -77,7 +77,7 @@ if (in_array($_SESSION['email'], $admins)) {
                     <div id="container_CC" class="col-4"></div>
                 </div>
                 <div class="d-flex w-100">
-                    <div class="d-flex flex-column col-md-12 col-lg-8">
+                    <div class="d-flex flex-column col-md-6 col-lg-8">
                         <table id="QSync_observations" class="table table-hover table-sm" style="width:100%;"> <!--table-dark-->
                             <thead>
                                 <tr>
@@ -94,7 +94,7 @@ if (in_array($_SESSION['email'], $admins)) {
                             </tbody>
                         </table>
                     </div>
-                    <div class="d-flex flex-column col-md-12 col-lg-4 bg-dark text-light">
+                    <div class="d-flex flex-column col-md-6 col-lg-4 bg-dark text-light">
                         <div class="d-flex w-100 justify-content-between p-2">
                             <button id="import_faune" type="button" class="btn btn-sm" style="background-color:rgba(236, 214, 14, 0.75);"><i class="fas fa-file-import text-dark px-1 fs-5"></i> Import Faune</button>
                             <button id="import_flore" type="button" class="btn btn-sm" style="background-color:rgba(39, 196, 60, 0.75);"><i class="fas fa-file-import text-dark px-1 fs-5"></i> Import Flore</button>
