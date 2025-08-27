@@ -6,7 +6,7 @@ if (r==true)
      change_load();
      console.log("write table in gpkg : " + $(this).attr('gpkg')+ ' table_name '+$(this).attr('table'));
      $.ajax({
-         url      : "php/ajax/write_table_from_skeleton_2.js.php",
+         url      : "php/ajax/write_table_from_skeleton.js.php",
          type     : "POST",
          data     : {
             table_name: $(this).attr('table'), 
