@@ -18,7 +18,7 @@ $db = new SQLite3('/var/www/html/q-sync/_qfield_skeleton/'. $gpkg , SQLITE3_OPEN
 $fichier = "/var/www/html/q-sync/_qfield_skeleton/dumps/".$table.".sql";
 $handle = fopen($fichier, 'w');
 // Exporter la structure
-$structure = $db->query("SELECT sql FROM sqlite_master WHERE type='table' AND name='$table'", true);
+$structure = $db->query("SELECT sql FROM sqlite_master WHERE type='table' AND name='$table'");
 fwrite($handle, "-- Structure de la table\n");
 fwrite($handle, "DROP TABLE IF EXISTS $table;\n");
 fwrite($handle, $structure['sql'] . ";\n\n");
