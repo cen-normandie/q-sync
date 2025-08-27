@@ -36,8 +36,6 @@ else
 
 
 
-
-
 $('button[id^="gpkg__"]').click( function () {
 var r=confirm("Êtes-vous sûr de sûr ?");
 if (r==true)
