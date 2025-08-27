@@ -14,7 +14,7 @@ if (empty($gpkg)) {
 }
 
 // Création de la sauvegarde d'une table
-$db = new SQLite3('/var/www/html/q-sync/_qfield_skeleton/'. $gpkg);
+$db = new SQLite3('/var/www/html/q-sync/_qfield_skeleton/'. $gpkg , SQLITE3_OPEN_READWRITE);
 $fichier = "/var/www/html/q-sync/_qfield_skeleton/dumps/".$table.".sql";
 $handle = fopen($fichier, 'w');
 // Exporter la structure
