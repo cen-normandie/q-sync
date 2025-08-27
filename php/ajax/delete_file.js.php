@@ -16,12 +16,12 @@ while($row = pg_fetch_row($personne))
   $path_file = '/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/'.$filename.'';
   if (file_exists($path_file)) {
     echo '</br>#########' .$row[0].'</br>';
-    echo 'suppression de '.$path_file.' ...';
+    echo 'suppression de '.$path_file.' ...</br>';
     exec("rm ".$path_file, $output, $retval);
     if ($retval==0) {
-        echo 'fichier supprimé !';
+        echo 'fichier supprimé !</br>';
     } else {
-        echo 'fichier non supprimé !';
+        echo 'fichier non supprimé !</br>';
     }
     echo "status $retval ";
     echo '</br>';

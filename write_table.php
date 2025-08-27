@@ -104,7 +104,7 @@ if (in_array($_SESSION['email'], $admins)) {
                         </div>
                     </div>
                     <div class="d-flex flex-column col-sm-6 col-md-8 col-lg-9 bg-dark text-light">
-                        <div class="d-flex align-items-center justify-content-start bg-dark text-light">
+                        <div class="d-flex align-items-center justify-content-start bg-dark text-light p-2">
                             <p id="output_" class="d-flex flex-column m-0 " style="overflow-y: auto;max-height: 100%;">
                             </p>
                         </div>
