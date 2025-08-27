@@ -38,63 +38,19 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
                     session_start ();
                     $_SESSION['email'] = $entries[0]["mail"][0];
                     $_SESSION['password'] = $_POST['password'];
-                    $_SESSION['u_nom_user_progecen'] = $entries[0]["name"][0];
-                    $_SESSION['u_responsable'] = false;
-                    $_SESSION['u_saf'] = false;
-                    $_SESSION['u_ge_caen'] = false;
-                    $_SESSION['u_ge_rouen'] = false;
-                    $_SESSION['u_zoot'] = false;
                     $_SESSION['session'] = $entries[0]["mail"][0];
-                    $_SESSION['cgu'] = false ;
                     $_SESSION['is_equipe_si'] = false;
-                    $_SESSION['is_equipe_rh'] = false;
-                    $_SESSION['fdt_optimisation'] = false;
         
                     foreach($groups as $group) {
-                        if( str_contains($group, 'progecen_resp_projet')) {
-                            $_SESSION['u_responsable'] = true;
-                        }
-                        if( str_contains($group, 'ge_caen')) {
-                            $_SESSION['u_ge_caen'] = true;
-                        }
-                        if( str_contains($group, 'ge_rouen')) {
-                            $_SESSION['u_ge_rouen'] = true;
-                        }
-                        if( str_contains($group, 'saf_fdt')) {
-                            $_SESSION['u_saf'] = true;
-                        }
-                        if( str_contains($group, 'zoo')) {
-                            $_SESSION['u_zoot'] = true;
-                        }
-                        if( str_contains($group, 'CGU_Foncier')) {
-                            $_SESSION['cgu'] = true;
-                        }
                         if( str_contains($group, 'si_web')) {
                             $_SESSION['is_equipe_si'] = true;
                         }
-                        if( str_contains($group, 'FILIERE_RESSOURCES_HUMAINE')) {
-                            $_SESSION['is_equipe_rh'] = true;
-                        }
-                        if( str_contains($group, 'fdt_optimisation')) {
-                            $_SESSION['fdt_optimisation'] = true;
-                        }
                     }
-
-                    $filter="(cn=progecen_resp_projet)";
-                    $result=ldap_search($ldapconn, "DC=CSNHN,DC=LOCAL", $filter);
-                    $entries= ldap_get_entries($ldapconn, $result);
-                    $groups = $entries[0]["member"];
-                    $list_responsable = array();
-                    foreach($groups as $group) {
-                        if (str_contains($group, "CN=")) {
-                            $name_a = explode("CN=", $group)[1];
-                            $name_ = explode(",OU", $name_a)[0];
-                            array_push($list_responsable, $name_);
-                        }
-                        sort($list_responsable);
-                    }
-
-                echo "Success";
+                if($_SESSION['is_equipe_si']) {
+                    header ('location: write_table.php');
+                } else {
+                    header ('location: index.php');
+                }
             } else {
                 echo "LDAP bind failed...";
             }
