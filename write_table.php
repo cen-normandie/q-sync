@@ -91,9 +91,6 @@ if (in_array($_SESSION['email'], $admins)) {
                                 <li class="list-group-item d-flex justify-content-between align-items-center"><span class="fw-bolder">remplacer n2k.qgz</span>     <button id="qgz__n2k" type="button" class="btn btn-success"><i class="fas fa-retweet text-light px-1 fs-5"></i></button></li>
                             </ul>
                         </div>
-                        <div class="d-flex w-100 p-2 text-light bg-dark justify-content-end">
-                            <h4 class="bebas my-0" >...</h4>
-                        </div>
                         <div class="d-flex align-items-center justify-content-start bg-dark text-light">
                             <h4 class="bebas my-0" >Delete files</h4>
                         </div>
@@ -101,6 +98,9 @@ if (in_array($_SESSION['email'], $admins)) {
                             <ul class="list-group">
                                 <li class="list-group-item d-flex justify-content-between align-items-center"><input id="delete_file_name" type="text" class="fw-bolder" value="" >     <button id="delete_file" type="button" class="btn btn-danger"><i class="fas fa-trash"></i></button></li>
                             </ul>
+                        </div>
+                        <div class="d-flex w-100 p-2 text-light bg-dark justify-content-end">
+                            <h4 class="bebas my-0" >...</h4>
                         </div>
                     </div>
                     <div class="d-flex flex-column col-sm-6 col-md-8 col-lg-9 bg-dark text-light">
