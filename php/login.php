@@ -47,7 +47,7 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
                         }
                     }
                 if($_SESSION['is_equipe_si']) {
-                    header ('location: write_table.php');
+                    header ('location: ../write_table.php');
                 } else {
                     header ('location: index.php');
                 }
