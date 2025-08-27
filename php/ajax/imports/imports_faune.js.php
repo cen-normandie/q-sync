@@ -19,14 +19,15 @@ while($row = pg_fetch_row($personne))
   */
   $observations_gpkg = '/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/observations.gpkg';
   if (file_exists($observations_gpkg)) {
-    $cmd='ogr2ogr -f PostgreSQL "PG:user='.$LOGIN_geonature.' host='.$DBHOST_geonature.' dbname='.$DBNAME_geonature.' password='.$PASS_geonature.'" /var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/observations.gpkg -nln sandbox.obs_faune -append -sql "SELECT *, \''.$row[0].'\' as courriel, \''.$row[3].'\' as uuid_nx from '.$faune.'  where date_import is null" 2>&1';
-    //echo '</br>'.$cmd.'</br>';
+    //$cmd='ogr2ogr -f PostgreSQL "PG:user='.$LOGIN_geonature.' host='.$DBHOST_geonature.' dbname='.$DBNAME_geonature.' password='.$PASS_geonature.'" /var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/observations.gpkg -nln sandbox.obs_faune -append -sql "SELECT *, \''.$row[0].'\' as courriel, \''.$row[3].'\' as uuid_nx from '.$faune.'  where date_import is null" 2>&1';
     $output=[];
     $return_var=0;
+    //Envoi toutes les obs faune sans date_import du geopackage dans sandbox.obs_faune
     exec($cmd, $output, $return_var);
     if ($return_var !== 2) {
-        //importe toutes les obs faune de sandbox.obs_faune dans geonature
+        //Execution de la fonction PG sandbox.import_faune() qui traite les données de sandbox.obs_faune sans date_import pour en faire des occurences
         $out = pg_execute($dbconn_geo, "sql_import_occtax",array()) or die ( pg_last_error());
+        //TO DO : créé un relevé pour un ensemble d'occurences
         if ($out) {
             $to_up = pg_execute($dbconn_geo, "sql_up",array($row[3])) or die ( pg_last_error());
             while($row_ = pg_fetch_row($to_up))

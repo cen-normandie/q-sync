@@ -22,7 +22,7 @@
     $t = ((($_POST['page']) == 'write_table.php') ? ' active' : '' ); echo $t;
     echo '"  href="write_table.php">
           <span data-feather=""></span>
-          <i class="fas fa-table"></i> gestion de tables | *.gpkg | *.qgz
+          <i class="fas fa-table"></i> Contenu Nextcloud
         </a>';
   } 
 ?>
