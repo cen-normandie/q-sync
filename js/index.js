@@ -73,7 +73,11 @@ $("#signin").click( function () {
             success  : function(data) {
                 if (data == "Success")
                 {   
-                    //window.location.href = 'imports.php';
+                    window.location.href = 'imports.php';
+                }
+                else if (data == "not_admin")
+                {
+                    alert('Vous ne disposez pas des droits pour accéder à cette application !');
                 }
                 else /*(data == "Failed")*/
                 {

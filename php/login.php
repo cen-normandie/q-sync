@@ -47,10 +47,11 @@ if (isset($_POST['email']) && isset($_POST['password'])) {
                         }
                     }
                 if($_SESSION['is_equipe_si']) {
-                    header ('location: ../write_table.php');
+                    echo "Success";
                 } else {
-                    header ('location: ../index.php');
+                    echo "not_admin";
                 }
+                
             } else {
                 echo "LDAP bind failed...";
             }
