@@ -23,6 +23,13 @@ while($row = pg_fetch_row($personne))
     echo "status $retval ";
     echo '</br>';
   }
+  else {
+    echo '</br>#########' .$row[0].'</br>';
+    echo "Le fichier $path_qgz n'existe pas. Création en cours...";
+    exec("cp /var/www/html/q-sync/_qfield_skeleton/".$qgz." ".$path_qgz, $output, $retval);
+    echo "status $retval ";
+    echo '</br>';
+  }
 }
 
 pg_close($dbconn_geo);
