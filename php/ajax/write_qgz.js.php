@@ -25,13 +25,13 @@ while($row = pg_fetch_row($personne))
 
   if (file_exists($path_qgz)) {
     echo "Mise à jour du fichier...</br>";
-    exec("cp /var/www/html/q-sync/_qfield_skeleton/".$qgz." ".$path_qgz, $output, $retval);
+    exec("cp /var/www/html/q-sync/_qfield_skeleton/_qfield/".$qgz." ".$path_qgz, $output, $retval);
     echo "status $retval ";
     echo '</br>';
   }
   else {
     echo "Le fichier $path_qgz n'existe pas. Création en cours...</br>";
-    exec("cp /var/www/html/q-sync/_qfield_skeleton/".$qgz." ".$path_qgz, $output, $retval);
+    exec("cp /var/www/html/q-sync/_qfield_skeleton/_qfield/".$qgz." ".$path_qgz, $output, $retval);
     echo "status $retval ";
     echo '</br>';
   }
