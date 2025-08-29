@@ -18,7 +18,7 @@ if (empty($gpkg)) {
 
 // Création de la sauvegarde d'une table
 $db = new SQLite3('/var/www/html/q-sync/_qfield_skeleton/'. $gpkg , SQLITE3_OPEN_READWRITE);
-$fichier = "/var/www/html/q-sync/_qfield_skeleton/dumps/".$table.".sql";
+$fichier = "/var/www/html/q-sync/dumps/".$table.".sql";
 $handle = fopen($fichier, 'w');
 // Exporter la structure
 $structure = $db->querySingle("SELECT sql FROM sqlite_master WHERE type='table' AND name='$table'", true);
@@ -58,7 +58,7 @@ while($row = pg_fetch_row($personne))
     echo '</br>#########</br>' .$row[0].'</br>';
     $db_user = new SQLite3($path_gpkg );
     // Lire le contenu du dump
-    $dump = file_get_contents("/var/www/html/q-sync/_qfield_skeleton/dumps/".$table.".sql");
+    $dump = file_get_contents("/var/www/html/q-sync/dumps/".$table.".sql");
     // Exécuter les commandes SQL
     $db_user->exec($dump);
     $db_user->close();
