@@ -17,15 +17,20 @@ $personne = pg_execute($dbconn_geo, "sql_select",array()) or die ( pg_last_error
 while($row = pg_fetch_row($personne))
 {
   $path_qgz = '/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/'.$qgz.'';
+  echo '</br>#########' .$row[0].'</br>';
+  if (!file_exists('/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/')) {
+    echo 'Le dossier n\'existe pas. Création en cours...</br>';
+    mkdir('/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/', 0777, true);
+  }
+
   if (file_exists($path_qgz)) {
-    echo '</br>#########' .$row[0].'</br>';
+    echo "Mise à jour du fichier...</br>";
     exec("cp /var/www/html/q-sync/_qfield_skeleton/".$qgz." ".$path_qgz, $output, $retval);
     echo "status $retval ";
     echo '</br>';
   }
   else {
-    echo '</br>#########' .$row[0].'</br>';
-    echo "Le fichier $path_qgz n'existe pas. Création en cours...";
+    echo "Le fichier $path_qgz n'existe pas. Création en cours...</br>";
     exec("cp /var/www/html/q-sync/_qfield_skeleton/".$qgz." ".$path_qgz, $output, $retval);
     echo "status $retval ";
     echo '</br>';
