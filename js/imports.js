@@ -166,6 +166,23 @@ $('#import_flore').on('click', function() {
     });
 });
 
+$('#import_cc').on('click', function() {
+    $.ajax({
+        url      : "php/ajax/imports/imports_carre_contact.js.php",
+        data     : {},
+        method   : "POST",
+        dataType : "text",
+        async    : true,
+        error    : function(request, error) { alert("Erreur : responseText: "+request.responseText);change_load();},
+        success  : function(data) {
+            change_load();
+            $('#console_observations').empty();
+            $('#console_observations').append( "<p>"+data+"</p>" );
+            file_scan ();
+            }
+    });
+});
+
 function file_scan () {
     $.ajax({
         url      : "php/file_scan.php",
