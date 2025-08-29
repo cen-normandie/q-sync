@@ -15,6 +15,7 @@ if (empty($gpkg)) {
 
 //exec("sqlite3 /var/www/html/q-sync/_qfield_skeleton/". $gpkg ." '.dump ".$table."' > /var/www/html/q-sync/_qfield_skeleton/dumps/".$table.".sql", $output, $retval);
 
+echo 'modification de table </br>';
 
 // Création de la sauvegarde d'une table
 $db = new SQLite3('/var/www/html/q-sync/_qfield_skeleton/'. $gpkg , SQLITE3_OPEN_READWRITE);
