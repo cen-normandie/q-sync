@@ -7,7 +7,7 @@ $select = pg_prepare($dbconn_geo, "sql_select", "select courriel, gn_user_name, 
 $personne = pg_execute($dbconn_geo, "sql_select",array()) or die ( pg_last_error());
 pg_prepare($dbconn_geo, "sql_down", "UPDATE $suivi_point_cc set gpkg_updated = true where uuid_obs = $1;");
 // ne fait rien pour le moment
-pg_prepare($dbconn_geo, "sql_import_occtax", "select sandbox.import_cc();");
+pg_prepare($dbconn_geo, "sql_import_cc_to_occtax", "select sandbox.import_cc();");
 pg_prepare($dbconn_geo, "sql_up", "SELECT id, uuid_nx, uuid_obs, date_import FROM $suivi_point_cc where gpkg_updated is false and uuid_nx = $1 ;");
 
 while($row = pg_fetch_row($personne))
@@ -28,7 +28,7 @@ while($row = pg_fetch_row($personne))
     if ($return_var !== 2) {
         //importe toutes les obs cc de sandbox.obs_cc dans geonature
         // ne fait rien pour le moment à part mettre à jour la date d'import date_import
-        $out = pg_execute($dbconn_geo, "sql_import_occtax",array()) or die ( pg_last_error());
+        $out = pg_execute($dbconn_geo, "sql_import_cc_to_occtax",array()) or die ( pg_last_error());
         if ($out) {
             $to_up = pg_execute($dbconn_geo, "sql_up",array($row[3])) or die ( pg_last_error());
             while($row_ = pg_fetch_row($to_up))
