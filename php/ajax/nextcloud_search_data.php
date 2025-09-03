@@ -120,7 +120,7 @@ while($row = pg_fetch_row($personne))
     }
     echo '</br> nb flore :' . $i_flore . '</br>';
     // Decompte des obs ccontact à importer
-    $results_obs_ccontact_gpkg = $db->query("select fid, id_dataset, id_digitiser from  $cc where date_import is null;"); //
+    $results_obs_ccontact_gpkg = $db->query("select fid, id_dataset, observateur from  $cc where date_import is null;"); //
     $i_cc= 0;
     while ($row_ = $results_obs_ccontact_gpkg->fetchArray()) {
             $i_cc++;
