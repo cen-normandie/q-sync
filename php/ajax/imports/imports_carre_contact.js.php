@@ -21,7 +21,7 @@ while($row = pg_fetch_row($personne))
   $observations_gpkg = '/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/observations.gpkg';
   if (file_exists($observations_gpkg)) {
     $cmd='ogr2ogr -f PostgreSQL "PG:user='.$LOGIN_geonature.' host='.$DBHOST_geonature.' dbname='.$DBNAME_geonature.' password='.$PASS_geonature.'" /var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/observations.gpkg -nln sandbox.obs_cc -append -sql "SELECT *, \''.$row[0].'\' as courriel, \''.$row[3].'\' as uuid_nx from '.$cc.'  where date_import is null" 2>&1';
-    //echo '</br>'.$cmd.'</br>';
+    echo '</br>'.$cmd.'</br>';
     $output=[];
     $return_var=0;
     exec($cmd, $output, $return_var);
