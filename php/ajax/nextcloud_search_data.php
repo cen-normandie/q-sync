@@ -126,9 +126,9 @@ while($row = pg_fetch_row($personne))
             $i_cc++;
     }
     // Decompte des obs ccontact importées
-    $results_obs_flore_gpkg = $db->query("select count(*) from  $cc where date_import is not null;"); //
+    $results_obs_ccontact_gpkg = $db->query("select count(*) from  $cc where date_import is not null;"); //
     $i_cc_imported= 0;
-    while ($row_ = $results_obs_cc_gpkg->fetchArray()) {
+    while ($row_ = $results_obs_ccontact_gpkg->fetchArray()) {
             //var_dump($row_);
             $i_cc_imported=$row_[0];
     }
