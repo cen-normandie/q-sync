@@ -163,6 +163,8 @@ function load_qsync_n2k () {
             }];
             console.log(data);
             for (const ele in qsync_liste) {
+                console.log('uuid :' + qsync_liste[ele].uuid );
+                console.log('name :' + qsync_liste[ele].personne );
                 data_json[0].n2k_polygone_a_integrer += parseInt(qsync_liste[ele].n2k_previ_polygone.split(' / ')[0]);
                 data_json[0].n2k_polygone_en_attente += parseInt(qsync_liste[ele].n2k_previ_polygone.split(' / ')[1]);
                 data_json[0].n2k_ligne_a_integrer += parseInt(qsync_liste[ele].n2k_previ_ligne.split(' / ')[0]);
