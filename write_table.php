@@ -64,7 +64,7 @@ if (in_array($_SESSION['email'], $admins)) {
                     <p>Remplacer les tables, les geopackages ou les projets QGIS depuis le dossier _qfield_skeleton pour l'ensemble des utilisateurs nextcloud</p>
                 </div>
                 <div class="d-flex w-100">
-                    <div class="d-flex flex-column col-sm-6 col-md-4 col-lg-3">
+                    <div class="d-flex flex-column col-sm-6 col-md-6 col-lg-3">
                         <div class="d-flex align-items-center justify-content-start bg-dark text-light">
                             <h4 class="bebas my-0" >Observations.gpkg</h4>
                         </div>
@@ -105,7 +105,7 @@ if (in_array($_SESSION['email'], $admins)) {
                             <h4 class="bebas my-0" >...</h4>
                         </div>
                     </div>
-                    <div class="d-flex flex-column col-sm-6 col-md-8 col-lg-9 bg-dark text-light">
+                    <div class="d-flex flex-column col-sm-6 col-md-6 col-lg-9 bg-dark text-light">
                         <div class="d-flex align-items-center justify-content-start bg-dark text-light p-2">
                             <p id="output_" class="d-flex flex-column m-0 " style="overflow-y: auto;max-height: 100%;">
                             </p>

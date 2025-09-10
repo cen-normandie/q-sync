@@ -119,6 +119,20 @@ while($row = pg_fetch_row($personne))
             $i_flore_imported=$row_[0];
     }
     echo '</br> nb flore :' . $i_flore . '</br>';
+    // Decompte des obs ccontact à importer
+    $results_obs_ccontact_gpkg = $db->query("select fid, id_dataset, observateur from  $cc where date_import is null;"); //
+    $i_cc= 0;
+    while ($row_ = $results_obs_ccontact_gpkg->fetchArray()) {
+            $i_cc++;
+    }
+    // Decompte des obs ccontact importées
+    $results_obs_ccontact_gpkg = $db->query("select count(*) from  $cc where date_import is not null;"); //
+    $i_cc_imported= 0;
+    while ($row_ = $results_obs_ccontact_gpkg->fetchArray()) {
+            //var_dump($row_);
+            $i_cc_imported=$row_[0];
+    }
+    echo '</br> nb ccontact :' . $i_cc . '</br>';
     //recuperation de la version
     $results_version = $db->query("select value_ from $meta_qsync where info_ = 'version';");
     $version = '';
@@ -127,7 +141,7 @@ while($row = pg_fetch_row($personne))
     }
     $db->close();
 
-    $insert_dashboard = pg_execute($dbconn_geo, "sql_insert_dashboard",array($row[3], $row[2], $i_faune, $i_faune_imported, $i_flore, $i_flore_imported, date('Y-m-d', filemtime($observations_gpkg)), 0, 0, $version )) or die ( pg_last_error());
+    $insert_dashboard = pg_execute($dbconn_geo, "sql_insert_dashboard",array($row[3], $row[2], $i_faune, $i_faune_imported, $i_flore, $i_flore_imported, date('Y-m-d', filemtime($observations_gpkg)), $i_cc, $i_cc_imported, $version )) or die ( pg_last_error());
   }
 
 
