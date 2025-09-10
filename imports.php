@@ -139,6 +139,9 @@ if (in_array($_SESSION['email'], $admins)) {
                         </div>
 
                     </div>
+                    <div class="d-flex w-100 p-2 text-light bg-dark justify-content-end">
+                        <h4 class="bebas my-0" >...</h4>
+                    </div>
                 </div>
             </div>	
 		</div>
