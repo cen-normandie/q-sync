@@ -10,9 +10,9 @@ SELECT array_to_json(array_agg(row_to_json(t))) FROM
 SELECT 
 	uuid,
 	personne, 
-	n2k_previ_polygone || ' / ' || n2k_previ_polygone_imported as previ_polygone,
-	n2k_previ_ligne || ' / ' || n2k_previ_ligne_imported as previ_ligne,
-	n2k_previ_point || ' / ' || n2k_previ_point_imported as previ_point,
+	n2k_previ_polygone || ' / ' || n2k_previ_polygone_imported as n2k_previ_polygone,
+	n2k_previ_ligne || ' / ' || n2k_previ_ligne_imported as n2k_previ_ligne,
+	n2k_previ_point || ' / ' || n2k_previ_point_imported as n2k_previ_point,
 	update,
 	version
 	FROM $nx_dashboard_n2k 
