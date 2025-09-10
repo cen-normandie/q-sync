@@ -31,7 +31,7 @@ $delete = pg_execute($dbconn_geo, "sql_dashboard_n2k",array()) or die ( pg_last_
 
 // INSERTION DANS LA TABLE NEXTCLOUD.DASHBOARD
 $insert_dashboard = pg_prepare($dbconn_geo, "sql_insert_dashboard", "INSERT INTO $nx_dashboard (uuid, personne, obs_faune, obs_faune_imported, obs_flore, obs_flore_imported, update, obs_cc, obs_cc_imported, version) VALUES ($1, $2, $3,$4,$5,$6,$7,$8,$9,$10);");
-$insert_dashboard_n2k = pg_prepare($dbconn_geo, "sql_insert_dashboard_n2k", "INSERT INTO $nx_dashboard_n2k (uuid, personne, n2k_previ_polygone, n2k_previ_polygone_imported) VALUES ($1, $2, $3,$4);");
+$insert_dashboard_n2k = pg_prepare($dbconn_geo, "sql_insert_dashboard_n2k", "INSERT INTO $nx_dashboard_n2k (uuid, personne, n2k_previ_polygone, n2k_previ_polygone_imported, n2k_previ_ligne, n2k_previ_ligne_imported, n2k_previ_point, n2k_previ_point_imported) VALUES ($1, $2, $3,$4,$5,$6,$7,$8);");
 $insert_s = pg_prepare($dbconn_nx, "sql", "
 with a_ as (
 SELECT id, uid, value as name_
@@ -158,20 +158,49 @@ while($row = pg_fetch_row($personne))
     $db = new SQLite3('/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg');
     $db->loadExtension('mod_spatialite.so');
 
-    // Decompte des operations n2k à importer
+    // Decompte des operations n2k polygone à importer
     $results_n2k_gpkg = $db->query("select fid, numerisateur from  $n2k_previ_polygone_gpkg where importe is null;"); //
-    $i_n2k= 0;
+    $i_n2k_polygone= 0;
     while ($row_ = $results_n2k_gpkg->fetchArray()) {
             //var_dump($row_);
-            $i_n2k++;
+            $i_n2k_polygone++;
     }
     $results_n2k_gpkg = $db->query("select fid, numerisateur from  $n2k_previ_polygone_gpkg where importe is not null;"); 
-    $i_n2k_imported= 0;
+    $i_n2k_polygone_imported= 0;
     while ($row_ = $results_n2k_gpkg->fetchArray()) {
             //var_dump($row_);
-            $i_n2k_imported++;
+            $i_n2k_polygone_imported++;
     }
-    $insert_dashboard_n2k = pg_execute($dbconn_geo, "sql_insert_dashboard_n2k",array($row[3], $row[2], $i_n2k, $i_n2k_imported)) or die ( pg_last_error());
+    
+    // Decompte des operations n2k ligne à importer
+    $results_n2k_gpkg = $db->query("select fid, numerisateur from  $n2k_previ_ligne_gpkg where importe is null;"); //
+    $i_n2k_ligne= 0;
+    while ($row_ = $results_n2k_gpkg->fetchArray()) {
+            //var_dump($row_);
+            $i_n2k_ligne++;
+    }
+    $results_n2k_gpkg = $db->query("select fid, numerisateur from  $n2k_previ_ligne_gpkg where importe is not null;"); 
+    $i_n2k_ligne_imported= 0;
+    while ($row_ = $results_n2k_gpkg->fetchArray()) {
+            //var_dump($row_);
+            $i_n2k_ligne_imported++;
+    }
+
+    // Decompte des operations n2k point à importer
+    $results_n2k_gpkg = $db->query("select fid, numerisateur from  $n2k_previ_point_gpkg where importe is null;"); //
+    $i_n2k_point= 0;
+    while ($row_ = $results_n2k_gpkg->fetchArray()) {
+            //var_dump($row_);
+            $i_n2k_point++;
+    }
+    $results_n2k_gpkg = $db->query("select fid, numerisateur from  $n2k_previ_point_gpkg where importe is not null;"); 
+    $i_n2k_point_imported= 0;
+    while ($row_ = $results_n2k_gpkg->fetchArray()) {
+            //var_dump($row_);
+            $i_n2k_point_imported++;
+    }
+
+    $insert_dashboard_n2k = pg_execute($dbconn_geo, "sql_insert_dashboard_n2k",array($row[3], $row[2], $i_n2k_polygone, $i_n2k_polygone_imported, $i_n2k_ligne, $i_n2k_ligne_imported, $i_n2k_point, $i_n2k_point_imported)) or die ( pg_last_error());
     $db->close();
   }
 
