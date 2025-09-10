@@ -111,7 +111,7 @@ if (in_array($_SESSION['email'], $admins)) {
                 <div class="d-flex w-100 p-2 text-light bg-dark">
                     <h4 class="bebas my-0" >n2k.gpkg</h4>
                 </div>
-                <div class="d-flex w-100 p-2">
+                <div class="d-flex w-100">
                     <div class="d-flex flex-column col-md-4 col-lg-8">
                         <table id="QSync_n2k" class="table table-hover table-sm" style="width:100%"> <!--table-dark-->
                             <thead>
