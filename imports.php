@@ -112,7 +112,7 @@ if (in_array($_SESSION['email'], $admins)) {
                     <h4 class="bebas my-0" >n2k.gpkg</h4>
                 </div>
                 <div class="d-flex w-100 p-2">
-                    <div class="d-flex flex-column w-100 col-10">
+                    <div class="d-flex flex-column col-md-4 col-lg-8">
                         <table id="QSync_n2k" class="table table-hover table-sm" style="width:100%"> <!--table-dark-->
                             <thead>
                                 <tr>
@@ -127,6 +127,17 @@ if (in_array($_SESSION['email'], $admins)) {
                             <tbody>
                             </tbody>
                         </table>
+                    </div>
+                    <div class="d-flex flex-column col-md-6 col-lg-4 bg-dark text-light" style="max-height:300px;overflow-y: auto;">
+                        <div class="d-flex flex-column w-100 justify-content-between ">
+                            <button id="import_n2k_previ" type="button" class="btn btn-sm m-2" style="background-color:rgba(236, 214, 14, 0.75);"><i class="fas fa-file-import text-dark px-1 fs-5"></i> Import Previ</button>
+                            <button id="import_n2k_realise" type="button" class="btn btn-sm m-2" style="background-color:rgba(39, 196, 60, 0.75);"><i class="fas fa-file-import text-dark px-1 fs-5"></i> Import Réalisé</button>
+                        </div>
+                        <div class="d-flex w-100 bg-dark text-light flex-grow-1">
+                            <div id="console_n2k" class="d-flex flex-column align-self-stretch"  >
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>	
