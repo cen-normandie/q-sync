@@ -142,6 +142,7 @@ load_qsync();
 
 
 function load_qsync_n2k () {
+console.log('load n2k');
     change_load('Chargement');
     $.ajax({
         url      : "php/ajax/dashboard_n2k.js.php",
