@@ -118,9 +118,9 @@ if (in_array($_SESSION['email'], $admins)) {
                                 <tr>
                                     <th>uuid</th>
                                     <th>Personne</th>
-                                    <th>n2k polygone</th>
-                                    <th>n2k ligne</th>
-                                    <th>n2k point</th>
+                                    <th>polygone</th>
+                                    <th>ligne</th>
+                                    <th>point</th>
                                     <th>date update n2k.gpkg</th>
                                 </tr>
                             </thead>
