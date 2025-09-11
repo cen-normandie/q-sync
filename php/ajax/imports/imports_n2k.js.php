@@ -43,15 +43,14 @@ while($row = pg_fetch_row($personne))
             $to_up = pg_execute($dbconn_geo, "sql_up_previ",array($row[3])) or die ( pg_last_error());
             while($row_ = pg_fetch_row($to_up))
                 {
-                    echo 'id_uuid_n2k :'.$row_[2].' - date_import : '.$row_[3].' </br>';
+                    echo '</br>id_uuid_n2k :'.$row_[2].' - date_import : '.$row_[3].' </br>';
                     $db = new SQLite3('/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg');
                     $db->loadExtension('mod_spatialite.so');
-                    echo '</br>Import des données N2K PREVI POLYGONE de '.$row[0].' - uuid_nx : '.$row[3].' - uuid_n2k : '.$row_[2].'</br>';
                     $results_write_gpkg = $db->query("UPDATE $n2k_previ_polygone_gpkg set importe = datetime('now') where importe is null and id_uuid_n2k = '".$row_[2]."';"); //
                     if ($results_write_gpkg) {
                         echo $db->changes();
                         pg_execute($dbconn_geo, "sql_down_previ",array($row_[2])) or die ( pg_last_error());
-                    }
+                    } else {echo "Erreur sur le gpkg : " . $db->lastErrorMsg(); }
                     $db->close();
                 }
         }
@@ -65,15 +64,14 @@ while($row = pg_fetch_row($personne))
             $to_up = pg_execute($dbconn_geo, "sql_up_previ",array($row[3])) or die ( pg_last_error());
             while($row_ = pg_fetch_row($to_up))
                 {
-                    echo 'id_uuid_n2k :'.$row_[2].' - date_import : '.$row_[3].' </br>';
+                    echo '</br>id_uuid_n2k :'.$row_[2].' - date_import : '.$row_[3].' </br>';
                     $db = new SQLite3('/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg');
                     $db->loadExtension('mod_spatialite.so');
-                    echo '</br>Import des données N2K PREVI POINT de '.$row[0].' - uuid_nx : '.$row[3].' - uuid_n2k : '.$row_[2].'</br>';
                     $results_write_gpkg = $db->query("UPDATE $n2k_previ_point_gpkg set importe = datetime('now') where importe is null and id_uuid_n2k = '".$row_[2]."';"); //
                     if ($results_write_gpkg) {
                         echo $db->changes();
                         pg_execute($dbconn_geo, "sql_down_previ",array($row_[2])) or die ( pg_last_error());
-                    }
+                    } else {echo "Erreur sur le gpkg : " . $db->lastErrorMsg(); }
                     $db->close();
                 }
         }
@@ -87,15 +85,14 @@ while($row = pg_fetch_row($personne))
             $to_up = pg_execute($dbconn_geo, "sql_up_previ",array($row[3])) or die ( pg_last_error());
             while($row_ = pg_fetch_row($to_up))
                 {
-                    echo 'id_uuid_n2k :'.$row_[2].' - date_import : '.$row_[3].' </br>';
+                    echo '</br>id_uuid_n2k :'.$row_[2].' - date_import : '.$row_[3].' </br>';
                     $db = new SQLite3('/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg');
                     $db->loadExtension('mod_spatialite.so');
-                    echo '</br>Import des données N2K PREVI LIGNE de '.$row[0].' - uuid_nx : '.$row[3].' - uuid_n2k : '.$row_[2].'</br>';
                     $results_write_gpkg = $db->query("UPDATE $n2k_previ_ligne_gpkg set importe = datetime('now') where importe is null and id_uuid_n2k = '".$row_[2]."';"); //
                     if ($results_write_gpkg) {
                         echo $db->changes();
                         pg_execute($dbconn_geo, "sql_down_previ",array($row_[2])) or die ( pg_last_error());
-                    }
+                    } else {echo "Erreur sur le gpkg : " . $db->lastErrorMsg(); }
                     $db->close();
                 }
         }
@@ -131,7 +128,7 @@ while($row = pg_fetch_row($personne))
                     if ($results_write_gpkg) {
                         echo $db->changes();
                         pg_execute($dbconn_geo, "sql_down_realise",array($row_[2])) or die ( pg_last_error());
-                    }
+                    } else {echo "Erreur sur le gpkg : " . $db->lastErrorMsg(); }
                     $db->close();
                 }
         }
@@ -152,7 +149,7 @@ while($row = pg_fetch_row($personne))
                     if ($results_write_gpkg) {
                         echo $db->changes();
                         pg_execute($dbconn_geo, "sql_down_realise",array($row_[2])) or die ( pg_last_error());
-                    }
+                    } else {echo "Erreur sur le gpkg : " . $db->lastErrorMsg(); }
                     $db->close();
                 }
         }
@@ -173,7 +170,7 @@ while($row = pg_fetch_row($personne))
                     if ($results_write_gpkg) {
                         echo $db->changes();
                         pg_execute($dbconn_geo, "sql_down_realise",array($row_[2])) or die ( pg_last_error());
-                    }
+                    } else {echo "Erreur sur le gpkg : " . $db->lastErrorMsg(); }
                     $db->close();
                 }
         }
