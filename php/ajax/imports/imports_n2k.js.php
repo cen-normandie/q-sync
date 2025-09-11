@@ -49,6 +49,7 @@ while($row = pg_fetch_row($personne))
                     $results_write_gpkg = $db->query("UPDATE $n2k_previ_polygone_gpkg set importe = datetime('now') where importe is null and id_uuid_n2k = '".$row_[2]."';"); //
                     if ($results_write_gpkg) {
                         echo '</br>"importe" UPDATED! </br>';
+                        echo "</br>UPDATE $n2k_previ_polygone_gpkg set importe = datetime('now') where importe is null and id_uuid_n2k = '".$row_[2]."';</br>";
                         echo $db->changes();
                         pg_execute($dbconn_geo, "sql_down_previ",array($row_[2])) or die ( pg_last_error());
                     } else {echo "Erreur sur le gpkg : " . $db->lastErrorMsg(); }
@@ -71,6 +72,7 @@ while($row = pg_fetch_row($personne))
                     $results_write_gpkg = $db->query("UPDATE $n2k_previ_point_gpkg set importe = datetime('now') where importe is null and id_uuid_n2k = '".$row_[2]."';"); //
                     if ($results_write_gpkg) {
                         echo '</br>"importe" UPDATED! </br>';
+                        echo "</br>UPDATE $n2k_previ_point_gpkg set importe = datetime('now') where importe is null and id_uuid_n2k = '".$row_[2]."';</br>";
                         echo $db->changes();
                         pg_execute($dbconn_geo, "sql_down_previ",array($row_[2])) or die ( pg_last_error());
                     } else {echo "Erreur sur le gpkg : " . $db->lastErrorMsg(); }
@@ -93,6 +95,7 @@ while($row = pg_fetch_row($personne))
                     $results_write_gpkg = $db->query("UPDATE $n2k_previ_ligne_gpkg set importe = datetime('now') where importe is null and id_uuid_n2k = '".$row_[2]."';"); //
                     if ($results_write_gpkg) {
                         echo '</br>"importe" UPDATED! </br>';
+                        echo "</br>UPDATE $n2k_previ_ligne_gpkg set importe = datetime('now') where importe is null and id_uuid_n2k = '".$row_[2]."';</br>";
                         echo $db->changes();
                         pg_execute($dbconn_geo, "sql_down_previ",array($row_[2])) or die ( pg_last_error());
                     } else {echo "Erreur sur le gpkg : " . $db->lastErrorMsg(); }
@@ -130,6 +133,7 @@ while($row = pg_fetch_row($personne))
                     $results_write_gpkg = $db->query("UPDATE $n2k_real_polygone_gpkg set importe = datetime('now') where importe is null and id_uuid_n2k = '".$row_[2]."';"); //
                     if ($results_write_gpkg) {
                         echo '</br>"importe" UPDATED! </br>';
+                        echo "</br>UPDATE $n2k_real_polygone_gpkg set importe = datetime('now') where importe is null and id_uuid_n2k = '".$row_[2]."';</br>";
                         echo $db->changes();
                         pg_execute($dbconn_geo, "sql_down_realise",array($row_[2])) or die ( pg_last_error());
                     } else {echo "Erreur sur le gpkg : " . $db->lastErrorMsg(); }
@@ -152,6 +156,7 @@ while($row = pg_fetch_row($personne))
                     $results_write_gpkg = $db->query("UPDATE $n2k_real_point_gpkg set importe = datetime('now') where importe is null and id_uuid_n2k = '".$row_[2]."';"); //
                     if ($results_write_gpkg) {
                         echo '</br>"importe" UPDATED! </br>';
+                        echo "</br>UPDATE $n2k_real_point_gpkg set importe = datetime('now') where importe is null and id_uuid_n2k = '".$row_[2]."';</br>";
                         echo $db->changes();
                         pg_execute($dbconn_geo, "sql_down_realise",array($row_[2])) or die ( pg_last_error());
                     } else {echo "Erreur sur le gpkg : " . $db->lastErrorMsg(); }
@@ -174,6 +179,7 @@ while($row = pg_fetch_row($personne))
                     $results_write_gpkg = $db->query("UPDATE $n2k_real_ligne_gpkg set importe = datetime('now') where importe is null and id_uuid_n2k = '".$row_[2]."';"); //
                     if ($results_write_gpkg) {
                         echo '</br>"importe" UPDATED! </br>';
+                        echo "</br>UPDATE $n2k_real_ligne_gpkg set importe = datetime('now') where importe is null and id_uuid_n2k = '".$row_[2]."';</br>";
                         echo $db->changes();
                         pg_execute($dbconn_geo, "sql_down_realise",array($row_[2])) or die ( pg_last_error());
                     } else {echo "Erreur sur le gpkg : " . $db->lastErrorMsg(); }
