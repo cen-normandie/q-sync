@@ -31,7 +31,7 @@ while($row = pg_fetch_row($personne))
     echo '</br>'.$cmd_point.'</br>';
     echo '</br>'.$cmd_ligne.'</br>';
 
-    $output_polygone=[];
+    /* $output_polygone=[];
     $output_point=[];
     $output_ligne=[];
     $return_var_polygone=0;
@@ -105,12 +105,15 @@ while($row = pg_fetch_row($personne))
     } 
     else {
         echo '</br>FAILED ligne</br>';
-    }
+    } */
     echo '</br>Import des données N2K REALISE de '.$row[0].' - uuid_nx : '.$row[3].'</br>';
     $cmd_polygone='ogr2ogr -f PostgreSQL "PG:user='.$LOGIN_geonature.' host='.$DBHOST_geonature.' dbname='.$DBNAME_geonature.' password='.$PASS_geonature.'" /var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg -nln sandbox.n2k_realise -append -sql "SELECT *, \''.$row[0].'\' as courriel, \''.$row[3].'\' as uuid_nx from '.$n2k_real_polygone_gpkg.'  where importe is null or up_date > importe" 2>&1';
     $cmd_point='ogr2ogr -f PostgreSQL "PG:user='.$LOGIN_geonature.' host='.$DBHOST_geonature.' dbname='.$DBNAME_geonature.' password='.$PASS_geonature.'" /var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg -nln sandbox.n2k_realise -append -sql "SELECT *, \''.$row[0].'\' as courriel, \''.$row[3].'\' as uuid_nx from '.$n2k_real_point_gpkg.'  where importe is null or up_date > importe" 2>&1';
     $cmd_ligne='ogr2ogr -f PostgreSQL "PG:user='.$LOGIN_geonature.' host='.$DBHOST_geonature.' dbname='.$DBNAME_geonature.' password='.$PASS_geonature.'" /var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg -nln sandbox.n2k_realise -append -sql "SELECT *, \''.$row[0].'\' as courriel, \''.$row[3].'\' as uuid_nx from '.$n2k_real_ligne_gpkg.'  where importe is null or up_date > importe" 2>&1';
     //echo '</br>'.$cmd_polygone.'</br>';
+    echo '</br>'.$cmd_polygone.'</br>';
+    echo '</br>'.$cmd_point.'</br>';
+    echo '</br>'.$cmd_ligne.'</br>';
     $output_polygone=[];
     $output_point=[];
     $output_ligne=[];
