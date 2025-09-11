@@ -71,13 +71,14 @@ if (in_array($_SESSION['email'], $admins)) {
                 <div class="d-flex w-100 p-2 text-light bg-dark">
                     <h4 class="bebas my-0" >Observations.gpkg</h4>
                 </div>
-                <div class="d-flex w-100 p-2">
-                    <div id="container_Flore" class="col-4"></div>
-                    <div id="container_Faune" class="col-4"></div>
-                    <div id="container_CC" class="col-4"></div>
-                </div>
-                <div class="d-flex w-100">
+
+                <div class="d-flex w-100 ">
                     <div class="d-flex flex-column col-md-4 col-lg-8">
+                        <div class="d-flex w-100 p-2">
+                            <div id="container_Flore" class="col-4"></div>
+                            <div id="container_Faune" class="col-4"></div>
+                            <div id="container_CC" class="col-4"></div>
+                        </div>
                         <table id="QSync_observations" class="table table-hover table-sm" style="width:100%;"> <!--table-dark-->
                             <thead>
                                 <tr>
@@ -87,31 +88,29 @@ if (in_array($_SESSION['email'], $admins)) {
                                     <th>nb obs flore</th>
                                     <th>nb obs cc</th>
                                     <th>date update .gpkg</th>
-<!--                                <th>.gpkg version</th>
-                                    <th>imports</th> 
--->
                                 </tr>
                             <tbody>
                             </tbody>
                         </table>
                     </div>
-                    <div class="d-flex flex-column col-md-6 col-lg-4 bg-dark text-light" style="max-height:300px;overflow-y: auto;">
-                        <div class="d-flex flex-column w-100 justify-content-between ">
-                            <button id="import_faune" type="button" class="btn btn-sm m-2" style="background-color:rgba(236, 214, 14, 0.75);"><i class="fas fa-file-import text-dark px-1 fs-5"></i> Import Faune</button>
-                            <button id="import_flore" type="button" class="btn btn-sm m-2" style="background-color:rgba(39, 196, 60, 0.75);"><i class="fas fa-file-import text-dark px-1 fs-5"></i> Import Flore</button>
-                            <button id="import_cc" type="button" class="btn btn-sm m-2" style="background-color:rgba(196, 39, 162, 0.75);"><i class="fas fa-file-import text-dark px-1 fs-5"></i> Import Carré Contact</button>
+                    <div class="d-flex flex-column col-md-6 col-lg-4 bg-dark text-light" >
+
+                        <div class="d-flex w-100 ">
+                            <button id="import_faune" type="button" class="btn btn-outline-warning btn-sm m-2" ><i class="fas fa-file-import px-1 fs-5"></i> Import Faune</button>
+                            <button id="import_flore" type="button" class="btn btn-outline-success btn-sm m-2" ><i class="fas fa-file-import px-1 fs-5"></i> Import Flore</button>
+                            <button id="import_cc" type="button" class="btn btn-outline-primary btn-sm m-2" ><i class="fas fa-file-import px-1 fs-5"></i> Import Carré Contact</button>
                         </div>
-                        <div class="d-flex w-100 bg-dark text-light flex-grow-1">
-                            <div id="console_observations" class="d-flex flex-column align-self-stretch"  >
+                        <div class="d-flex w-100 bg-dark text-light flex-grow-1 p-2">
+                            <div id="console_observations" class="d-flex flex-column align-self-stretch" style="max-height:300px;overflow-y: auto;" >
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <div class="d-flex w-100 p-2 text-light bg-dark">
                     <h4 class="bebas my-0" >n2k.gpkg</h4>
                 </div>
-                <div class="d-flex w-100">
+
+                <div class="d-flex w-100 ">
                     <div class="d-flex flex-column col-md-4 col-lg-8">
                         <table id="QSync_n2k" class="table table-hover table-sm" style="width:100%"> <!--table-dark-->
                             <thead>
@@ -128,16 +127,15 @@ if (in_array($_SESSION['email'], $admins)) {
                             </tbody>
                         </table>
                     </div>
-                    <div class="d-flex flex-column col-md-6 col-lg-4 bg-dark text-light" style="max-height:300px;overflow-y: auto;">
-                        <div class="d-flex flex-column w-100 justify-content-between ">
-                            <button id="import_n2k_previ" type="button" class="btn btn-sm m-2" style="background-color:rgba(10, 99, 160, 0.75);"><i class="fas fa-file-import text-dark px-1 fs-5"></i> Import Previ</button>
-                            <button id="import_n2k_realise" type="button" class="btn btn-sm m-2" style="background-color:rgba(149, 21, 21, 0.75);"><i class="fas fa-file-import text-dark px-1 fs-5"></i> Import Réalisé</button>
+                    <div class="d-flex flex-column col-md-6 col-lg-4 bg-dark text-light" >
+                        <div class="d-flex w-100">
+                            <button id="import_n2k_previ" type="button" class="btn btn-outline-danger btn-sm m-2" ><i class="fas fa-file-import px-1 fs-5"></i> Import Previ</button>
+                            <button id="import_n2k_realise" type="button" class="btn btn-outline-info btn-sm m-2" ><i class="fas fa-file-import px-1 fs-5"></i> Import Réalisé</button>
                         </div>
                         <div class="d-flex w-100 bg-dark text-light flex-grow-1">
-                            <div id="console_n2k" class="d-flex flex-column align-self-stretch"  >
+                            <div id="console_n2k" class="d-flex flex-column align-self-stretch" style="max-height:300px;overflow-y: auto;" >
                             </div>
                         </div>
-
                     </div>
                 </div>
                 <div class="d-flex w-100 p-2 text-light bg-dark justify-content-end">

@@ -71,6 +71,7 @@ $("#signin").click( function () {
             dataType : "text",
             error    : function(request, error) { console.log("not ajax success ");},
             success  : function(data) {
+                console.log(data);
                 if (data == "Success")
                 {   
                     window.location.href = 'imports.php';
