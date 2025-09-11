@@ -17,9 +17,9 @@ while($row = pg_fetch_row($personne))
   echo 'nom_ad :'.$row[2].'</br>';
   echo 'uuid_nx :'.$row[3].'</br>'; 
   */
-  $observations_gpkg = '/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/observations.gpkg';
-  if (file_exists($observations_gpkg)) {
-    $cmd='ogr2ogr -f PostgreSQL "PG:user='.$LOGIN_geonature.' host='.$DBHOST_geonature.' dbname='.$DBNAME_geonature.' password='.$PASS_geonature.'" /var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/observations.gpkg -nln sandbox.obs_flore -append -sql "SELECT *, \''.$row[0].'\' as courriel, \''.$row[3].'\' as uuid_nx from '.$flore.'  where date_import is null" 2>&1';
+  $n2k_gpkg = '/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg';
+  if (file_exists($n2k_gpkg)) {
+    $cmd='ogr2ogr -f PostgreSQL "PG:user='.$LOGIN_geonature.' host='.$DBHOST_geonature.' dbname='.$DBNAME_geonature.' password='.$PASS_geonature.'" /var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg -nln sandbox.n2k -append -sql "SELECT *, \''.$row[0].'\' as courriel, \''.$row[3].'\' as uuid_nx from '.$flore.'  where importe is null" 2>&1';
     //echo '</br>'.$cmd.'</br>';
     $output=[];
     $return_var=0;
