@@ -23,13 +23,10 @@ while($row = pg_fetch_row($personne))
   $n2k_gpkg = '/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg';
   if (file_exists($n2k_gpkg)) {
 
-    /* echo '</br>Import des données N2K PREVI de '.$row[0].' - uuid_nx : '.$row[3].'</br>';
+    echo '</br>Import des données N2K PREVI de '.$row[0].' - uuid_nx : '.$row[3].'</br>';
     $cmd_polygone='ogr2ogr -f PostgreSQL "PG:user='.$LOGIN_geonature.' host='.$DBHOST_geonature.' dbname='.$DBNAME_geonature.' password='.$PASS_geonature.'" /var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg -nln sandbox.n2k_previ -append -sql "SELECT *, \''.$row[0].'\' as courriel, \''.$row[3].'\' as uuid_nx from '.$n2k_previ_polygone_gpkg.'  where importe is null" 2>&1';
     $cmd_point='ogr2ogr -f PostgreSQL "PG:user='.$LOGIN_geonature.' host='.$DBHOST_geonature.' dbname='.$DBNAME_geonature.' password='.$PASS_geonature.'" /var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg -nln sandbox.n2k_previ -append -sql "SELECT *, \''.$row[0].'\' as courriel, \''.$row[3].'\' as uuid_nx from '.$n2k_previ_point_gpkg.'  where importe is null" 2>&1';
     $cmd_ligne='ogr2ogr -f PostgreSQL "PG:user='.$LOGIN_geonature.' host='.$DBHOST_geonature.' dbname='.$DBNAME_geonature.' password='.$PASS_geonature.'" /var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg -nln sandbox.n2k_previ -append -sql "SELECT *, \''.$row[0].'\' as courriel, \''.$row[3].'\' as uuid_nx from '.$n2k_previ_ligne_gpkg.'  where importe is null" 2>&1';
-    echo '</br>'.$cmd_polygone.'</br>';
-    echo '</br>'.$cmd_point.'</br>';
-    echo '</br>'.$cmd_ligne.'</br>';
 
     $output_polygone=[];
     $output_point=[];
@@ -40,13 +37,13 @@ while($row = pg_fetch_row($personne))
     exec($cmd_polygone, $output_polygone, $return_var_polygone);
     exec($cmd_point, $output_point, $return_var_point);
     exec($cmd_ligne, $output_ligne, $return_var_ligne);
-    if ($return_var_polygone !== 2) {
+    if ($return_var_polygone == 0) {
         $out = pg_execute($dbconn_geo, "sql_import_n2k_previ",array()) or die ( pg_last_error());
         if ($out) {
             $to_up = pg_execute($dbconn_geo, "sql_up_previ",array($row[3])) or die ( pg_last_error());
             while($row_ = pg_fetch_row($to_up))
                 {
-                    echo 'id_uuid_n2k :'.$row_[2].' - date_import : '.$row_[3].' uuid_nx : '.$row_[1].'</br>';
+                    echo 'id_uuid_n2k :'.$row_[2].' - date_import : '.$row_[3].' </br>';
                     $db = new SQLite3('/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg');
                     $db->loadExtension('mod_spatialite.so');
                     echo '</br>Import des données N2K PREVI POLYGONE de '.$row[0].' - uuid_nx : '.$row[3].' - uuid_n2k : '.$row_[2].'</br>';
@@ -59,16 +56,16 @@ while($row = pg_fetch_row($personne))
                 }
         }
     }
-    else {
-        echo '</br>FAILED polygone</br>';
+    else if ($return_var_polygone > 0) {
+        echo '</br>FAILED try run : '.$cmd_polygone.'</br>';
     }
-    if ($return_var_point !== 2) {
+    if ($return_var_point == 0) {
         $out = pg_execute($dbconn_geo, "sql_import_n2k_previ",array()) or die ( pg_last_error());
         if ($out) {
             $to_up = pg_execute($dbconn_geo, "sql_up_previ",array($row[3])) or die ( pg_last_error());
             while($row_ = pg_fetch_row($to_up))
                 {
-                    echo 'id_uuid_n2k :'.$row_[2].' - date_import : '.$row_[3].' uuid_nx : '.$row_[1].'</br>';
+                    echo 'id_uuid_n2k :'.$row_[2].' - date_import : '.$row_[3].' </br>';
                     $db = new SQLite3('/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg');
                     $db->loadExtension('mod_spatialite.so');
                     echo '</br>Import des données N2K PREVI POINT de '.$row[0].' - uuid_nx : '.$row[3].' - uuid_n2k : '.$row_[2].'</br>';
@@ -81,16 +78,16 @@ while($row = pg_fetch_row($personne))
                 }
         }
     }
-    else {
-        echo '</br>FAILED point</br>';
+    else if ($return_var_point > 0) {
+        echo '</br>FAILED try run : '.$cmd_point.'</br>';
     }
-    if ($return_var_ligne !== 2) {
+    if ($return_var_ligne == 0) {
         $out = pg_execute($dbconn_geo, "sql_import_n2k_previ",array()) or die ( pg_last_error());
         if ($out) {
             $to_up = pg_execute($dbconn_geo, "sql_up_previ",array($row[3])) or die ( pg_last_error());
             while($row_ = pg_fetch_row($to_up))
                 {
-                    echo 'id_uuid_n2k :'.$row_[2].' - date_import : '.$row_[3].' uuid_nx : '.$row_[1].'</br>';
+                    echo 'id_uuid_n2k :'.$row_[2].' - date_import : '.$row_[3].' </br>';
                     $db = new SQLite3('/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg');
                     $db->loadExtension('mod_spatialite.so');
                     echo '</br>Import des données N2K PREVI LIGNE de '.$row[0].' - uuid_nx : '.$row[3].' - uuid_n2k : '.$row_[2].'</br>';
@@ -103,17 +100,15 @@ while($row = pg_fetch_row($personne))
                 }
         }
     } 
-    else {
-        echo '</br>FAILED ligne</br>';
-    } */
+    else if ($return_var_ligne > 0) {
+        echo '</br>FAILED try run : '.$cmd_ligne.'</br>';
+    } 
+    echo '</br>####################################</br>';
     echo '</br>Import des données N2K REALISE de '.$row[0].' - uuid_nx : '.$row[3].'</br>';
     $cmd_polygone='ogr2ogr -f PostgreSQL "PG:user='.$LOGIN_geonature.' host='.$DBHOST_geonature.' dbname='.$DBNAME_geonature.' password='.$PASS_geonature.'" /var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg -nln sandbox.n2k_realise -append -sql "SELECT *, \''.$row[0].'\' as courriel, \''.$row[3].'\' as uuid_nx from '.$n2k_real_polygone_gpkg.'  where importe is null or up_date > importe" 2>&1';
     $cmd_point='ogr2ogr -f PostgreSQL "PG:user='.$LOGIN_geonature.' host='.$DBHOST_geonature.' dbname='.$DBNAME_geonature.' password='.$PASS_geonature.'" /var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg -nln sandbox.n2k_realise -append -sql "SELECT *, \''.$row[0].'\' as courriel, \''.$row[3].'\' as uuid_nx from '.$n2k_real_point_gpkg.'  where importe is null or up_date > importe" 2>&1';
     $cmd_ligne='ogr2ogr -f PostgreSQL "PG:user='.$LOGIN_geonature.' host='.$DBHOST_geonature.' dbname='.$DBNAME_geonature.' password='.$PASS_geonature.'" /var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg -nln sandbox.n2k_realise -append -sql "SELECT *, \''.$row[0].'\' as courriel, \''.$row[3].'\' as uuid_nx from '.$n2k_real_ligne_gpkg.'  where importe is null or up_date > importe" 2>&1';
     //echo '</br>'.$cmd_polygone.'</br>';
-    echo '</br>'.$cmd_polygone.'</br>';
-    echo '</br>'.$cmd_point.'</br>';
-    echo '</br>'.$cmd_ligne.'</br>';
     $output_polygone=[];
     $output_point=[];
     $output_ligne=[];
@@ -123,13 +118,13 @@ while($row = pg_fetch_row($personne))
     exec($cmd_polygone, $output_polygone, $return_var_polygone);
     exec($cmd_point, $output_point, $return_var_point);
     exec($cmd_ligne, $output_ligne, $return_var_ligne);
-    if ($return_var_polygone !== 2) {
+    if ($return_var_polygone == 0) {
         $out = pg_execute($dbconn_geo, "sql_import_n2k_realise",array()) or die ( pg_last_error());
         if ($out) {
             $to_up = pg_execute($dbconn_geo, "sql_up_realise",array($row[3])) or die ( pg_last_error());
             while($row_ = pg_fetch_row($to_up))
                 {
-                    echo 'id_uuid_n2k :'.$row_[2].' - date_import : '.$row_[3].' uuid_nx : '.$row_[1].'</br>';
+                    echo '</br>id_uuid_n2k :'.$row_[2].' - date_import : '.$row_[3].' </br>';
                     $db = new SQLite3('/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg');
                     $db->loadExtension('mod_spatialite.so');
                     $results_write_gpkg = $db->query("UPDATE $n2k_real_polygone_gpkg set importe = datetime('now') where importe is null and id_uuid_n2k = '".$row_[2]."';"); //
@@ -141,16 +136,16 @@ while($row = pg_fetch_row($personne))
                 }
         }
     }
-    else {
-        echo '</br>FAILED polygone</br>';
+    else if ($return_var_polygone > 0) {
+        echo '</br>FAILED try run : '.$cmd_polygone.'</br>';
     }
-    if ($return_var_point !== 2) {
+    if ($return_var_point == 0) {
         $out = pg_execute($dbconn_geo, "sql_import_n2k_realise",array()) or die ( pg_last_error());
         if ($out) {
             $to_up = pg_execute($dbconn_geo, "sql_up_realise",array($row[3])) or die ( pg_last_error());
             while($row_ = pg_fetch_row($to_up))
                 {
-                    echo 'id_uuid_n2k :'.$row_[2].' - date_import : '.$row_[3].' uuid_nx : '.$row_[1].'</br>';
+                    echo '</br>id_uuid_n2k :'.$row_[2].' - date_import : '.$row_[3].' </br>';
                     $db = new SQLite3('/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg');
                     $db->loadExtension('mod_spatialite.so');
                     $results_write_gpkg = $db->query("UPDATE $n2k_real_point_gpkg set importe = datetime('now') where importe is null and id_uuid_n2k = '".$row_[2]."';"); //
@@ -162,10 +157,10 @@ while($row = pg_fetch_row($personne))
                 }
         }
     }
-    else {
-        echo '</br>FAILED point</br>';
+    else if ($return_var_point > 0) {
+        echo '</br>FAILED try run : '.$cmd_point.'</br>';
     }
-    if ($return_var_ligne !== 2) {
+    if ($return_var_ligne == 0) {
         $out = pg_execute($dbconn_geo, "sql_import_n2k_realise",array()) or die ( pg_last_error());
         if ($out) {
             $to_up = pg_execute($dbconn_geo, "sql_up_realise",array($row[3])) or die ( pg_last_error());
@@ -183,8 +178,8 @@ while($row = pg_fetch_row($personne))
                 }
         }
     } 
-    else {
-        echo '</br>FAILED ligne</br>';
+    else if ($return_var_ligne > 0) {
+        echo '</br>FAILED try run : '.$cmd_ligne.'</br>';
     }
 
 
