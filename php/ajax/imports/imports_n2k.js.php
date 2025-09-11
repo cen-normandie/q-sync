@@ -43,7 +43,7 @@ while($row = pg_fetch_row($personne))
             $to_up = pg_execute($dbconn_geo, "sql_up_previ",array($row[3])) or die ( pg_last_error());
             while($row_ = pg_fetch_row($to_up))
                 {
-                    echo '</br>id_uuid_n2k :'.$row_[2].' </br>';
+                    echo '</br>BEGIN ####### </br>id_uuid_n2k :'.$row_[2].' </br>';
                     $db = new SQLite3('/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg');
                     $db->loadExtension('mod_spatialite.so');
                     $results_write_gpkg = $db->query("UPDATE $n2k_previ_polygone_gpkg set importe = datetime('now') where importe is null and id_uuid_n2k = '".$row_[2]."';"); //
@@ -54,6 +54,7 @@ while($row = pg_fetch_row($personne))
                         pg_execute($dbconn_geo, "sql_down_previ",array($row_[2])) or die ( pg_last_error());
                     } else {echo "Erreur sur le gpkg : " . $db->lastErrorMsg(); }
                     $db->close();
+                    echo '</br>END ####### </br>';
                 }
         }
     }
