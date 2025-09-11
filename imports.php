@@ -129,8 +129,7 @@ if (in_array($_SESSION['email'], $admins)) {
                     </div>
                     <div class="d-flex flex-column col-md-6 col-lg-4 bg-dark text-light" >
                         <div class="d-flex w-100">
-                            <button id="import_n2k_previ" type="button" class="btn btn-outline-danger btn-sm m-2" ><i class="fas fa-file-import px-1 fs-5"></i> Import Previ</button>
-                            <button id="import_n2k_realise" type="button" class="btn btn-outline-info btn-sm m-2" ><i class="fas fa-file-import px-1 fs-5"></i> Import Réalisé</button>
+                            <button id="import_n2k" type="button" class="btn btn-outline-danger btn-sm m-2" ><i class="fas fa-file-import px-1 fs-5"></i> Import N2K</button>
                         </div>
                         <div class="d-flex w-100 bg-dark text-light flex-grow-1">
                             <div id="console_n2k" class="d-flex flex-column align-self-stretch" style="max-height:300px;overflow-y: auto;" >
