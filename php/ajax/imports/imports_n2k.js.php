@@ -9,8 +9,8 @@ pg_prepare($dbconn_geo, "sql_down_previ", "UPDATE $n2k_suivi_previ set gpkg_upda
 pg_prepare($dbconn_geo, "sql_down_realise", "UPDATE $n2k_suivi_real set gpkg_updated = true where id_uuid_n2k = $1;");
 pg_prepare($dbconn_geo, "sql_import_n2k_previ", "select sandbox.import_n2k_previ();");
 pg_prepare($dbconn_geo, "sql_import_n2k_realise", "select sandbox.import_n2k_realise();");
-pg_prepare($dbconn_geo, "sql_up_previ", "SELECT id, uuid_nx, id_uuid_n2k, date_import FROM $n2k_suivi_previ where gpkg_updated is false and uuid_nx = $1 ;");
-pg_prepare($dbconn_geo, "sql_up_realise", "SELECT id, uuid_nx, id_uuid_n2k, date_import FROM $n2k_suivi_real where gpkg_updated is false and uuid_nx = $1 ;");
+pg_prepare($dbconn_geo, "sql_up_previ", "SELECT id, uuid_nx, id_uuid_n2k, importe FROM $n2k_suivi_previ where gpkg_updated is false and uuid_nx = $1 ;");
+pg_prepare($dbconn_geo, "sql_up_realise", "SELECT id, uuid_nx, id_uuid_n2k, importe FROM $n2k_suivi_real where gpkg_updated is false and uuid_nx = $1 ;");
 
 while($row = pg_fetch_row($personne))
 {
