@@ -274,6 +274,13 @@ $('#import_n2k').on('click', function() {
     });
 });
 
+$('#file_scan').on('click', function() {
+    console.log('file scan');
+    $('#console_file_scan').empty();
+    $('#console_file_scan').append( "<p>Scan des fichiers en cours...</p>" );
+    file_scan ('console_file_scan');
+});
+
 function file_scan (console_name) {
     $.ajax({
         url      : "php/file_scan.php",

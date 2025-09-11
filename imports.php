@@ -137,6 +137,25 @@ if (in_array($_SESSION['email'], $admins)) {
                         </div>
                     </div>
                 </div>
+                <div class="d-flex w-100 p-2 text-light bg-dark">
+                    <h4 class="bebas my-0" >File_scan()</h4>
+                </div>
+
+                <div class="d-flex w-100 ">
+                    <div class="d-flex flex-column col-md-4 col-lg-8">
+                        <table id="" class="table table-hover table-sm" style="width:100%"> <!--table-dark-->
+                        </table>
+                    </div>
+                    <div class="d-flex flex-column col-md-6 col-lg-4 bg-dark text-light" >
+                        <div class="d-flex w-100">
+                            <button id="file_scan" type="button" class="btn btn-outline-danger btn-sm m-2" ><i class="fas fa-file-import px-1 fs-5"></i> File Scan</button>
+                        </div>
+                        <div class="d-flex w-100 bg-dark text-light flex-grow-1">
+                            <div id="console_file_scan" class="d-flex flex-column align-self-stretch" style="max-height:300px;overflow-y: auto;" >
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="d-flex w-100 p-2 text-light bg-dark justify-content-end">
                     <h4 class="bebas my-0" >...</h4>
                 </div>
