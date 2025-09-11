@@ -219,7 +219,7 @@ $('#import_faune').on('click', function() {
             change_load();
             $('#console_observations').empty();
             $('#console_observations').append( "<p>"+data+"</p>" );
-            file_scan ();
+            file_scan ('console_observations');
             }
     });
 });
@@ -235,7 +235,7 @@ $('#import_flore').on('click', function() {
             change_load();
             $('#console_observations').empty();
             $('#console_observations').append( "<p>"+data+"</p>" );
-            file_scan ();
+            file_scan ('console_observations');
             }
     });
 });
@@ -252,7 +252,7 @@ $('#import_cc').on('click', function() {
             change_load();
             $('#console_observations').empty();
             $('#console_observations').append( "<p>"+data+"</p>" );
-            file_scan ();
+            file_scan ('console_observations');
             }
     });
 });
@@ -269,12 +269,12 @@ $('#import_n2k').on('click', function() {
             change_load();
             $('#console_n2k').empty();
             $('#console_n2k').append( "<p>"+data+"</p>" );
-            file_scan ();
+            file_scan ('console_n2k');
             }
     });
 });
 
-function file_scan () {
+function file_scan (console_name) {
     $.ajax({
         url      : "php/file_scan.php",
         data     : {},
@@ -284,7 +284,7 @@ function file_scan () {
         error    : function(request, error) { alert("Erreur : responseText: "+request.responseText);change_load();},
         success  : function(data) {
             change_load();
-            $('#console_observations').append( "<p>"+data+"</p>" );
+            $('#'+console_name).append( "<p>"+data+"</p>" );
             }
     });
 }

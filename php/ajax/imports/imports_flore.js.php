@@ -39,6 +39,7 @@ while($row = pg_fetch_row($personne))
                         echo $db->changes();
                         pg_execute($dbconn_geo, "sql_down",array($row_[2])) or die ( pg_last_error());
                     }
+                    $db->close();
                 }
         }
     } else {
