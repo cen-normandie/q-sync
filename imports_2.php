@@ -96,7 +96,7 @@ if (in_array($_SESSION['email'], $admins)) {
                 <div class="d-flex flex-column w-100 p-2 text-light bg-dark">
                     <h4 class="bebas my-0" >Console / Logs</h4>
                 </div>
-                <div id="console" class="d-flex flex-column bg-dark text-light border border-light" style="min-height: 200px;max-height:400px;overflow-y: auto;" >
+                <div id="console" class="d-flex flex-column bg-dark text-light border border-light p-1" style="min-height: 200px;max-height:400px;overflow-y: auto;" >
                     </div>
 
                 <div class="d-flex w-100 p-2 text-light bg-dark">
