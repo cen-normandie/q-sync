@@ -22,7 +22,7 @@ $delete = pg_prepare($dbconn_geo, "sql", "DELETE FROM $nx_users;");
 $delete = pg_execute($dbconn_geo, "sql",array()) or die ( pg_last_error());
 
 
-$update_users = pg_prepare($dbconn_geo, "update_users", "UPDATE $nx_users set observations_gpkg = $1, n2k_gpg = $2 where uuid_nx= $3;");
+$update_users = pg_prepare($dbconn_geo, "update_users", "UPDATE $nx_users set observations_gpkg = $1, n2k_gpkg = $2 where uuid_nx= $3;");
 $insert_s = pg_prepare($dbconn_nx, "sql", "
 with a_ as (
 SELECT id, uid, value as name_
