@@ -77,11 +77,6 @@ while($row = pg_fetch_row($personne))
     $o_gpkg=date('Y-m-d', filemtime($observations_gpkg));
   }
   if (file_exists($n2k_gpkg)) {
-    echo $n2k_gpkg;
-    echo "\n";
-    echo 'file exists and filetime: ' . filemtime($n2k_gpkg);
-    echo 'for user: ' . $row[3];
-    echo "\n";
     $f_n2k_gpkg=date('Y-m-d', filemtime($n2k_gpkg));
   }
 
