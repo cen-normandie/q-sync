@@ -72,15 +72,18 @@ while($row = pg_fetch_row($personne))
   $observations_gpkg = '/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/observations.gpkg';
   $n2k_gpkg = '/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg';
   $o_gpkg = '';
-  $n2k_gpkg = '';
+  $f_n2k_gpkg = '';
   if (file_exists($observations_gpkg)) {
     $o_gpkg=date('Y-m-d', filemtime($observations_gpkg));
   }
   if (file_exists($n2k_gpkg)) {
-    $n2k_gpkg=date('Y-m-d', filemtime($n2k_gpkg));
+    echo $n2k_gpkg;
+    echo "\n";
+    echo 'file exists and filetime: ' . filemtime($n2k_gpkg);
+    $f_n2k_gpkg=date('Y-m-d', filemtime($n2k_gpkg));
   }
 
-  $update_users_ = pg_execute($dbconn_geo, "update_users",array($o_gpkg, $n2k_gpkg, $row[3])) or die ( pg_last_error());
+  $update_users_ = pg_execute($dbconn_geo, "update_users",array($o_gpkg, $f_n2k_gpkg, $row[3])) or die ( pg_last_error());
 }
 
 pg_close($dbconn_geo);
