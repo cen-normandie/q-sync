@@ -23,6 +23,7 @@ while($row = pg_fetch_row($personne))
         $output_=[];
         $return_var=0;
         exec($cmd_, $output_, $return_var);
+        echo '</br>'.$cmd_.'</br>';
         if ($return_var == 0) {
             $db = new SQLite3('/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/observations.gpkg');
             $db->loadExtension('mod_spatialite.so');
