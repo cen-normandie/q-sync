@@ -7,7 +7,7 @@ $select = pg_prepare($dbconn_geo, "sql_select", "select courriel, gn_user_name, 
 $personne = pg_execute($dbconn_geo, "sql_select",array()) or die ( pg_last_error());
 
 
-$tables_previ = array($n2k_previ_polygone_gpkg, $n2k_previ_point_gpkg, $n2k_previ_ligne_gpkg);
+$tables_previ = array(' n2k_previ_point ', ' n2k_previ_ligne ', ' n2k_previ_polygone ');
 $tables_realise = array($n2k_real_polygone_gpkg, $n2k_real_point_gpkg, $n2k_real_ligne_gpkg);
 
 
@@ -19,24 +19,26 @@ while($row = pg_fetch_row($personne))
     foreach ($tables_previ as $table) {
         $cmd_='ogr2ogr -f PostgreSQL "PG:user='.$LOGIN_geonature.' host='.$DBHOST_geonature.' dbname='.$DBNAME_geonature.' password='.$PASS_geonature.'" /var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg -nln sandbox.n2k_previ -append -sql "SELECT *, \''.$row[0].'\' as courriel, \''.$row[3].'\' as uuid_nx, id_uuid_n2k as id_uuid_n2k_up from '.$table.'  where importe is null" 2>&1';
         echo '</br>Try run : '.$cmd_.'</br>';
-    }
-    $output_=[];
-    $return_var=0;
-    exec($cmd_, $output_, $return_var);
-    if ($return_var == 0) {
-        echo '</br>Données n2k ( '.$table.' ) importées avec succès!</br>';
-        echo '<br>Mise à jour de la colonne "importe" du geopackage </br>';
-        $db = new SQLite3('/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg');
-        $db->loadExtension('mod_spatialite.so');
-        $results_write_gpkg = $db->query("UPDATE $table set importe = datetime('now') where importe is null ;"); //
-        if ($results_write_gpkg) {
-            echo '</br>"importe" UPDATED! </br>';
-            echo $db->changes();
-        } else {echo "Erreur sur le gpkg : " . $db->lastErrorMsg(); }
-        $db->close();
-    }
-    else {
-        echo '</br>FAILED try run : '.$cmd_polygone.'</br>';
+
+        $output_=[];
+        $return_var=0;
+        exec($cmd_, $output_, $return_var);
+        if ($return_var == 0) {
+            echo '</br>Données n2k ( '.$table.' ) importées avec succès!</br>';
+            echo '<br>Mise à jour de la colonne "importe" du geopackage </br>';
+            $db = new SQLite3('/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg');
+            $db->loadExtension('mod_spatialite.so');
+            $results_write_gpkg = $db->query("UPDATE $table set importe = datetime('now') where importe is null ;"); //
+            if ($results_write_gpkg) {
+                echo '</br>"importe" UPDATED! </br>';
+                echo $db->changes();
+            } else {echo "Erreur sur le gpkg : " . $db->lastErrorMsg(); }
+            $db->close();
+        }
+        else {
+            echo '</br>FAILED try run : '.$cmd_polygone.'</br>';
+        }
+
     }
   }
 }
