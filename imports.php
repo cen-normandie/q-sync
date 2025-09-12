@@ -54,7 +54,7 @@ if (in_array($_SESSION['email'], $admins)) {
 			<div class="m-2"><span class="text-light"><i class="fas fa-user"></i> <?php echo $_SESSION['email']; ?></span></div>
 			<div class="m-2"><a class="logout text-light" href="php/logout.php" ><i class="fa fa-fw fa-power-off"></i> Déconnexion</a></div>
 		</div>
-        <div class="d-flex flex-column justify-content-end" style="">
+        <div class="d-flex flex-column justify-content-start h-100" style="">
             <div class="d-flex flex-column w-100">
                 <div class="d-flex align-items-center justify-content-between bg-light text-dark m-2">
                     <h4 class="bebas">Fichiers sur Nextcloud :</h4>
@@ -63,103 +63,56 @@ if (in_array($_SESSION['email'], $admins)) {
                         <i class="fas fa-sync-alt text-dark"></i><span class="p-2 bebas">Update</span>
                     </button>       
                 </div>
-                <div class="d-flex w-100 p-2">
-                    <p>Ci-dessous les données présentes au sein des geopackages.
-                    Lecture : <span class="fw-bold" > En attente / Intégrées dans Géonature </span>
-                    </p>
-                </div>
                 <div class="d-flex w-100 p-2 text-light bg-dark">
-                    <h4 class="bebas my-0" >Observations.gpkg</h4>
+                    <h4 class="bebas my-0" >Utilisateurs</h4>
                 </div>
 
                 <div class="d-flex w-100 ">
-                    <div class="d-flex flex-column col-md-4 col-lg-8">
-                        <div class="d-flex w-100 p-2">
-                            <div id="container_Flore" class="col-4"></div>
-                            <div id="container_Faune" class="col-4"></div>
-                            <div id="container_CC" class="col-4"></div>
-                        </div>
-                        <table id="QSync_observations" class="table table-hover table-sm" style="width:100%;"> <!--table-dark-->
+                    <div class="d-flex flex-column col-9 p-1">
+                        <table id="QSync" class="table table-hover table-sm" style="width:100%;"> <!--table-dark-->
                             <thead>
                                 <tr>
                                     <th>uuid</th>
                                     <th>Personne</th>
-                                    <th>nb obs faune</th>
-                                    <th>nb obs flore</th>
-                                    <th>nb obs cc</th>
-                                    <th>date update .gpkg</th>
+                                    <th>observations.gpkg</th>
+                                    <th>n2k.gpkg</th>
                                 </tr>
                             <tbody>
                             </tbody>
                         </table>
                     </div>
-                    <div class="d-flex flex-column col-md-6 col-lg-4 bg-dark text-light" >
+                    <div class="d-flex flex-column col-3 bg-dark text-light" >
 
-                        <div class="d-flex w-100 ">
+                        <div class="d-flex flex-wrap w-100 ">
                             <button id="import_faune" type="button" class="btn btn-outline-warning btn-sm m-2" ><i class="fas fa-file-import px-1 fs-5"></i> Import Faune</button>
                             <button id="import_flore" type="button" class="btn btn-outline-success btn-sm m-2" ><i class="fas fa-file-import px-1 fs-5"></i> Import Flore</button>
                             <button id="import_cc" type="button" class="btn btn-outline-primary btn-sm m-2" ><i class="fas fa-file-import px-1 fs-5"></i> Import Carré Contact</button>
-                        </div>
-                        <div class="d-flex w-100 bg-dark text-light flex-grow-1 p-2">
-                            <div id="console_observations" class="d-flex flex-column align-self-stretch" style="max-height:300px;overflow-y: auto;" >
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="d-flex w-100 p-2 text-light bg-dark">
-                    <h4 class="bebas my-0" >n2k.gpkg</h4>
-                </div>
-
-                <div class="d-flex w-100 ">
-                    <div class="d-flex flex-column col-md-4 col-lg-8">
-                        <table id="QSync_n2k" class="table table-hover table-sm" style="width:100%"> <!--table-dark-->
-                            <thead>
-                                <tr>
-                                    <th>uuid</th>
-                                    <th>Personne</th>
-                                    <th>polygone</th>
-                                    <th>ligne</th>
-                                    <th>point</th>
-                                    <th>date update n2k.gpkg</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="d-flex flex-column col-md-6 col-lg-4 bg-dark text-light" >
-                        <div class="d-flex w-100">
                             <button id="import_n2k" type="button" class="btn btn-outline-danger btn-sm m-2" ><i class="fas fa-file-import px-1 fs-5"></i> Import N2K</button>
                         </div>
-                        <div class="d-flex w-100 bg-dark text-light flex-grow-1">
-                            <div id="console_n2k" class="d-flex flex-column align-self-stretch" style="max-height:300px;overflow-y: auto;" >
-                            </div>
+                        <div class="d-flex w-100 bg-dark text-light flex-grow-1 p-2">
                         </div>
                     </div>
                 </div>
+                <div class="d-flex flex-column w-100 p-2 text-light bg-dark">
+                    <h4 class="bebas my-0" >Console / Logs</h4>
+                </div>
+                <div id="console" class="d-flex flex-column bg-dark text-light border border-light p-1" style="min-height: 200px;max-height:400px;overflow-y: auto;" >
+                    </div>
+
                 <div class="d-flex w-100 p-2 text-light bg-dark">
-                    <h4 class="bebas my-0" >File_scan()</h4>
+                    <h4 class="bebas my-0" >File_scan</h4>
                 </div>
 
-                <div class="d-flex w-100 ">
-                    <div class="d-flex flex-column col-md-4 col-lg-8">
-                        <table id="" class="table table-hover table-sm" style="width:100%"> <!--table-dark-->
-                        </table>
-                    </div>
-                    <div class="d-flex flex-column col-md-6 col-lg-4 bg-dark text-light" >
-                        <div class="d-flex w-100">
-                            <button id="file_scan" type="button" class="btn btn-outline-danger btn-sm m-2" ><i class="fas fa-file-import px-1 fs-5"></i> File Scan</button>
-                        </div>
-                        <div class="d-flex w-100 bg-dark text-light flex-grow-1">
-                            <div id="console_file_scan" class="d-flex flex-column align-self-stretch" style="max-height:300px;overflow-y: auto;" >
-                            </div>
-                        </div>
-                    </div>
+                <div class="d-flex w-100 bg-dark ">
+                    <button id="file_scan" type="button" class="btn btn-outline-danger btn-sm m-2" ><i class="fas fa-file-import px-1 fs-5"></i> File Scan</button>
                 </div>
-                <div class="d-flex w-100 p-2 text-light bg-dark justify-content-end">
-                    <h4 class="bebas my-0" >...</h4>
-                </div>
-            </div>	
+            </div>
+            <div class="d-flex w-100 p-2 text-light bg-dark justify-content-end flex-grow-1">
+                <h4 class="bebas my-0" ></h4>
+            </div>
+            <div class="d-flex w-100 p-2 text-light bg-dark justify-content-end">
+                <h4 class="bebas my-0" >...</h4>
+            </div>
 		</div>
 
 		<div class="d-flex mt-auto justify-content-end align-items-center text-muted fixed-bottom">
@@ -194,7 +147,7 @@ if (in_array($_SESSION['email'], $admins)) {
 <!-- general.js -->
 <script type="text/javascript" src="js/general/general.js" ></script>
 <!-- Empty.js -->
-<script type="text/javascript" src="js/imports.js" ></script>
+<script type="text/javascript" src="js/imports_2.js" ></script>
 <script type="text/javascript">
 
 
