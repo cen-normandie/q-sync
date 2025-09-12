@@ -63,8 +63,6 @@ if (in_array($_SESSION['email'], $admins)) {
                         <i class="fas fa-sync-alt text-dark"></i><span class="p-2 bebas">Update</span>
                     </button>       
                 </div>
-                <div class="d-flex w-100 p-2">
-                </div>
                 <div class="d-flex w-100 p-2 text-light bg-dark">
                     <h4 class="bebas my-0" >Utilisateurs</h4>
                 </div>
