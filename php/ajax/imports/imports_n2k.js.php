@@ -5,8 +5,6 @@ include '../../properties.php';
 $dbconn_geo = pg_connect("hostaddr=$DBHOST_geonature port=$PORT_geonature dbname=$DBNAME_geonature user=$LOGIN_geonature password=$PASS_geonature") or die ('Connexion impossible :'. pg_last_error());
 $select = pg_prepare($dbconn_geo, "sql_select", "select courriel, gn_user_name, nom_ad, uuid_nx from $nx_users where n2k_gpkg <> '' ;");
 $personne = pg_execute($dbconn_geo, "sql_select",array()) or die ( pg_last_error());
-pg_prepare($dbconn_geo, "sql_down_previ", "UPDATE $n2k_suivi_previ set gpkg_updated = true where id_uuid_n2k = $1;");
-pg_prepare($dbconn_geo, "sql_down_realise", "UPDATE $n2k_suivi_real set gpkg_updated = true where id_uuid_n2k = $1;");
 
 
 $tables_previ = array($n2k_previ_polygone_gpkg, $n2k_previ_point_gpkg, $n2k_previ_ligne_gpkg);
@@ -26,6 +24,8 @@ while($row = pg_fetch_row($personne))
     $return_var=0;
     exec($cmd_, $output_, $return_var);
     if ($return_var == 0) {
+        echo '</br>Données n2k ( '.$table.' ) importées avec succès!</br>';
+        echo '<br>Mise à jour de la colonne "importe" du geopackage </br>';
         $db = new SQLite3('/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg');
         $db->loadExtension('mod_spatialite.so');
         $results_write_gpkg = $db->query("UPDATE $table set importe = datetime('now') where importe is null ;"); //
