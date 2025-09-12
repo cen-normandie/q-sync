@@ -35,7 +35,7 @@ while($row = pg_fetch_row($personne))
             $db->close();
         }
         else {
-            echo '</br>FAILED try run : '.$cmd_polygone.'</br>';
+            echo '</br>FAILED try run : '.$cmd_.'</br>';
         }
 
     }
@@ -57,7 +57,7 @@ while($row = pg_fetch_row($personne))
             $db->close();
         }
         else {
-            echo '</br>FAILED try run : '.$cmd_polygone.'</br>';
+            echo '</br>FAILED try run : '.$cmd_.'</br>';
         }
 
     }
