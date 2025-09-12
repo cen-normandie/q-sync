@@ -147,7 +147,7 @@ if (in_array($_SESSION['email'], $admins)) {
 <!-- general.js -->
 <script type="text/javascript" src="js/general/general.js" ></script>
 <!-- Empty.js -->
-<script type="text/javascript" src="js/imports_2.js" ></script>
+<script type="text/javascript" src="js/imports.js" ></script>
 <script type="text/javascript">
 
 

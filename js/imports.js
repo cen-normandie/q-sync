@@ -31,7 +31,7 @@ const dtQSync =$('#QSync').DataTable({
 function load_qsync () {
     change_load('Chargement');
     $.ajax({
-        url      : "php/ajax/dashboard_2.js.php",
+        url      : "php/ajax/dashboard.js.php",
         data     : {},
         method   : "POST",
         dataType : "json",
@@ -59,7 +59,7 @@ load_qsync();
 
 $('#refresh').on('click', function() {
     $.ajax({
-        url      : "php/ajax/nextcloud_search_data_2.php",
+        url      : "php/ajax/nextcloud_search_data.php",
         data     : {},
         method   : "POST",
         dataType : "text",
