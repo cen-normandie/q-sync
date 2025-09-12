@@ -59,7 +59,7 @@ load_qsync();
 
 $('#refresh').on('click', function() {
     $.ajax({
-        url      : "php/ajax/nextcloud_search_data.php",
+        url      : "php/ajax/nextcloud_search_data.js.php",
         data     : {},
         method   : "POST",
         dataType : "text",
