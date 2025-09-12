@@ -156,7 +156,7 @@ function file_scan (console_name) {
         error    : function(request, error) { alert("Erreur : responseText: "+request.responseText);change_load();},
         success  : function(data) {
             change_load();
-            $('#'+console_name).append( "<p>"+data+"</p>" );
+            $('#'+console_name).append( "<p class='text-success'>"+data+"</p>" );
             }
     });
 }
