@@ -54,7 +54,7 @@ if (in_array($_SESSION['email'], $admins)) {
 			<div class="m-2"><span class="text-light"><i class="fas fa-user"></i> <?php echo $_SESSION['email']; ?></span></div>
 			<div class="m-2"><a class="logout text-light" href="php/logout.php" ><i class="fa fa-fw fa-power-off"></i> Déconnexion</a></div>
 		</div>
-        <div class="d-flex flex-column justify-content-end" style="">
+        <div class="d-flex flex-column justify-content-start h-100" style="">
             <div class="d-flex flex-column w-100">
                 <div class="d-flex align-items-center justify-content-between bg-light text-dark m-2">
                     <h4 class="bebas">Fichiers sur Nextcloud :</h4>
@@ -70,7 +70,7 @@ if (in_array($_SESSION['email'], $admins)) {
                 </div>
 
                 <div class="d-flex w-100 ">
-                    <div class="d-flex flex-column col-6">
+                    <div class="d-flex flex-column col-9 p-1">
                         <table id="QSync" class="table table-hover table-sm" style="width:100%;"> <!--table-dark-->
                             <thead>
                                 <tr>
@@ -83,39 +83,35 @@ if (in_array($_SESSION['email'], $admins)) {
                             </tbody>
                         </table>
                     </div>
-                    <div class="d-flex flex-column col-6 bg-dark text-light" >
+                    <div class="d-flex flex-column col-3 bg-dark text-light" >
 
-                        <div class="d-flex w-100 ">
+                        <div class="d-flex flex-wrap w-100 ">
                             <button id="import_faune" type="button" class="btn btn-outline-warning btn-sm m-2" ><i class="fas fa-file-import px-1 fs-5"></i> Import Faune</button>
                             <button id="import_flore" type="button" class="btn btn-outline-success btn-sm m-2" ><i class="fas fa-file-import px-1 fs-5"></i> Import Flore</button>
                             <button id="import_cc" type="button" class="btn btn-outline-primary btn-sm m-2" ><i class="fas fa-file-import px-1 fs-5"></i> Import Carré Contact</button>
                             <button id="import_n2k" type="button" class="btn btn-outline-danger btn-sm m-2" ><i class="fas fa-file-import px-1 fs-5"></i> Import N2K</button>
                         </div>
                         <div class="d-flex w-100 bg-dark text-light flex-grow-1 p-2">
-                            <div id="console" class="d-flex flex-column align-self-stretch" style="max-height:300px;overflow-y: auto;" >
-                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="d-flex w-100 p-2 text-light bg-dark">
-                    <h4 class="bebas my-0" >File_scan()</h4>
+                    <h4 class="bebas my-0" >Console / Logs</h4>
+                    <div id="console" class="d-flex flex-column align-self-stretch" style="min-height: 200px;max-height:400px;overflow-y: auto;" >
+                    </div>
                 </div>
 
-                <div class="d-flex w-100 ">
-                    <div class="d-flex flex-column col-md-4 col-lg-8">
-                        <table id="" class="table table-hover table-sm" style="width:100%"> <!--table-dark-->
-                        </table>
-                    </div>
-                    <div class="d-flex flex-column col-md-6 col-lg-4 bg-dark text-light" >
-                        <div class="d-flex w-100">
-                            <button id="file_scan" type="button" class="btn btn-outline-danger btn-sm m-2" ><i class="fas fa-file-import px-1 fs-5"></i> File Scan</button>
-                        </div>
-                    </div>
+                <div class="d-flex w-100 p-2 text-light bg-dark">
+                    <h4 class="bebas my-0" >File_scan</h4>
                 </div>
-                <div class="d-flex w-100 p-2 text-light bg-dark justify-content-end">
-                    <h4 class="bebas my-0" >...</h4>
+
+                <div class="d-flex w-100 bg-dark ">
+                    <button id="file_scan" type="button" class="btn btn-outline-danger btn-sm m-2" ><i class="fas fa-file-import px-1 fs-5"></i> File Scan</button>
                 </div>
-            </div>	
+            </div>
+            <div class="d-flex w-100 p-2 text-light bg-dark justify-content-end flex-grow-1">
+                <h4 class="bebas my-0" >...</h4>
+            </div>
 		</div>
 
 		<div class="d-flex mt-auto justify-content-end align-items-center text-muted fixed-bottom">

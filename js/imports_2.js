@@ -83,8 +83,8 @@ $('#import_faune').on('click', function() {
         error    : function(request, error) { alert("Erreur : responseText: "+request.responseText);change_load();},
         success  : function(data) {
             change_load();
-            $('#console_observations').empty();
-            $('#console_observations').append( "<p>"+data+"</p>" );
+            $('#console').empty();
+            $('#console').append( "<p>"+data+"</p>" );
             file_scan ('console');
             }
     });
