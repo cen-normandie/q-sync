@@ -40,7 +40,7 @@ while($row = pg_fetch_row($personne))
 
     }
     foreach ($tables_realise as $table) {
-        $cmd_='ogr2ogr -f PostgreSQL "PG:user='.$LOGIN_geonature.' host='.$DBHOST_geonature.' dbname='.$DBNAME_geonature.' password='.$PASS_geonature.'" /var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg -nln sandbox.n2k_previ -append -sql "SELECT *, \''.$row[0].'\' as courriel, \''.$row[3].'\' as uuid_nx, id_uuid_n2k as id_uuid_n2k_up from '.$table.'  where importe is null" 2>&1';
+        $cmd_='ogr2ogr -f PostgreSQL "PG:user='.$LOGIN_geonature.' host='.$DBHOST_geonature.' dbname='.$DBNAME_geonature.' password='.$PASS_geonature.'" /var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg -nln sandbox.n2k_realise -append -sql "SELECT *, \''.$row[0].'\' as courriel, \''.$row[3].'\' as uuid_nx, id_uuid_n2k as id_uuid_n2k_up from '.$table.'  where importe is null" 2>&1';
         $output_=[];
         $return_var=0;
         exec($cmd_, $output_, $return_var);
