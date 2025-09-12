@@ -91,7 +91,7 @@ $('#import_faune').on('click', function() {
 });
 $('#import_flore').on('click', function() {
     $.ajax({
-        url      : "php/ajax/imports/imports_flore.js.php",
+        url      : "php/ajax/imports/imports_flore_.js.php",
         data     : {},
         method   : "POST",
         dataType : "text",
