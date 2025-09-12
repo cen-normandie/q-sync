@@ -14,7 +14,7 @@ $tables_realise = array($n2k_real_polygone_gpkg, $n2k_real_point_gpkg, $n2k_real
 while($row = pg_fetch_row($personne))
 {
   echo '</br>----------------------------------------------------------</br>';
-  echo '</br>Import des données n2k pour l\'utilisateur : <span class="text-success">'.$row[2].'</span> ('.$row[0].' - '.$row[3].')</br>';
+  echo 'Import des données n2k pour l\'utilisateur : <span class="text-danger">'.$row[2].'</span> ('.$row[0].' - '.$row[3].')</br>';
   $n2k_gpkg = '/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg';
   if (file_exists($n2k_gpkg)) {
 
