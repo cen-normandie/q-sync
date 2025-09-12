@@ -74,7 +74,7 @@ $("#signin").click( function () {
                 console.log(data);
                 if (data == "Success")
                 {   
-                    window.location.href = 'imports_2.php';
+                    window.location.href = 'imports.php';
                 }
                 else if (data == "not_admin")
                 {
