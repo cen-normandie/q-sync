@@ -61,6 +61,30 @@ while($row = pg_fetch_row($personne))
         }
 
     }
+    foreach ($tables_realise as $table) {
+        $cmd_='ogr2ogr -f PostgreSQL "PG:user='.$LOGIN_geonature.' host='.$DBHOST_geonature.' dbname='.$DBNAME_geonature.' password='.$PASS_geonature.'" /var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg -nln sandbox.n2k_realise -update -sql "UPDATE sandbox.n2k_realise set geometry = (SELECT geometry from '.$table.'  where up_date > importe and (n2k_realise.id_uuid_n2k = '.$table.'.id_uuid_n2k) )" 2>&1';
+        echo $cmd_;
+        /* $output_=[];
+        $return_var=0;
+        exec($cmd_, $output_, $return_var);
+        if ($return_var == 0) {
+            //echo '<br>Mise à jour de la colonne "importe" du geopackage </br>';
+            $db = new SQLite3('/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg');
+            $db->loadExtension('mod_spatialite.so');
+            $results_write_gpkg = $db->query("UPDATE $table set importe = datetime('now') where importe is null ;"); //
+            if ($results_write_gpkg) {
+                //echo '</br>Données n2k ( '.$table.' ) importées avec succès ! </br>';
+                echo $db->changes();
+                echo ' données mises à jour dans le gpkg ( '.$table.' )</br>';
+            } else {echo "Erreur sur le gpkg : " . $db->lastErrorMsg(); }
+            $db->close();
+        }
+        else {
+            echo '</br>FAILED try run : '.$cmd_.'</br>';
+        } */
+
+    }
+
   }
 }
 
