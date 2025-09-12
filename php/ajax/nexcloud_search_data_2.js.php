@@ -80,6 +80,8 @@ while($row = pg_fetch_row($personne))
     echo $n2k_gpkg;
     echo "\n";
     echo 'file exists and filetime: ' . filemtime($n2k_gpkg);
+    echo 'for user: ' . $row[3];
+    echo "\n";
     $f_n2k_gpkg=date('Y-m-d', filemtime($n2k_gpkg));
   }
 
