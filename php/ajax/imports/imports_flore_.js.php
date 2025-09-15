@@ -5,7 +5,7 @@ include '../../properties.php';
 $dbconn_geo = pg_connect("hostaddr=$DBHOST_geonature port=$PORT_geonature dbname=$DBNAME_geonature user=$LOGIN_geonature password=$PASS_geonature") or die ('Connexion impossible :'. pg_last_error());
 $select = pg_prepare($dbconn_geo, "sql_select", "select courriel, gn_user_name, nom_ad, uuid_nx from $nx_users where observations_gpkg <> '' ;");
 pg_prepare($dbconn_geo, "sql_import_occtax", "select sandbox.import_flore_();");
-$delete = pg_prepare($dbconn_geo, "sql_delete", "delete from sandbox.obs_flore_tmp ;");
+//$delete = pg_prepare($dbconn_geo, "sql_delete", "delete from sandbox.obs_flore_tmp ;");
 $personne = pg_execute($dbconn_geo, "sql_select",array()) or die ( pg_last_error());
 
 
