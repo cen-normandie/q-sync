@@ -9,7 +9,7 @@ pg_prepare($dbconn_geo, "sql_import_occtax", "select sandbox.import_flore_();");
 $personne = pg_execute($dbconn_geo, "sql_select",array()) or die ( pg_last_error());
 
 
-$tables_flore = array(' obs_flore ', ' obs_flore_polygone ', ' obs_flore_ligne ');
+$tables_flore = array(' obs_flore ', ' obs_flore_polygone '); //, ' obs_flore_ligne '
 
 
 while($row = pg_fetch_row($personne))
