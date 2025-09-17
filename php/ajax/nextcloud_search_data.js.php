@@ -22,7 +22,14 @@ $delete = pg_prepare($dbconn_geo, "sql", "DELETE FROM $nx_users;");
 $delete = pg_execute($dbconn_geo, "sql",array()) or die ( pg_last_error());
 
 
-$update_users = pg_prepare($dbconn_geo, "update_users", "UPDATE $nx_users set observations_gpkg = $1, n2k_gpkg = $2 where uuid_nx= $3;");
+$update_users = pg_prepare($dbconn_geo, "update_users", 
+  "UPDATE $nx_users set 
+    observations_gpkg = $1, 
+    n2k_gpkg = $2, 
+    obs_flore = $3, 
+    obs_flore_polygone = $4, 
+    obs_faune = $5, 
+    obs_cc = $6 where uuid_nx= $7;");
 $insert_s = pg_prepare($dbconn_nx, "sql", "
 with a_ as (
 SELECT id, uid, value as name_
@@ -73,6 +80,11 @@ while($row = pg_fetch_row($personne))
   $n2k_gpkg = '/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg';
   $o_gpkg = '';
   $f_n2k_gpkg = '';
+  if (file_exists($n2k_gpkg)) {
+    $f_n2k_gpkg=date('Y-m-d', filemtime($n2k_gpkg));
+  } else {
+    $f_n2k_gpkg = 'ø';
+  }
   if (file_exists($observations_gpkg)) {
     $o_gpkg=date('Y-m-d', filemtime($observations_gpkg));
     $db = new SQLite3($observations_gpkg);
@@ -81,13 +93,26 @@ while($row = pg_fetch_row($personne))
     $db->query("UPDATE meta_qsync set obs_flore_polygone = (select count(*) from obs_flore_polygone where date_import is null ) ;");
     $db->query("UPDATE meta_qsync set obs_faune = (select count(*) from obs_faune where date_import is null ) ;");
     $db->query("UPDATE meta_qsync set obs_cc = (select count(*) from carre_contact where date_import is null ) ;");
+    $db->query("SELECT * from meta_qsync ;");
+    $result = $db->query("SELECT * from meta_qsync ;");
+    while ($meta_row = $result->fetchArray(SQLITE3_ASSOC)) {
+        // Traitement des résultats
+        $obs_flore = $meta_row['obs_flore'];
+        $obs_flore_polygone = $meta_row['obs_flore_polygone'];
+        $obs_faune = $meta_row['obs_faune'];
+        $obs_cc = $meta_row['obs_cc'];
+    }
     $db->close();
-  }
-  if (file_exists($n2k_gpkg)) {
-    $f_n2k_gpkg=date('Y-m-d', filemtime($n2k_gpkg));
+  } else {
+    $o_gpkg = 'ø';
+    $obs_flore = 0;
+    $obs_flore_polygone = 0;
+    $obs_faune = 0;
+    $obs_cc = 0;
   }
 
-  $update_users_ = pg_execute($dbconn_geo, "update_users",array($o_gpkg, $f_n2k_gpkg, $row[3])) or die ( pg_last_error());
+  $update_users_ = pg_execute($dbconn_geo, "update_users",array($o_gpkg, $f_n2k_gpkg, $obs_flore, $obs_flore_polygone, $obs_faune, $obs_cc, $row[3])) or die ( pg_last_error());
+  //$update_users_ = pg_execute($dbconn_geo, "update_users",array($o_gpkg, $f_n2k_gpkg, $row[3])) or die ( pg_last_error());
 }
 
 pg_close($dbconn_geo);
