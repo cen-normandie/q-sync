@@ -76,6 +76,10 @@ if (in_array($_SESSION['email'], $admins)) {
                                     <th>Personne</th>
                                     <th>observations.gpkg</th>
                                     <th>n2k.gpkg</th>
+                                    <th>flore</th>
+                                    <th>faune</th>
+                                    <th>flore polygone</th>
+                                    <th>carre_contact</th>
                                 </tr>
                             <tbody>
                             </tbody>

@@ -11,7 +11,11 @@ SELECT
 	uuid_nx,
 	nom_ad as personne, 
 	observations_gpkg,
-	n2k_gpkg
+	n2k_gpkg,
+	obs_flore as flore,
+	obs_faune as faune,
+	obs_flore_polygone as flore_polygone,
+	obs_cc as carre_contact
 	FROM $nx_users 
     where observations_gpkg <> $1 or n2k_gpkg <> $2
 ) t

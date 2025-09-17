@@ -44,7 +44,11 @@ function load_qsync () {
                     qsync_liste[ele].uuid_nx,
                     qsync_liste[ele].personne, 
                     qsync_liste[ele].observations_gpkg,
-                    qsync_liste[ele].n2k_gpkg
+                    qsync_liste[ele].n2k_gpkg,
+                    qsync_liste[ele].flore,
+                    qsync_liste[ele].faune,
+                    qsync_liste[ele].flore_polygone,
+                    qsync_liste[ele].carre_contact
                 ] ).node().id = qsync_liste[ele].uuid;
             }
             dtQSync.draw();
