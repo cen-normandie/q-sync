@@ -68,7 +68,7 @@ while($row = pg_fetch_row($personne))
   if ($gpkg == 'observations.gpkg' && $table == 'meta_qsync') {
     $db = new SQLite3($path_gpkg);
     $db->loadExtension('mod_spatialite.so');
-    $results_write_gpkg = $db->query("UPDATE meta_qsync set gn_user_id = ".$row[1].", nextcloud_user_id = '".$row[3]."', ad_name = '".$row[2]."' ;"); //
+    $results_write_gpkg = $db->query("UPDATE meta_qsync set gn_user_id = ".$row[1]." , nextcloud_user_id = '".$row[3]."' , ad_name = '".$row[2]."' ;");
     if ($results_write_gpkg) {
         echo $db->changes();
         echo ' données mises à jour dans le gpkg ( meta_qsync )</br>';
