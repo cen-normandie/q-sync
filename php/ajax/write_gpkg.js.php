@@ -23,6 +23,17 @@ while($row = pg_fetch_row($personne))
     echo "status $retval ";
     echo '</br>';
   }
+  if ($gpkg == 'observations.gpkg') {
+    $db = new SQLite3($path_gpkg);
+    $db->loadExtension('mod_spatialite.so');
+    $results_write_gpkg = $db->query("UPDATE meta_qsync set gn_user_id = ".$row[1]."::integer, nextcloud_user_id = '".$row[3]."', ad_name = '".$row[2]."' ;"); //
+    if ($results_write_gpkg) {
+        echo $db->changes();
+        echo ' données mises à jour dans le gpkg ( meta_qsync )</br>';
+    } else {echo "Erreur sur le gpkg : " . $db->lastErrorMsg(); }
+    $db->close();
+
+  }
 }
 
 pg_close($dbconn_geo);
