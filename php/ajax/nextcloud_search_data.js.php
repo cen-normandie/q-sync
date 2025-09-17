@@ -80,7 +80,7 @@ while($row = pg_fetch_row($personne))
     $db->query("UPDATE meta_qsync set obs_flore = (select count(*) from obs_flore where date_import is null ) ;");
     $db->query("UPDATE meta_qsync set obs_flore_polygone = (select count(*) from obs_flore_polygone where date_import is null ) ;");
     $db->query("UPDATE meta_qsync set obs_faune = (select count(*) from obs_faune where date_import is null ) ;");
-    $db->query("UPDATE meta_qsync set obs_cc = (select count(*) from obs_cc where date_import is null ) ;");
+    $db->query("UPDATE meta_qsync set obs_cc = (select count(*) from carre_contact where date_import is null ) ;");
     $db->close();
   }
   if (file_exists($n2k_gpkg)) {
