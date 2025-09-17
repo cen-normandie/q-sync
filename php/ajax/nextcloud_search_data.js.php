@@ -75,6 +75,13 @@ while($row = pg_fetch_row($personne))
   $f_n2k_gpkg = '';
   if (file_exists($observations_gpkg)) {
     $o_gpkg=date('Y-m-d', filemtime($observations_gpkg));
+    $db = new SQLite3($observations_gpkg);
+    $db->loadExtension('mod_spatialite.so');
+    $db->query("UPDATE meta_qsync set obs_flore = (select count(*) from obs_flore where date_import is null ) ;");
+    $db->query("UPDATE meta_qsync set obs_flore_polygone = (select count(*) from obs_flore_polygone where date_import is null ) ;");
+    $db->query("UPDATE meta_qsync set obs_faune = (select count(*) from obs_faune where date_import is null ) ;");
+    $db->query("UPDATE meta_qsync set obs_cc = (select count(*) from obs_cc where date_import is null ) ;");
+    $db->close();
   }
   if (file_exists($n2k_gpkg)) {
     $f_n2k_gpkg=date('Y-m-d', filemtime($n2k_gpkg));
