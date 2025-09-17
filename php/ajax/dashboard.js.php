@@ -18,6 +18,7 @@ SELECT
 	obs_cc as carre_contact
 	FROM $nx_users 
     where observations_gpkg <> $1 or n2k_gpkg <> $2
+	and gn_user_name is not null
 ) t
 "
 );
