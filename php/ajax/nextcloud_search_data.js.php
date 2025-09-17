@@ -96,6 +96,12 @@ while($row = pg_fetch_row($personne))
     $db->query("SELECT * from meta_qsync ;");
     $result = $db->query("SELECT * from meta_qsync ;");
     while ($meta_row = $result->fetchArray(SQLITE3_ASSOC)) {
+        echo '</br>#########' .$row[0].'</br>';
+        echo 'Données dans le gpkg ( meta_qsync ) : </br>';
+        echo ' - obs_flore : '.$meta_row['obs_flore'].'</br>';
+        echo ' - obs_flore_polygone : '.$meta_row['obs_flore_polygone'].'</br>';
+        echo ' - obs_faune : '.$meta_row['obs_faune'].'</br>';
+        echo ' - obs_cc : '.$meta_row['obs_cc'].'</br>';
         // Traitement des résultats
         $obs_flore = $meta_row['obs_flore'];
         $obs_flore_polygone = $meta_row['obs_flore_polygone'];
