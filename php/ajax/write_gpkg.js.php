@@ -12,7 +12,7 @@ $dbconn_nx = pg_connect("hostaddr=$DBHOST_nextcloud port=$PORT_nextcloud dbname=
 /* $db_skeleton = new SQLite3('/var/www/html/q-sync/_qfield_skeleton/observations.gpkg');
 $db_skeleton->loadExtension('mod_spatialite.so'); */
 
-$select = pg_prepare($dbconn_geo, "sql_select", "select courriel, gn_user_name, nom_ad, uuid_nx from $nx_users where active is true;");
+$select = pg_prepare($dbconn_geo, "sql_select", "select courriel, gn_user_name, nom_ad, uuid_nx from $nx_users where active is true and gn_user_name is not null;");
 $personne = pg_execute($dbconn_geo, "sql_select",array()) or die ( pg_last_error());
 while($row = pg_fetch_row($personne))
 {
