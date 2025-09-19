@@ -14,8 +14,6 @@ $dbconn_nx = pg_connect("hostaddr=$DBHOST_nextcloud port=$PORT_nextcloud dbname=
 ///////////////////////////////////////////////////////////////////
 $setval = pg_prepare($dbconn_geo, "sql_setval_a", "SELECT setval( 'nextcloud.users_id_seq', 1);");
 $setval = pg_execute($dbconn_geo, "sql_setval_a",array()) or die ( pg_last_error());
-$setval = pg_prepare($dbconn_geo, "sql_setval_b", "SELECT setval( 'nextcloud.dashboard_id_seq', 1);");
-$setval = pg_execute($dbconn_geo, "sql_setval_b",array()) or die ( pg_last_error());
 
 
 $delete = pg_prepare($dbconn_geo, "sql", "DELETE FROM $nx_users;");
