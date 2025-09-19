@@ -79,7 +79,7 @@ $('#refresh').on('click', function() {
 
 $('#import_faune').on('click', function() {
     $.ajax({
-        url      : "php/ajax/imports/imports_faune.js.php",
+        url      : "php/ajax/imports/imports_faune_.js.php",
         data     : {},
         method   : "POST",
         dataType : "text",
