@@ -19,6 +19,13 @@ while($row = pg_fetch_row($personne))
   $path_gpkg = '/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/'.$gpkg.'';
   if (file_exists($path_gpkg)) {
     echo '</br>#########' .$row[0].'</br>';
+    echo "Le fichier $path_gpkg existe pas. Mise à jour en cours...</br>";
+    exec("cp /var/www/html/q-sync/_qfield_skeleton/_qfield/".$gpkg." ".$path_gpkg, $output, $retval);
+    echo "status $retval ";
+    echo '</br>';
+  } else {
+    echo '</br>#########' .$row[0].'</br>';
+    echo "Le fichier $path_gpkg n'existe pas. Création en cours...</br>";
     exec("cp /var/www/html/q-sync/_qfield_skeleton/_qfield/".$gpkg." ".$path_gpkg, $output, $retval);
     echo "status $retval ";
     echo '</br>';
