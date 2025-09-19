@@ -1,3 +1,17 @@
+function init() {
+    $.ajax({
+        url      : "php/ajax/nextcloud_search_data.js.php",
+        data     : {},
+        method   : "POST",
+        dataType : "text",
+        async    : true,
+        error    : function(request, error) { alert("Erreur : responseText: "+request.responseText);change_load();},
+        success  : function(data) {
+            }
+    });
+}
+init();
+
 const dtQSync =$('#QSync').DataTable({
     "language": {
         "paginate": {
@@ -72,7 +86,7 @@ $('#refresh').on('click', function() {
         success  : function(data) {
             console.log(data);
             change_load();
-            //window.location.reload();
+            window.location.reload();
             }
     });
 });
