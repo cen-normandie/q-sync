@@ -123,14 +123,14 @@ while($row = pg_fetch_row($personne))
     $db->query("UPDATE meta_qsync set obs_flore_polygone = (select count(*) from obs_flore_polygone where date_import is null ) ;");
     $db->query("UPDATE meta_qsync set obs_faune = (select count(*) from obs_faune where date_import is null ) ;");
     $db->query("UPDATE meta_qsync set obs_cc = (select count(*) from carre_contact where date_import is null ) ;");
-    
-    
-    $db->query("UPDATE meta_qsync set n2k_previ_point = $p_p ;");
-    $db->query("UPDATE meta_qsync set n2k_previ_ligne = $p_l ;");
-    $db->query("UPDATE meta_qsync set n2k_previ_polygone = $p_pol ;");
-    $db->query("UPDATE meta_qsync set n2k_realise_point = $r_p ;");
-    $db->query("UPDATE meta_qsync set n2k_realise_ligne = $r_l ;");
-    $db->query("UPDATE meta_qsync set n2k_realise_polygone = $r_pol ;");
+
+
+    $db->query('UPDATE meta_qsync set "n2k_previ_point" = '.$p_p.' ;');
+    $db->query('UPDATE meta_qsync set "n2k_previ_ligne" = '.$p_l.' ;');
+    $db->query('UPDATE meta_qsync set "n2k_previ_polygone" = '.$p_pol.' ;');
+    $db->query('UPDATE meta_qsync set "n2k_realise_point" = '.$r_p.' ;');
+    $db->query('UPDATE meta_qsync set "n2k_realise_ligne" = '.$r_l.' ;');
+    $db->query('UPDATE meta_qsync set "n2k_realise_polygone" = '.$r_pol.' ;');
 
     $db->query("SELECT * from meta_qsync ;");
     $result = $db->query("SELECT * from meta_qsync ;");
