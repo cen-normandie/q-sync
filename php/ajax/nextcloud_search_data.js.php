@@ -34,7 +34,7 @@ $update_users = pg_prepare($dbconn_geo, "update_users",
     n2k_realise_point = $10,
     n2k_realise_ligne = $11,
     n2k_realise_polygone = $12
-    where uuid_nx= $7;");
+    where uuid_nx= $13;");
 $insert_s = pg_prepare($dbconn_nx, "sql", "
 with a_ as (
 SELECT id, uid, value as name_
