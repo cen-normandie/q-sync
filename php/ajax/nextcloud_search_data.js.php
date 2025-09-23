@@ -86,6 +86,7 @@ while($row = pg_fetch_row($personne))
   $o_gpkg = '';
   $f_n2k_gpkg = '';
   if (file_exists($n2k_gpkg)) {
+    echo '</br>#########' .$row[0].' - N2K gpkg</br>';
     $f_n2k_gpkg=date('Y-m-d', filemtime($n2k_gpkg));
     $db_n2k = new SQLite3($n2k_gpkg);
     $db_n2k->loadExtension('mod_spatialite.so');
@@ -135,7 +136,6 @@ while($row = pg_fetch_row($personne))
     $db->query("SELECT * from meta_qsync ;");
     $result = $db->query("SELECT * from meta_qsync ;");
     while ($meta_row = $result->fetchArray(SQLITE3_ASSOC)) {
-        echo '</br>#########' .$row[0].'</br>';
         echo 'Données dans le gpkg ( meta_qsync ) : </br>';
         echo ' - obs_flore : '.$meta_row['obs_flore'].'</br>';
         echo ' - obs_flore_polygone : '.$meta_row['obs_flore_polygone'].'</br>';
