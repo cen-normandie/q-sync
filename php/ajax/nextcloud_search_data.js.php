@@ -124,7 +124,7 @@ while($row = pg_fetch_row($personne))
     $db->query("UPDATE meta_qsync set obs_faune = (select count(*) from obs_faune where date_import is null ) ;");
     $db->query("UPDATE meta_qsync set obs_cc = (select count(*) from carre_contact where date_import is null ) ;");
 
-
+    echo 'UPDATE meta_qsync set "n2k_previ_point" = '.$p_p.' ;'.'</br>';
     $db->query('UPDATE meta_qsync set "n2k_previ_point" = '.$p_p.' ;');
     $db->query('UPDATE meta_qsync set "n2k_previ_ligne" = '.$p_l.' ;');
     $db->query('UPDATE meta_qsync set "n2k_previ_polygone" = '.$p_pol.' ;');
