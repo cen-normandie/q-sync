@@ -3,7 +3,7 @@ include '../../properties.php';
 
 
 $dbconn_geo = pg_connect("hostaddr=$DBHOST_geonature port=$PORT_geonature dbname=$DBNAME_geonature user=$LOGIN_geonature password=$PASS_geonature") or die ('Connexion impossible :'. pg_last_error());
-$select = pg_prepare($dbconn_geo, "sql_select", "select courriel, gn_user_name, nom_ad, uuid_nx from $nx_users where n2k_gpkg <> '' ;");
+$select = pg_prepare($dbconn_geo, "sql_select", "select courriel, gn_user_name, nom_ad, uuid_nx from $nx_users where n2k_gpkg <> '' and (n2k_realise_point > 0 or n2k_realise_ligne > 0 or n2k_realise_polygone > 0) ;");
 $delete = pg_prepare($dbconn_geo, "sql_delete", "delete from sandbox.n2k_realise_tmp ;");
 $personne = pg_execute($dbconn_geo, "sql_select",array()) or die ( pg_last_error());
 

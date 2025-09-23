@@ -87,8 +87,23 @@ while($row = pg_fetch_row($personne))
   $f_n2k_gpkg = '';
   if (file_exists($n2k_gpkg)) {
     $f_n2k_gpkg=date('Y-m-d', filemtime($n2k_gpkg));
+    $db_n2k = new SQLite3($n2k_gpkg);
+    $db_n2k->loadExtension('mod_spatialite.so');
+    $p_p =    $db_n2k->query("SELECT count(*) as c from n2k_previ_point where importe is null ;");
+    $p_l =    $db_n2k->query("SELECT count(*) as c from n2k_previ_ligne where importe is null ;");
+    $p_pol =  $db_n2k->query("SELECT count(*) as c from n2k_previ_polygone where importe is null ;");
+    $r_p =    $db_n2k->query("SELECT count(*) as c from n2k_realise_point where importe is null ;");
+    $r_l =    $db_n2k->query("SELECT count(*) as c from n2k_realise_ligne where importe is null ;");
+    $r_pol =  $db_n2k->query("SELECT count(*) as c from n2k_realise_polygone where importe is null ;");
+    $db_n2k->close();
   } else {
     $f_n2k_gpkg = 'ø';
+    $p_p = 0;
+    $p_l = 0;
+    $p_pol = 0;
+    $r_p = 0;
+    $r_l = 0;
+    $r_pol = 0;
   }
   if (file_exists($observations_gpkg)) {
     $o_gpkg=date('Y-m-d', filemtime($observations_gpkg));
@@ -96,21 +111,14 @@ while($row = pg_fetch_row($personne))
     $db = new SQLite3($observations_gpkg);
     $db->loadExtension('mod_spatialite.so');
     
-    $db_n2k = new SQLite3($n2k_gpkg);
-    $db_n2k->loadExtension('mod_spatialite.so');
+    
 
     $db->query("UPDATE meta_qsync set obs_flore = (select count(*) from obs_flore where date_import is null ) ;");
     $db->query("UPDATE meta_qsync set obs_flore_polygone = (select count(*) from obs_flore_polygone where date_import is null ) ;");
     $db->query("UPDATE meta_qsync set obs_faune = (select count(*) from obs_faune where date_import is null ) ;");
     $db->query("UPDATE meta_qsync set obs_cc = (select count(*) from carre_contact where date_import is null ) ;");
     
-    $p_p = $db_n2k->query("SELECT count(*) as c from n2k_previ_point where importe is null ;");
-    $p_l = $db_n2k->query("SELECT count(*) as c from n2k_previ_ligne where importe is null ;");
-    $p_pol = $db_n2k->query("SELECT count(*) as c from n2k_previ_polygone where importe is null ;");
-    $r_p = $db_n2k->query("SELECT count(*) as c from n2k_realise_point where importe is null ;");
-    $r_l = $db_n2k->query("SELECT count(*) as c from n2k_realise_ligne where importe is null ;");
-    $r_pol = $db_n2k->query("SELECT count(*) as c from n2k_realise_polygone where importe is null ;");
-    $db_n2k->close();
+    
     $db->query("UPDATE meta_qsync set n2k_previ_point = $p_p ;");
     $db->query("UPDATE meta_qsync set n2k_previ_ligne = $p_l ;");
     $db->query("UPDATE meta_qsync set n2k_previ_polygone = $p_pol ;");
@@ -140,12 +148,6 @@ while($row = pg_fetch_row($personne))
     $obs_flore_polygone = 0;
     $obs_faune = 0;
     $obs_cc = 0;
-    $p_p = 0;
-    $p_l = 0;
-    $p_pol = 0;
-    $r_p = 0;
-    $r_l = 0;
-    $r_pol = 0;
   }
 
   $update_users_ = pg_execute($dbconn_geo, "update_users",array($o_gpkg, $f_n2k_gpkg, $obs_flore, $obs_flore_polygone, $obs_faune, $obs_cc, $p_p, $p_l, $p_pol, $r_p, $r_l, $r_pol, $row[3])) or die ( pg_last_error());
