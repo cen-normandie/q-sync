@@ -89,12 +89,18 @@ while($row = pg_fetch_row($personne))
     $f_n2k_gpkg=date('Y-m-d', filemtime($n2k_gpkg));
     $db_n2k = new SQLite3($n2k_gpkg);
     $db_n2k->loadExtension('mod_spatialite.so');
-    $p_p =    $db_n2k->query("SELECT count(*) as c from n2k_previ_point where importe is null ;");
-    $p_l =    $db_n2k->query("SELECT count(*) as c from n2k_previ_ligne where importe is null ;");
-    $p_pol =  $db_n2k->query("SELECT count(*) as c from n2k_previ_polygone where importe is null ;");
-    $r_p =    $db_n2k->query("SELECT count(*) as c from n2k_realise_point where importe is null ;");
-    $r_l =    $db_n2k->query("SELECT count(*) as c from n2k_realise_ligne where importe is null ;");
-    $r_pol =  $db_n2k->query("SELECT count(*) as c from n2k_realise_polygone where importe is null ;");
+    $p_p = (int) $db_n2k->query("SELECT count(*) as c from n2k_previ_point where importe is null ;");
+    echo 'Prévi point non importées : '.$p_p.'</br>';
+    $p_l = (int) $db_n2k->query("SELECT count(*) as c from n2k_previ_ligne where importe is null ;");
+    echo 'Prévi ligne non importées : '.$p_l.'</br>';
+    $p_pol = (int) $db_n2k->query("SELECT count(*) as c from n2k_previ_polygone where importe is null ;");
+    echo 'Prévi polygone non importées : '.$p_pol.'</br>';
+    $r_p = (int) $db_n2k->query("SELECT count(*) as c from n2k_realise_point where importe is null ;");
+    echo 'Réalisé point non importées : '.$r_p.'</br>';
+    $r_l = (int) $db_n2k->query("SELECT count(*) as c from n2k_realise_ligne where importe is null ;");
+    echo 'Réalisé ligne non importées : '.$r_l.'</br>';
+    $r_pol = (int) $db_n2k->query("SELECT count(*) as c from n2k_realise_polygone where importe is null ;");
+    echo 'Réalisé polygone non importées : '.$r_pol.'</br>';
     $db_n2k->close();
   } else {
     $f_n2k_gpkg = 'ø';
