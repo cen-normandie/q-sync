@@ -44,8 +44,6 @@ while($row = pg_fetch_row($personne))
                         }
                     }
                 }
-                echo $db->changes();
-                echo ' données mises à jour dans le gpkg ( '.$table.' )</br>';
             } else {echo "Erreur sur le gpkg : " . $db->lastErrorMsg(); }
             $results_write_gpkg = $db->query("UPDATE $table set date_import = datetime('now') where date_import is null ;"); //
             if ($results_write_gpkg) {
