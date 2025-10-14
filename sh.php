@@ -55,8 +55,8 @@ if (in_array($_SESSION['email'], $admins)) {
 			<div class="m-2"><a class="logout text-light" href="php/logout.php" ><i class="fa fa-fw fa-power-off"></i> Déconnexion</a></div>
 		</div>
         <div class="d-flex" style="">
-            <div class="d-flex flex-column justify-content-start col-3 ">
-                <h4 class="bebas">Filtres :</h4>
+            <div class="d-flex flex-column justify-content-center col-3 p-2">
+                <h4 class="d-flex bebas ">Filtres :</h4>
                 <div class="input-group input-group-sm my-2">
                     <label class="input-group-text" for="suivi">Suivi</label>
                     <select id="suivi" name="suivi" class="form-select">
@@ -67,7 +67,7 @@ if (in_array($_SESSION['email'], $admins)) {
                 </div>
                 <div class="input-group input-group-sm my-2">
                     <span class="input-group-text" id="">Site</span>
-                    <input id="site" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+                    <input id="site" type="text" class="form-control" placeholder="76MAR / Chichebo" aria-label="76MAR / Chichebo " aria-describedby="">
                     <ul id="suggestions"></ul>
                 </div>
                 <div class="input-group input-group-sm my-2">
