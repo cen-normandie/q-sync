@@ -57,16 +57,16 @@ if (in_array($_SESSION['email'], $admins)) {
         <div class="d-flex" style="">
             <div class="d-flex flex-column justify-content-start col-3 ">
                 <h4 class="bebas">Filtres :</h4>
-                <div class="my-2">
-                    <label class="form-label">Type de suivi</label>
+                <div class="input-group input-group-sm my-2">
+                    <label class="input-group-text" for="suivi">Suivi</label>
                     <select id="suivi" name="suivi" class="form-select">
                         <option value="">--</option>
                         <option value="releve_phyto">Relevé Phyto</option>
                         <option value="carre_contact">Carré Contact</option>
                     </select>
                 </div>
-                <div class="input-group  input-group-sm my-2">
-                    <span class="input-group-text" id="basic-addon1">Site</span>
+                <div class="input-group input-group-sm my-2">
+                    <span class="input-group-text" id="">Site</span>
                     <input id="site" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
                     <ul id="suggestions"></ul>
                 </div>
