@@ -34,11 +34,31 @@ ini_set('display_errors', '1');
                 <option value="carre_contact">Carré Contact</option>
             </select>
         </div>
-        <div class="col-md-2"><label class="form-label">Site</label><input      id="site" type="text" name="site" class="form-control" value=""></div>
-        <div class="col-md-2"><label class="form-label">Année</label><input id="annee" type="number" name="annee" class="form-control" value=""></div>
-        <div class="col-md-2"><label class="form-label">Plot</label><input id="plot" type="text" name="plot" class="form-control" value=""></div>
-        <div class="col-md-2"><label class="form-label">Transect</label><input id="transect" type="text" name="transect" class="form-control" value=""></div>
-        <div class="col-md-2"><label class="form-label">ID Relevé</label><input id="releve_id" type="number" name="releve_id" class="form-control" value=""></div>
+        <div class="col-md-2"><label class="form-label">Site</label>
+            <select id="site" name="site" class="form-select">
+                <option value="">--</option>
+            </select>
+        </div>
+        <div class="col-md-2"><label class="form-label">Année</label>
+            <select id="annee" name="annee" class="form-select">
+                <option value="">--</option>
+            </select>
+        </div>
+        <div class="col-md-2"><label class="form-label">Plot</label>
+            <select id="plot" name="plot" class="form-select">
+                <option value="">--</option>
+            </select>
+        </div>
+        <div class="col-md-2"><label class="form-label">Transect</label>
+            <select id="transect" name="transect" class="form-select">
+                <option value="">--</option>
+            </select>
+        </div>
+        <div class="col-md-2"><label class="form-label">ID Relevé</label>
+            <select id="releve_id" name="releve_id" class="form-select">
+                <option value="">--</option>
+            </select>
+        </div>
         <div class="col-12"><button type="submit" class="btn btn-primary">Afficher</button></div>
 
     <div id="container_shannon" class="mb-5" style="height: 400px;"></div>
