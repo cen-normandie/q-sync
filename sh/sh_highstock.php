@@ -29,15 +29,16 @@ ini_set('display_errors', '1');
         <div class="col-md-2">
             <label class="form-label">Type de suivi</label>
             <select id="suivi" name="suivi" class="form-select">
+                <option value="">--</option>
                 <option value="phyto">Relevé Phyto</option>
                 <option value="contact">Carré Contact</option>
             </select>
         </div>
-        <div class="col-md-2"><label class="form-label">Site</label><input type="text" name="site" class="form-control" value=""></div>
-        <div class="col-md-2"><label class="form-label">Année</label><input type="number" name="annee" class="form-control" value=""></div>
-        <div class="col-md-2"><label class="form-label">Plot</label><input type="text" name="plot" class="form-control" value=""></div>
-        <div class="col-md-2"><label class="form-label">Transect</label><input type="text" name="transect" class="form-control" value=""></div>
-        <div class="col-md-2"><label class="form-label">ID Relevé</label><input type="number" name="releve_id" class="form-control" value=""></div>
+        <div class="col-md-2"><label class="form-label">Site</label><input      id="site" type="text" name="site" class="form-control" value=""></div>
+        <div class="col-md-2"><label class="form-label">Année</label><input id="annee" type="number" name="annee" class="form-control" value=""></div>
+        <div class="col-md-2"><label class="form-label">Plot</label><input id="plot" type="text" name="plot" class="form-control" value=""></div>
+        <div class="col-md-2"><label class="form-label">Transect</label><input id="transect" type="text" name="transect" class="form-control" value=""></div>
+        <div class="col-md-2"><label class="form-label">ID Relevé</label><input id="releve_id" type="number" name="releve_id" class="form-control" value=""></div>
         <div class="col-12"><button type="submit" class="btn btn-primary">Afficher</button></div>
 
     <div id="container_shannon" class="mb-5" style="height: 400px;"></div>
