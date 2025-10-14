@@ -67,8 +67,8 @@ foreach ($fonctions as $key => $fonction) {
         <div class="col-md-2">
             <label class="form-label">Type de suivi</label>
             <select id="suivi" name="suivi" class="form-select">
-                <option value="phyto" <?= $suivi == "phyto" ? "selected" : "" ?>>Relevé Phyto</option>
-                <option value="contact" <?= $suivi == "contact" ? "selected" : "" ?>>Carré Contact</option>
+                <option value="phyto">Relevé Phyto</option>
+                <option value="contact">Carré Contact</option>
             </select>
         </div>
         <div class="col-md-2"><label class="form-label">Site</label><input type="text" name="site" class="form-control" value="<?= $site ?>"></div>
