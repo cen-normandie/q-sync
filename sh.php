@@ -114,6 +114,6 @@ if (in_array($_SESSION['email'], $admins)) {
 <script type="text/javascript" src="js/plugins/highcharts/code/highstock.js"></script>
 <script type="text/javascript" src="js/plugins/highcharts/code/modules/exporting.js"></script>  
 
-<script type="text/javascript" src="sh/sh_highstock.js"></script>  
+<script type="text/javascript" src="sh/sh.js"></script>  
 </body>
 </html>
