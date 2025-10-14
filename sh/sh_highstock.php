@@ -1,45 +1,7 @@
 <?php
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
-include '../php/properties.php';
 
-//connexion a la BD
-$conn = pg_connect("hostaddr=$DBHOST_geonature port=$PORT_geonature dbname=$DBNAME_geonature user=$LOGIN_geonature password=$PASS_geonature") or die ('Connexion impossible :'. pg_last_error())    ;
-
-// Récupération des paramètres
-$suivi = $_POST["suivi"] ?? "phyto";
-$site = $_POST["site"] ?? "";
-$annee = $_POST["annee"] ?? "";
-$plot = $_POST["plot"] ?? "";
-$transect = $_POST["transect"] ?? "";
-$releve_id = $_POST["releve_id"] ?? "";
-
-// Fonctions à interroger
-$fonctions = [
-    "shannon" => $suivi == "phyto" ? "sh.f_shannon_phyto" : "sh.f_shannon_contact",
-    "richesse" => $suivi == "phyto" ? "sh.f_richesse_phyto" : "sh.f_richesse_contact",
-    "sumcoef" => $suivi == "phyto" ? "sh.f_sumcoef_phyto" : "sh.f_sumcoef_contact"
-];
-
-// Requête et stockage des résultats
-$data = [];
-foreach ($fonctions as $key => $fonction) {
-    if ($suivi == "phyto") {
-        echo "Querying $fonction with site=$site, annee=$annee, plot=$plot, transect=$transect\n";
-        if (empty($site)|| $site=="" || empty($annee) || empty($plot) || empty($transect)) {
-            continue; // Skip if any parameter is missing
-        } else {
-            $result = pg_query_params($conn, "SELECT * FROM $fonction($1, $2, $3, $4)", [$site, $annee, $plot, $transect]);
-        }
-        
-    } else {
-        $result = pg_query_params($conn, "SELECT * FROM $fonction($1)", [$releve_id]);
-    }
-    $data[$key] = [];
-    while ($row = pg_fetch_assoc($result)) {
-        $data[$key][] = $row;
-    }
-}
 ?>
 
 <!DOCTYPE html>
@@ -94,29 +56,5 @@ foreach ($fonctions as $key => $fonction) {
 <script type="text/javascript" src="../js/plugins/highcharts/code/highstock.js"></script>
 <script type="text/javascript" src="../js/plugins/highcharts/code/modules/exporting.js"></script>  
 
-
-    <script>
-    Highcharts.setOptions({ time: { timezone: 'Europe/Paris' } });
-
-    function renderChart(container, title, data, valueKey) {
-        Highcharts.stockChart(container, {
-            rangeSelector: { selected: 1 },
-            title: { text: title },
-            series: [{
-                name: title,
-                data: data.map(row => [Date.UTC(row.annee, 0, 1), parseFloat(row[valueKey])]),
-                tooltip: { valueDecimals: 2 }
-            }]
-        });
-    }
-
-    const dataShannon = <?= json_encode($data["shannon"]) ?>;
-    const dataRichesse = <?= json_encode($data["richesse"]) ?>;
-    const dataSumcoef = <?= json_encode($data["sumcoef"]) ?>;
-
-    renderChart("container_shannon", "Indice de Shannon", dataShannon, "shannon");
-    renderChart("container_richesse", "Richesse spécifique", dataRichesse, "richesse");
-    renderChart("container_sumcoef", "Somme des coefficients", dataSumcoef, "sumcoef");
-    </script>
 </body>
 </html>
