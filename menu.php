@@ -24,6 +24,12 @@
           <span data-feather=""></span>
           <i class="fas fa-table"></i> Contenu Nextcloud
         </a>';
+    echo '        <a class="nav-link py-1';
+    $t = ((($_POST['page']) == 'sh.php') ? ' active' : '' ); echo $t;
+    echo '"  href="sh.php">
+          <span data-feather=""></span>
+          <i class="fas fa-chart-bar"></i> Suivi Habitats
+        </a>';
   } 
 ?>
 
