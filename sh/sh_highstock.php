@@ -46,7 +46,6 @@ if (in_array($_SESSION['email'], $admins)) {
     <!--<link href="css/plugins/twitter_bs5.css" rel="stylesheet">-->
 </head>
 <body class="container py-4">
-    <h1 class="mb-4">Indicateurs écologiques - Highstock</h1>
 
 <div class="d-flex w-100 h-100 bg-light" style="min-height:100vh;">
   <?php $_POST["page"] = basename(__FILE__);include("../menu.php"); ?>
