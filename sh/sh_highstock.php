@@ -34,8 +34,9 @@ ini_set('display_errors', '1');
                 <option value="carre_contact">Carré Contact</option>
             </select>
         </div>
-        <div class="col-md-2"><label class="form-label">Site</label>
-            <input id="site" type="text" class="form-select"></input>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon1">Site</span>
+            <input id="site" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
         </div>
         <div class="col-md-2"><label class="form-label">Année</label>
             <select id="annee" name="annee" class="form-select">

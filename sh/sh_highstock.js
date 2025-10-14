@@ -12,7 +12,6 @@ $("#suivi").on("change", function() {
                 method: 'POST',
                 dataType: 'json',
                 data: {
-                    //q: query,
                     type_suivi: suivi
                 },
                 success: function(response) {

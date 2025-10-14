@@ -11,6 +11,5 @@ $data = [];
 while ($row = pg_fetch_assoc($result)) {
     $data[] = ['value' => $row['site'], 'label' => $row['site']];
 }
-header('Content-Type: application/json');
 echo json_encode($data);
 ?>
