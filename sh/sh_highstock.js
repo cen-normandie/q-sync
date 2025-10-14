@@ -19,9 +19,12 @@ $(document).ready(function() {
                         const $list = $('#suggestions');
                         $list.empty();
 
-                        if (Array.isArray(response) && response.length > 0) {
-                            response.forEach(function(item) {
-                                $list.append('<li>' + item.label + '</li>');
+                        // Adaptation au format { "0": { "value": "...", "label": "..." }, ... }
+                        const entries = Object.values(response);
+
+                        if (entries.length > 0) {
+                            entries.forEach(function(item) {
+                                $list.append('<li data-value="' + item.value + '">' + item.label + '</li>');
                             });
                             $list.show();
                         } else {
