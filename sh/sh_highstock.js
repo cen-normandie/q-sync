@@ -5,14 +5,15 @@ $("#suivi").on("change", function() {
     console.log("suivi change --> autocomplete");    
 
     $('#site').on('input', function() {
-
+        const query = $(this).val();
         if ($('#site').val().length >= 2) {
             $.ajax({
                 url: 'filtre/get_sites.php', // ton endpoint serveur
                 method: 'POST',
                 dataType: 'json',
                 data: {
-                    type_suivi: suivi
+                    type_suivi: suivi,
+                    query: query
                 },
                 success: function(response) {
                     const $list = $('#suggestions');
