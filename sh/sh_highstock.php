@@ -27,6 +27,15 @@ ini_set('display_errors', '1');
 <body class="container py-4">
     <h1 class="mb-4">Indicateurs écologiques - Highstock</h1>
 
+<div class="d-flex w-100 h-100 bg-light" style="min-height:100vh;">
+  <?php $_POST["page"] = basename(__FILE__);include("menu.php"); ?>
+	<div class="d-flex flex-column col-md-9 col-lg-10 bg-light " >
+		<div class="d-flex justify-content-end  bg-dark sticky-top">
+			<div class="m-2"><span class="text-light"><i class="fas fa-user"></i> <?php echo $_SESSION['email']; ?></span></div>
+			<div class="m-2"><a class="logout text-light" href="../php/logout.php" ><i class="fa fa-fw fa-power-off"></i> Déconnexion</a></div>
+		</div>
+        <div class="d-flex flex-column justify-content-start h-100 bg-secondary" style="">
+
         <div class="col-md-2">
             <label class="form-label">Type de suivi</label>
             <select id="suivi" name="suivi" class="form-select">
@@ -35,7 +44,7 @@ ini_set('display_errors', '1');
                 <option value="carre_contact">Carré Contact</option>
             </select>
         </div>
-        <div class="input-group  input-group-sm col-md-2">
+        <div class="input-group  input-group-sm">
             <span class="input-group-text" id="basic-addon1">Site</span>
             <input id="site" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
             <ul id="suggestions"></ul>
@@ -66,6 +75,13 @@ ini_set('display_errors', '1');
     <div id="container_richesse" class="mb-5" style="height: 400px;"></div>
     <div id="container_sumcoef" class="mb-5" style="height: 400px;"></div>
 
+        </div>
+		<div class="d-flex mt-auto justify-content-end align-items-center text-muted fixed-bottom">
+			<kbd class="small">CEN Normandie © <?php echo date("Y"); ?></kbd>
+		</div>
+	</div>
+
+</div>
 
 <script src="../js/jquery.js" ></script>
 <!-- Bootstrap Core JavaScript -->
