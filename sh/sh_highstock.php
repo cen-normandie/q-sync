@@ -30,8 +30,8 @@ ini_set('display_errors', '1');
             <label class="form-label">Type de suivi</label>
             <select id="suivi" name="suivi" class="form-select">
                 <option value="">--</option>
-                <option value="phyto">Relevé Phyto</option>
-                <option value="contact">Carré Contact</option>
+                <option value="releve_phyto">Relevé Phyto</option>
+                <option value="carre_contact">Carré Contact</option>
             </select>
         </div>
         <div class="col-md-2"><label class="form-label">Site</label><input      id="site" type="text" name="site" class="form-control" value=""></div>
