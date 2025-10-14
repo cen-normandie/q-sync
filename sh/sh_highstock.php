@@ -34,7 +34,7 @@ ini_set('display_errors', '1');
                 <option value="carre_contact">Carré Contact</option>
             </select>
         </div>
-        <div class="input-group mb-3">
+        <div class="input-group-sm col-md-2">
             <span class="input-group-text" id="basic-addon1">Site</span>
             <input id="site" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
         </div>
