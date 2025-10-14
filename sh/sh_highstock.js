@@ -1,4 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
+
+console.log("DOM fully loaded and parsed");
+$("#suivi").on("change", function() {
+    const suivi = $(this).val();
+    
+});
+    const type_suivi = document.getElementById("suivi");
     const siteSelect = document.getElementById("site");
     const anneeSelect = document.getElementById("annee");
     const plotSelect = document.getElementById("plot");
@@ -22,7 +29,13 @@ document.addEventListener("DOMContentLoaded", function () {
             });
         });
     }
-
+    type_suivi.addEventListener("change", function () {
+        fetchOptions("filtre/get_sites.php", { type_suivi: type_suivi.value }, siteSelect);
+        anneeSelect.innerHTML = "";
+        plotSelect.innerHTML = "";
+        transectSelect.innerHTML = "";
+        idReleveSelect.innerHTML = "";
+    });
     siteSelect.addEventListener("change", function () {
         fetchOptions("filtre/get_annees.php", { site: siteSelect.value }, anneeSelect);
     });
