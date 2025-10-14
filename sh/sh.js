@@ -8,7 +8,7 @@ $(document).ready(function() {
 
             if (query.length >= 2) {
                 $.ajax({
-                    url: 'sh/filtre/get_sites.php', // à adapter
+                    url: 'sh/filtre/get_sites.php',
                     method: 'POST',
                     dataType: 'json',
                     data: {
@@ -18,8 +18,6 @@ $(document).ready(function() {
                     success: function(response) {
                         const $list = $('#suggestions');
                         $list.empty();
-
-                        // Adaptation au format { "0": { "value": "...", "label": "..." }, ... }
                         const entries = Object.values(response);
 
                         if (entries.length > 0) {
@@ -43,10 +41,48 @@ $(document).ready(function() {
     });
 
     $('#suggestions').on('click', 'li', function() {
-        $('#site').val($(this).text());
+        const id_Site = $(this).data('value').split(' - ')[0];
+        const nom_complet_site = $(this).data('value');
+        const annee = $('#annee').val();
+        const type_suivi = $('#suivi').val();
+        $('#site').val(nom_complet_site);
         $('#suggestions').hide();
+
+        // Charger les années associées au site sélectionné
+        $.ajax({
+            url: 'sh/filtre/get_annees.php',
+            method: 'POST',
+            dataType: 'json',
+            data: {
+                site: id_Site,
+                type_suivi: type_suivi,
+                annee: annee
+            },
+            success: function(data) {
+                const $select = $('#annee');
+                $select.empty();
+                if (Array.isArray(data) && data.length > 0) {
+                    data.forEach(function(annee) {
+                        $select.append('<option value="' + annee + '">' + annee + '</option>');
+                    });
+                } else {
+                    $select.append('<option value="">Aucune année disponible</option>');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Erreur chargement années :', error);
+            }
+        });
     });
 });
+
+
+
+
+
+
+
+
 
 
     /* const type_suivi = document.getElementById("suivi");
