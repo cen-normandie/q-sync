@@ -17,6 +17,7 @@ ini_set('display_errors', '1');
     <link href="../css/plugins/dataTables.bootstrap5.min.css" rel="stylesheet">
     <!-- Custom CSS -->
     <link href="../css/cennormandie.css" rel="stylesheet">
+    <link href="sh.css" rel="stylesheet">
 	<link href="../css/autocomplete.dashboard.css" rel="stylesheet">
     <!--FONT AWESOME-->
     <link href="../fontawesome-free-5.15.2-web/css/all.css" rel="stylesheet" type="text/css">
