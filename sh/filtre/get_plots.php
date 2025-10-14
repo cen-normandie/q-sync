@@ -1,5 +1,5 @@
 <?php
-include '../php/properties.php';
+include '../../php/properties.php';
 $conn = pg_connect("hostaddr=$DBHOST_geonature port=$PORT_geonature dbname=$DBNAME_geonature user=$LOGIN_geonature password=$PASS_geonature");
 $site = $_POST['site'] ?? '';
 $annee = $_POST['annee'] ?? '';

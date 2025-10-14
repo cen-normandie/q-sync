@@ -64,21 +64,38 @@ foreach ($fonctions as $key => $fonction) {
 <body class="container py-4">
     <h1 class="mb-4">Indicateurs écologiques - Highstock</h1>
 
-    <form method="POST" class="row g-3 mb-4">
-        <div class="col-md-2">
-            <label class="form-label">Type de suivi</label>
-            <select name="suivi" class="form-select">
-                <option value="phyto" <?= $suivi == "phyto" ? "selected" : "" ?>>Relevé Phyto</option>
-                <option value="contact" <?= $suivi == "contact" ? "selected" : "" ?>>Carré Contact</option>
-            </select>
-        </div>
-        <div class="col-md-2"><label class="form-label">Site</label><input type="text" name="site" class="form-control" value="<?= $site ?>"></div>
-        <div class="col-md-2"><label class="form-label">Année</label><input type="number" name="annee" class="form-control" value="<?= $annee ?>"></div>
-        <div class="col-md-2"><label class="form-label">Plot</label><input type="text" name="plot" class="form-control" value="<?= $plot ?>"></div>
-        <div class="col-md-2"><label class="form-label">Transect</label><input type="text" name="transect" class="form-control" value="<?= $transect ?>"></div>
-        <div class="col-md-2"><label class="form-label">ID Relevé</label><input type="number" name="releve_id" class="form-control" value="<?= $releve_id ?>"></div>
-        <div class="col-12"><button type="submit" class="btn btn-primary">Afficher</button></div>
-    </form>
+<form method="POST" class="row g-3 mb-4">
+    <div class="col-md-2">
+        <label class="form-label">Type de suivi</label>
+        <select name="suivi" class="form-select">
+            <option value="phyto">Relevé Phyto</option>
+            <option value="contact">Carré Contact</option>
+        </select>
+    </div>
+    <div class="col-md-2">
+        <label class="form-label">Site</label>
+        <select name="site" id="site" class="form-select"></select>
+    </div>
+    <div class="col-md-2">
+        <label class="form-label">Année</label>
+        <select name="annee" id="annee" class="form-select"></select>
+    </div>
+    <div class="col-md-2">
+        <label class="form-label">Plot</label>
+        <select name="plot" id="plot" class="form-select"></select>
+    </div>
+    <div class="col-md-2">
+        <label class="form-label">Transect</label>
+        <select name="transect" id="transect" class="form-select"></select>
+    </div>
+    <div class="col-md-2">
+        <label class="form-label">ID Relevé</label>
+        <select name="releve_id" id="releve_id" class="form-select"></select>
+    </div>
+    <div class="col-12">
+        <button type="submit" class="btn btn-primary">Afficher</button>
+    </div>
+</form>
 
     <div id="container_shannon" class="mb-5" style="height: 400px;"></div>
     <div id="container_richesse" class="mb-5" style="height: 400px;"></div>
@@ -96,7 +113,7 @@ foreach ($fonctions as $key => $fonction) {
 <script type="text/javascript" src="../js/plugins/highcharts/code/highstock.js"></script>
 <script type="text/javascript" src="../js/plugins/highcharts/code/modules/exporting.js"></script>  
 
-
+<script type="text/javascript" src="sh_highstock.js"></script>
     <script>
     Highcharts.setOptions({ time: { timezone: 'Europe/Paris' } });
 
