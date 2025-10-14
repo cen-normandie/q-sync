@@ -1,9 +1,8 @@
-document.addEventListener("DOMContentLoaded", function () {
 
-console.log("DOM fully loaded and parsed");
+
 $("#suivi").on("change", function() {
     const suivi = $(this).val();
-    
+    console.log("suivi change --> autocomplte");    
 
     $('#autocomplete').on('input', function() {
 
@@ -17,7 +16,7 @@ $("#suivi").on("change", function() {
                     type_suivi: suivi
                 },
                 success: function(response) {
-                    const $list = $('#suggestions');
+                    const $list = $('#site');
                     $list.empty();
 
                     if (Array.isArray(response) && response.length > 0) {
@@ -31,17 +30,17 @@ $("#suivi").on("change", function() {
                 },
                 error: function(xhr, status, error) {
                     console.error('Erreur AJAX :', error);
-                    $('#suggestions').hide();
+                    $('#site').hide();
                 }
             });
         } else {
-            $('#suggestions').hide();
+            $('#site').hide();
         }
     });
 
-    $('#suggestions').on('click', 'li', function() {
+    $('#site').on('click', 'li', function() {
         $('#autocomplete').val($(this).text());
-        $('#suggestions').hide();
+        $('#site').hide();
     });
 
 });
@@ -100,4 +99,3 @@ $("#suivi").on("change", function() {
             transect: transectSelect.value
         }, idReleveSelect);
     }); */
-});

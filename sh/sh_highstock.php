@@ -35,9 +35,7 @@ ini_set('display_errors', '1');
             </select>
         </div>
         <div class="col-md-2"><label class="form-label">Site</label>
-            <select id="site" name="site" class="form-select">
-                <option value="">--</option>
-            </select>
+            <input id="site" type="text" class="form-select"></input>
         </div>
         <div class="col-md-2"><label class="form-label">Année</label>
             <select id="annee" name="annee" class="form-select">
