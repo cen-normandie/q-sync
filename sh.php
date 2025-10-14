@@ -70,24 +70,24 @@ if (in_array($_SESSION['email'], $admins)) {
                     <input id="site" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
                     <ul id="suggestions"></ul>
                 </div>
-                <div class="my-2"><label class="form-label">Année</label>
+                <div class="input-group input-group-sm my-2">
+                    <label class="input-group-text" for="annee">Année</label>
                     <select id="annee" name="annee" class="form-select">
-                        <option value="">--</option>
                     </select>
                 </div>
-                <div class="my-2"><label class="form-label">Plot</label>
+                <div class="input-group input-group-sm my-2">
+                    <label class="input-group-text" for="plot">Plot</label>
                     <select id="plot" name="plot" class="form-select">
-                        <option value="">--</option>
                     </select>
                 </div>
-                <div class=""><label class="form-label">Transect</label>
+                <div class="input-group input-group-sm my-2">
+                    <label class="input-group-text" for="transect">Transect</label>
                     <select id="transect" name="transect" class="form-select">
-                        <option value="">--</option>
                     </select>
                 </div>
-                <div class=""><label class="form-label">ID Relevé</label>
+                <div class="input-group input-group-sm my-2">
+                    <label class="input-group-text" for="releve_id">ID Relevé</label>
                     <select id="releve_id" name="releve_id" class="form-select">
-                        <option value="">--</option>
                     </select>
                 </div>
                 <div class="my-2">
