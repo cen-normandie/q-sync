@@ -8,7 +8,7 @@ $("#suivi").on("change", function() {
 
         if ($('#site').val().length >= 2) {
             $.ajax({
-                url: '/filtre/get_sites.php', // ton endpoint serveur
+                url: 'sh/filtre/get_sites.php', // ton endpoint serveur
                 method: 'POST',
                 dataType: 'json',
                 data: {
