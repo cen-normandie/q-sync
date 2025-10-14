@@ -6,7 +6,7 @@ $("#suivi").on("change", function() {
 
     $('#site').on('input', function() {
 
-        if (query.length >= 2) {
+        if ($('#site').val().length >= 2) {
             $.ajax({
                 url: '/filtre/get_sites.php', // ton endpoint serveur
                 method: 'POST',
