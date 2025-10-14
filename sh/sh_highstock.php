@@ -2,6 +2,26 @@
 error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
+session_start(); 
+include '../php/properties.php';
+if (!isset($_SESSION['email'])) {
+    header('Location: index.php');
+    exit();
+};
+if (!isset($_SESSION['password'])) {
+    header('Location: index.php');
+    exit();
+};
+if (!isset($_SESSION['session'])) {
+    header('Location: index.php');
+    exit();
+};
+$_SESSION['is_admin'] = false;
+$admins = array("b.perceval@cen-normandie.fr");
+if (in_array($_SESSION['email'], $admins)) {
+    $_SESSION['is_admin'] = true;
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -9,6 +29,7 @@ ini_set('display_errors', '1');
 <head>
     <meta charset="UTF-8">
     <title>Indicateurs écologiques</title>
+    <link rel="shortcut icon" href="../img/qgis.ico" />
     <!-- Bootstrap Core CSS -->
     <!--<link href="css/bootstrap.min.css" rel="stylesheet">-->
 	<link href="../bootstrap-5.0.0/css/bootstrap.min.css" rel="stylesheet">
@@ -28,7 +49,7 @@ ini_set('display_errors', '1');
     <h1 class="mb-4">Indicateurs écologiques - Highstock</h1>
 
 <div class="d-flex w-100 h-100 bg-light" style="min-height:100vh;">
-  <?php $_POST["page"] = basename(__FILE__);include("menu.php"); ?>
+  <?php $_POST["page"] = basename(__FILE__);include("../menu.php"); ?>
 	<div class="d-flex flex-column col-md-9 col-lg-10 bg-light " >
 		<div class="d-flex justify-content-end  bg-dark sticky-top">
 			<div class="m-2"><span class="text-light"><i class="fas fa-user"></i> <?php echo $_SESSION['email']; ?></span></div>
