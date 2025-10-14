@@ -55,9 +55,9 @@ if (in_array($_SESSION['email'], $admins)) {
 			<div class="m-2"><a class="logout text-light" href="php/logout.php" ><i class="fa fa-fw fa-power-off"></i> Déconnexion</a></div>
 		</div>
         <div class="d-flex" style="">
-            <div class="d-flex flex-column justify-content-start col-3 m-2 p-3 bg-white border border-2 border-dark rounded">
+            <div class="d-flex flex-column justify-content-start col-3 ">
                 <h4 class="bebas">Filtres :</h4>
-                <div class="">
+                <div class="my-2">
                     <label class="form-label">Type de suivi</label>
                     <select id="suivi" name="suivi" class="form-select">
                         <option value="">--</option>
@@ -65,17 +65,17 @@ if (in_array($_SESSION['email'], $admins)) {
                         <option value="carre_contact">Carré Contact</option>
                     </select>
                 </div>
-                <div class="input-group  input-group-sm">
+                <div class="input-group  input-group-sm my-2">
                     <span class="input-group-text" id="basic-addon1">Site</span>
                     <input id="site" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
                     <ul id="suggestions"></ul>
                 </div>
-                <div class=""><label class="form-label">Année</label>
+                <div class="my-2"><label class="form-label">Année</label>
                     <select id="annee" name="annee" class="form-select">
                         <option value="">--</option>
                     </select>
                 </div>
-                <div class=""><label class="form-label">Plot</label>
+                <div class="my-2"><label class="form-label">Plot</label>
                     <select id="plot" name="plot" class="form-select">
                         <option value="">--</option>
                     </select>
@@ -90,7 +90,9 @@ if (in_array($_SESSION['email'], $admins)) {
                         <option value="">--</option>
                     </select>
                 </div>
-                <div class="col-12"><button type="submit" class="btn btn-primary">Afficher</button></div>
+                <div class="my-2">
+                    <button type="submit" class="btn btn-primary">Afficher</button>
+                </div>
 
             </div>
             <div class="d-flex flex-column justify-content-start col-9 m-2 p-3 bg-white border border-2 border-dark rounded">
