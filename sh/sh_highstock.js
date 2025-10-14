@@ -2,9 +2,9 @@
 
 $("#suivi").on("change", function() {
     const suivi = $(this).val();
-    console.log("suivi change --> autocomplte");    
+    console.log("suivi change --> autocomplete");    
 
-    $('#autocomplete').on('input', function() {
+    $('#site').on('input', function() {
 
         if (query.length >= 2) {
             $.ajax({
@@ -16,7 +16,7 @@ $("#suivi").on("change", function() {
                     type_suivi: suivi
                 },
                 success: function(response) {
-                    const $list = $('#site');
+                    const $list = $('#suggestions');
                     $list.empty();
 
                     if (Array.isArray(response) && response.length > 0) {
@@ -30,17 +30,17 @@ $("#suivi").on("change", function() {
                 },
                 error: function(xhr, status, error) {
                     console.error('Erreur AJAX :', error);
-                    $('#site').hide();
+                    $('#suggestions').hide();
                 }
             });
         } else {
-            $('#site').hide();
+            $('#suggestions').hide();
         }
     });
 
-    $('#site').on('click', 'li', function() {
-        $('#autocomplete').val($(this).text());
-        $('#site').hide();
+    $('#suggestions').on('click', 'li', function() {
+        $('#site').val($(this).text());
+        $('#suggestions').hide();
     });
 
 });
