@@ -3,7 +3,7 @@ error_reporting(E_ALL);
 ini_set('display_errors', '1');
 
 session_start(); 
-include '../php/properties.php';
+include 'php/properties.php';
 if (!isset($_SESSION['email'])) {
     header('Location: index.php');
     exit();
@@ -29,30 +29,30 @@ if (in_array($_SESSION['email'], $admins)) {
 <head>
     <meta charset="UTF-8">
     <title>Indicateurs écologiques</title>
-    <link rel="shortcut icon" href="../img/qgis.ico" />
+    <link rel="shortcut icon" href="img/qgis.ico" />
     <!-- Bootstrap Core CSS -->
     <!--<link href="css/bootstrap.min.css" rel="stylesheet">-->
-	<link href="../bootstrap-5.0.0/css/bootstrap.min.css" rel="stylesheet">
+	<link href="bootstrap-5.0.0/css/bootstrap.min.css" rel="stylesheet">
     <!--Datatable-->
-	<!--<link href="../js/plugins/datatable/datatables.min.css" rel="stylesheet">-->
-    <link href="../css/plugins/dataTables.bootstrap5.min.css" rel="stylesheet">
+	<!--<link href="js/plugins/datatable/datatables.min.css" rel="stylesheet">-->
+    <link href="css/plugins/dataTables.bootstrap5.min.css" rel="stylesheet">
     <!-- Custom CSS -->
-    <link href="../css/cennormandie.css" rel="stylesheet">
-    <link href="sh.css" rel="stylesheet">
-	<link href="../css/autocomplete.dashboard.css" rel="stylesheet">
+    <link href="css/cennormandie.css" rel="stylesheet">
+    <link href="sh/sh.css" rel="stylesheet">
+	<link href="css/autocomplete.dashboard.css" rel="stylesheet">
     <!--FONT AWESOME-->
-    <link href="../fontawesome-free-5.15.2-web/css/all.css" rel="stylesheet" type="text/css">
+    <link href="fontawesome-free-5.15.2-web/css/all.css" rel="stylesheet" type="text/css">
     <!--Datatable bs5-->
     <!--<link href="css/plugins/twitter_bs5.css" rel="stylesheet">-->
 </head>
-<body class="container py-4">
+<body>
 
 <div class="d-flex w-100 h-100 bg-light" style="min-height:100vh;">
-  <?php $_POST["page"] = basename(__FILE__);include("../menu.php"); ?>
+  <?php $_POST["page"] = basename(__FILE__);include("menu.php"); ?>
 	<div class="d-flex flex-column col-md-9 col-lg-10 bg-light " >
 		<div class="d-flex justify-content-end  bg-dark sticky-top">
 			<div class="m-2"><span class="text-light"><i class="fas fa-user"></i> <?php echo $_SESSION['email']; ?></span></div>
-			<div class="m-2"><a class="logout text-light" href="../php/logout.php" ><i class="fa fa-fw fa-power-off"></i> Déconnexion</a></div>
+			<div class="m-2"><a class="logout text-light" href="php/logout.php" ><i class="fa fa-fw fa-power-off"></i> Déconnexion</a></div>
 		</div>
         <div class="d-flex flex-column justify-content-start h-100 bg-secondary" style="">
 
@@ -103,17 +103,17 @@ if (in_array($_SESSION['email'], $admins)) {
 
 </div>
 
-<script src="../js/jquery.js" ></script>
+<script src="js/jquery.js" ></script>
 <!-- Bootstrap Core JavaScript -->
-<script src="../bootstrap-5.0.0/js/bootstrap.min.js"></script>
-<script src="../js/plugins/bs5-datepicker/js/bootstrap-datepicker.min.js"></script>
-<script src="../js/plugins/bs5-datepicker/locales/bootstrap-datepicker.fr.min.js"></script>
+<script src="bootstrap-5.0.0/js/bootstrap.min.js"></script>
+<script src="js/plugins/bs5-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="js/plugins/bs5-datepicker/locales/bootstrap-datepicker.fr.min.js"></script>
 <!-- FONT AWESOME -->
-<script src="../fontawesome-free-5.15.2-web/js/fontawesome.min.js" ></script>
+<script src="fontawesome-free-5.15.2-web/js/fontawesome.min.js" ></script>
 <!-- HIGHCHARTS -->
-<script type="text/javascript" src="../js/plugins/highcharts/code/highstock.js"></script>
-<script type="text/javascript" src="../js/plugins/highcharts/code/modules/exporting.js"></script>  
+<script type="text/javascript" src="js/plugins/highcharts/code/highstock.js"></script>
+<script type="text/javascript" src="js/plugins/highcharts/code/modules/exporting.js"></script>  
 
-<script type="text/javascript" src="sh_highstock.js"></script>  
+<script type="text/javascript" src="sh/sh_highstock.js"></script>  
 </body>
 </html>
