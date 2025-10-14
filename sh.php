@@ -54,10 +54,10 @@ if (in_array($_SESSION['email'], $admins)) {
 			<div class="m-2"><span class="text-light"><i class="fas fa-user"></i> <?php echo $_SESSION['email']; ?></span></div>
 			<div class="m-2"><a class="logout text-light" href="php/logout.php" ><i class="fa fa-fw fa-power-off"></i> Déconnexion</a></div>
 		</div>
-        <div class="d-flex flex-column justify-content-start h-100 bg-secondary" style="">
+        <div class="d-flex" style="">
             <div class="d-flex flex-column justify-content-start col-3 m-2 p-3 bg-white border border-2 border-dark rounded">
                 <h4 class="bebas">Filtres :</h4>
-                                <div class="col-md-2">
+                <div class="">
                     <label class="form-label">Type de suivi</label>
                     <select id="suivi" name="suivi" class="form-select">
                         <option value="">--</option>
@@ -70,22 +70,22 @@ if (in_array($_SESSION['email'], $admins)) {
                     <input id="site" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
                     <ul id="suggestions"></ul>
                 </div>
-                <div class="col-md-2"><label class="form-label">Année</label>
+                <div class=""><label class="form-label">Année</label>
                     <select id="annee" name="annee" class="form-select">
                         <option value="">--</option>
                     </select>
                 </div>
-                <div class="col-md-2"><label class="form-label">Plot</label>
+                <div class=""><label class="form-label">Plot</label>
                     <select id="plot" name="plot" class="form-select">
                         <option value="">--</option>
                     </select>
                 </div>
-                <div class="col-md-2"><label class="form-label">Transect</label>
+                <div class=""><label class="form-label">Transect</label>
                     <select id="transect" name="transect" class="form-select">
                         <option value="">--</option>
                     </select>
                 </div>
-                <div class="col-md-2"><label class="form-label">ID Relevé</label>
+                <div class=""><label class="form-label">ID Relevé</label>
                     <select id="releve_id" name="releve_id" class="form-select">
                         <option value="">--</option>
                     </select>
@@ -94,7 +94,7 @@ if (in_array($_SESSION['email'], $admins)) {
 
             </div>
             <div class="d-flex flex-column justify-content-start col-9 m-2 p-3 bg-white border border-2 border-dark rounded">
-                <h4 class="bebas">Indicateurs écologiques</h4>
+                <h4 class="bebas">Indicateurs ecologiques</h4>
                 <div class="d-flex flex-column w-100">
 
                     <div id="container_shannon" class="mb-5" style="height: 400px;"></div>

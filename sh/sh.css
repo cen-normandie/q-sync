@@ -13,10 +13,11 @@
 }
 
 #suggestions li {
-    padding: 8px 12px;
+    padding: 4px 6px;
     cursor: pointer;
 }
 
 #suggestions li:hover {
-    background-color: #b8e0d4;
+    background-color: #212529;
+    color: #f8f9fa;
 }
