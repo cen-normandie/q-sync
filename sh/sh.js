@@ -8,7 +8,7 @@ $(document).ready(function() {
 
             if (query.length >= 2) {
                 $.ajax({
-                    url: 'filtre/get_sites.php', // à adapter
+                    url: 'sh/filtre/get_sites.php', // à adapter
                     method: 'POST',
                     dataType: 'json',
                     data: {
