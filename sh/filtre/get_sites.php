@@ -2,7 +2,7 @@
 include '../../php/properties.php';
 
 $type_suivi = $_POST["type_suivi"] ?? "phyto"; // Pour forcer le type de suivi phyto
-$query = $_POST["query"]; // Pour forcer le type de suivi phyto
+$query = $_POST["q"]; // Pour forcer le type de suivi phyto
 
 $conn = pg_connect("hostaddr=$DBHOST_geonature port=$PORT_geonature dbname=$DBNAME_geonature user=$LOGIN_geonature password=$PASS_geonature");
 
