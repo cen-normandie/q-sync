@@ -43,7 +43,6 @@ $(document).ready(function() {
     $('#suggestions').on('click', 'li', function() {
         const id_Site = $(this).data('value').split(' - ')[0];
         const nom_complet_site = $(this).data('value');
-        const annee = $('#annee').val();
         const type_suivi = $('#suivi').val();
         $('#site').val(nom_complet_site);
         $('#suggestions').hide();
@@ -56,7 +55,6 @@ $(document).ready(function() {
             data: {
                 site: id_Site,
                 type_suivi: type_suivi,
-                annee: annee
             },
             success: function(data) {
                 const $select = $('#annee');
