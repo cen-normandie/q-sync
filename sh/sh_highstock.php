@@ -4,7 +4,7 @@ ini_set('display_errors', '1');
 include '../php/properties.php';
 
 //connexion a la BD
-$conn = pg_connect("hostaddr=$dbgeon port=$dbgeonport dbname=$dbgeonname user=$dbgeonlogin password=$dbgeonpass");
+$conn = pg_connect("hostaddr=$DBHOST_geonature port=$PORT_geonature dbname=$DBNAME_geonature user=$LOGIN_geonature password=$PASS_geonature") or die ('Connexion impossible :'. pg_last_error())    ;
 
 // Récupération des paramètres
 $suivi = $_POST["suivi"] ?? "phyto";
