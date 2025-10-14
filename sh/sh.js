@@ -56,12 +56,15 @@ $(document).ready(function() {
                 site: id_Site,
                 type_suivi: type_suivi,
             },
-            success: function(data) {
+            success: function(response) {
                 const $select = $('#annee');
                 $select.empty();
-                if (Array.isArray(data) && data.length > 0) {
-                    data.forEach(function(annee) {
-                        $select.append('<option value="' + annee + '">' + annee + '</option>');
+
+                const annees = Object.values(response); // ← adaptation au format reçu
+
+                if (annees.length > 0) {
+                    annees.forEach(function(item) {
+                        $select.append('<option value="' + item.value + '">' + item.label + '</option>');
                     });
                 } else {
                     $select.append('<option value="">Aucune année disponible</option>');
