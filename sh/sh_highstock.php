@@ -37,6 +37,7 @@ ini_set('display_errors', '1');
         <div class="input-group  input-group-sm col-md-2">
             <span class="input-group-text" id="basic-addon1">Site</span>
             <input id="site" type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1">
+            <ul id="suggestions"></ul>
         </div>
         <div class="col-md-2"><label class="form-label">Année</label>
             <select id="annee" name="annee" class="form-select">
