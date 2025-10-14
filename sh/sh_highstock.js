@@ -4,8 +4,48 @@ console.log("DOM fully loaded and parsed");
 $("#suivi").on("change", function() {
     const suivi = $(this).val();
     
+
+    $('#autocomplete').on('input', function() {
+
+        if (query.length >= 2) {
+            $.ajax({
+                url: '/filtre/get_sites.php', // ton endpoint serveur
+                method: 'POST',
+                dataType: 'json',
+                data: {
+                    //q: query,
+                    type_suivi: suivi
+                },
+                success: function(response) {
+                    const $list = $('#suggestions');
+                    $list.empty();
+
+                    if (Array.isArray(response) && response.length > 0) {
+                        response.forEach(function(item) {
+                            $list.append('<li>' + item.label + '</li>'); // ou item.nom, selon ton JSON
+                        });
+                        $list.show();
+                    } else {
+                        $list.hide();
+                    }
+                },
+                error: function(xhr, status, error) {
+                    console.error('Erreur AJAX :', error);
+                    $('#suggestions').hide();
+                }
+            });
+        } else {
+            $('#suggestions').hide();
+        }
+    });
+
+    $('#suggestions').on('click', 'li', function() {
+        $('#autocomplete').val($(this).text());
+        $('#suggestions').hide();
+    });
+
 });
-    const type_suivi = document.getElementById("suivi");
+    /* const type_suivi = document.getElementById("suivi");
     const siteSelect = document.getElementById("site");
     const anneeSelect = document.getElementById("annee");
     const plotSelect = document.getElementById("plot");
@@ -59,5 +99,5 @@ $("#suivi").on("change", function() {
             plot: plotSelect.value,
             transect: transectSelect.value
         }, idReleveSelect);
-    });
+    }); */
 });
