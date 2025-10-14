@@ -71,11 +71,11 @@ foreach ($fonctions as $key => $fonction) {
                 <option value="contact">Carré Contact</option>
             </select>
         </div>
-        <div class="col-md-2"><label class="form-label">Site</label><input type="text" name="site" class="form-control" value="<?= $site ?>"></div>
-        <div class="col-md-2"><label class="form-label">Année</label><input type="number" name="annee" class="form-control" value="<?= $annee ?>"></div>
-        <div class="col-md-2"><label class="form-label">Plot</label><input type="text" name="plot" class="form-control" value="<?= $plot ?>"></div>
-        <div class="col-md-2"><label class="form-label">Transect</label><input type="text" name="transect" class="form-control" value="<?= $transect ?>"></div>
-        <div class="col-md-2"><label class="form-label">ID Relevé</label><input type="number" name="releve_id" class="form-control" value="<?= $releve_id ?>"></div>
+        <div class="col-md-2"><label class="form-label">Site</label><input type="text" name="site" class="form-control" value=""></div>
+        <div class="col-md-2"><label class="form-label">Année</label><input type="number" name="annee" class="form-control" value=""></div>
+        <div class="col-md-2"><label class="form-label">Plot</label><input type="text" name="plot" class="form-control" value=""></div>
+        <div class="col-md-2"><label class="form-label">Transect</label><input type="text" name="transect" class="form-control" value=""></div>
+        <div class="col-md-2"><label class="form-label">ID Relevé</label><input type="number" name="releve_id" class="form-control" value=""></div>
         <div class="col-12"><button type="submit" class="btn btn-primary">Afficher</button></div>
 
     <div id="container_shannon" class="mb-5" style="height: 400px;"></div>
