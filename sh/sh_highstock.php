@@ -64,10 +64,9 @@ foreach ($fonctions as $key => $fonction) {
 <body class="container py-4">
     <h1 class="mb-4">Indicateurs écologiques - Highstock</h1>
 
-    <form method="POST" class="row g-3 mb-4">
         <div class="col-md-2">
             <label class="form-label">Type de suivi</label>
-            <select name="suivi" class="form-select">
+            <select id="suivi" name="suivi" class="form-select">
                 <option value="phyto" <?= $suivi == "phyto" ? "selected" : "" ?>>Relevé Phyto</option>
                 <option value="contact" <?= $suivi == "contact" ? "selected" : "" ?>>Carré Contact</option>
             </select>
@@ -78,7 +77,6 @@ foreach ($fonctions as $key => $fonction) {
         <div class="col-md-2"><label class="form-label">Transect</label><input type="text" name="transect" class="form-control" value="<?= $transect ?>"></div>
         <div class="col-md-2"><label class="form-label">ID Relevé</label><input type="number" name="releve_id" class="form-control" value="<?= $releve_id ?>"></div>
         <div class="col-12"><button type="submit" class="btn btn-primary">Afficher</button></div>
-    </form>
 
     <div id="container_shannon" class="mb-5" style="height: 400px;"></div>
     <div id="container_richesse" class="mb-5" style="height: 400px;"></div>
