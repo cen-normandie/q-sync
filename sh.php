@@ -97,7 +97,7 @@ if (in_array($_SESSION['email'], $admins)) {
             </div>
             <div class="d-flex flex-column justify-content-start col-9">
                 <h4 class="bebas">Indicateurs ecologiques</h4>
-                <div class="d-flex flex-column w-100 m-2">
+                <div class="d-flex flex-column w-100 p-2">
                     <div id="container_shannon" class="mb-5" style="height: 400px;"></div>
                     <div id="container_richesse" class="mb-5" style="height: 400px;"></div>
                     <div id="container_sumcoef" class="mb-5" style="height: 400px;"></div>
