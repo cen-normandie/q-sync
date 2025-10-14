@@ -56,5 +56,6 @@ ini_set('display_errors', '1');
 <script type="text/javascript" src="../js/plugins/highcharts/code/highstock.js"></script>
 <script type="text/javascript" src="../js/plugins/highcharts/code/modules/exporting.js"></script>  
 
+<script type="text/javascript" src="sh_highstock.js"></script>  
 </body>
 </html>
