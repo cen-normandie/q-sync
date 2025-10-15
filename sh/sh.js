@@ -2,6 +2,13 @@
 $(document).ready(function() {
     $('#suivi').on('change', function() {
         const typeSuivi = $(this).val();
+        console.log('Type de suivi sélectionné :', typeSuivi);
+
+        //Releve Phyto
+        if (typeSuivi === 'phyto') {
+            //
+        }
+
 
         $('#site').off('input').on('input', function() {
             const query = $(this).val();
