@@ -4,7 +4,7 @@ $conn = pg_connect("hostaddr=$DBHOST_geonature port=$PORT_geonature dbname=$DBNA
 
 $site = $_POST['site'];
 $type_suivi = $_POST["type_suivi"];
-$table = ($type_suivi == "carre_contact") ? "sh.carres_contact" : "sh.releve_phyto";
+$table = ($type_suivi == "carre_contact") ? "sh.carre_contact" : "sh.releve_phyto";
 
 $select = pg_prepare($conn, "sql_select", "SELECT annee FROM $table WHERE site = $1 GROUP BY 1 ORDER BY 1");
 $result = pg_execute($conn, "sql_select",array( $site)) or die ( pg_last_error());

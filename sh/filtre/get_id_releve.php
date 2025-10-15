@@ -6,7 +6,7 @@ $type_suivi = $_POST["type_suivi"];
 $annee = $_POST["annees"]; // tableau des années
 $str_annee = '{' . implode(',', $annee) . '}'; // conversion en chaîne pour la requête SQL
 
-$table = ($type_suivi == "carre_contact") ? "sh.carres_contact" : "sh.releve_phyto";
+$table = ($type_suivi == "carre_contact") ? "sh.carre_contact" : "sh.releve_phyto";
 $data = [];
 /* 
 echo "SELECT id_releve FROM $table WHERE site = $1 and annee = ANY($2) GROUP BY 1 ORDER BY 1";
