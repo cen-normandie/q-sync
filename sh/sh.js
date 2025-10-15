@@ -12,7 +12,7 @@ $(document).ready(function() {
 
         $('#site').off('input').on('input', function() {
             const query = $(this).val();
-
+            console.log('blablabla');
             if (query.length >= 2) {
                 $.ajax({
                     url: 'sh/filtre/get_sites.php',
