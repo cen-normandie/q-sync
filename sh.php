@@ -67,7 +67,8 @@ if (in_array($_SESSION['email'], $admins)) {
                 </div>
                 <div class="input-group input-group-sm my-2">
                     <span class="input-group-text" id="">Site</span>
-                    <input id="site" type="text" class="form-control" placeholder="76MAR / Chichebo" aria-label="76MAR / Chichebo ">
+                    <input id="site" type="text" class="form-control" placeholder="76MAR / Chichebo" aria-label="76MAR / Chichebo "></input>
+                    <button id="clear_site" class="btn btn-outline-secondary" type="button"><i class="fas fa-times"></i></button>
                     <ul id="suggestions"></ul>
                 </div>
                 <div class="input-group input-group-sm my-2">
@@ -76,22 +77,12 @@ if (in_array($_SESSION['email'], $admins)) {
                     </select>
                 </div>
                 <div class="input-group input-group-sm my-2">
-                    <label class="input-group-text" for="plot">Plot</label>
-                    <select id="plot" name="plot" class="form-select">
-                    </select>
-                </div>
-                <div class="input-group input-group-sm my-2">
-                    <label class="input-group-text" for="transect">Transect</label>
-                    <select id="transect" name="transect" class="form-select">
-                    </select>
-                </div>
-                <div class="input-group input-group-sm my-2">
                     <label class="input-group-text" for="releve_id">ID Relevé</label>
-                    <select id="releve_id" name="releve_id" class="form-select">
+                    <select id="releve_id" name="releve_id" class="form-select" multiple>
                     </select>
                 </div>
                 <div class="my-2">
-                    <button type="submit" class="btn btn-primary align-items-start">Charger les graphiques</button>
+                    <button id="graphs" class="btn btn-primary align-items-start">Charger les graphiques</button>
                 </div>
 
             </div>
