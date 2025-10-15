@@ -72,7 +72,7 @@ if (in_array($_SESSION['email'], $admins)) {
                 </div>
                 <div class="input-group input-group-sm my-2">
                     <label class="input-group-text" for="annee">Année</label>
-                    <select id="annee" name="annee" class="form-select">
+                    <select id="annee" name="annee" class="form-select" multiple>
                     </select>
                 </div>
                 <div class="input-group input-group-sm my-2">

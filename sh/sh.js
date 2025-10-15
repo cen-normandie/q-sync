@@ -2,10 +2,10 @@
 $(document).ready(function() {
     $('#suivi').on('change', function() {
         const typeSuivi = $(this).val();
-        console.log('Type de suivi sélectionné :'+typeSuivi);
-
         //Releve Phyto
-        if (typeSuivi === 'phyto') {
+        if (typeSuivi === 'releve_phyto') {
+            //
+        } else if (typeSuivi === 'carre_contact') {
             //
         }
 
