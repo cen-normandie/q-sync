@@ -1,5 +1,36 @@
 
 $(document).ready(function() {
+
+const dtInd =$('#IndicateursEcologiques').DataTable({
+    "language": {
+        "paginate": {
+            "previous": "Préc.",
+            "next": "Suiv."
+        },
+        "search": "Filtrer :",
+        "sLengthMenu":     "Afficher _MENU_ &eacute;l&eacute;ments",
+        "sInfo":           "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+        "sInfoEmpty":      "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
+        "sInfoFiltered":   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+        "sInfoPostFix":    "",
+        "sLoadingRecords": "Chargement en cours...",
+        "sZeroRecords":    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+        "sEmptyTable":     "Aucune donn&eacute;e disponible dans le tableau"
+    },
+    dom: '<"top"<"d-flex justify-content-between align-items-center"f>>t', // export excel -->B :<"top"<"d-flex justify-content-end align-items-center"fB>>t
+    scrollY: '200px',
+    scrollCollapse: true,
+    paging: false,
+    columnDefs: [
+        {
+            target: 0,
+            visible: false
+        }
+    ]
+});
+
+
+
     $('#suivi').on('change', function() {
         const typeSuivi = $(this).val();
         //Releve Phyto
@@ -155,6 +186,42 @@ function clear(bool) {
 }
 
 
+
+$('#graphs').on('click', function() {
+    const type_suivi = $('#suivi').val();
+    const site = $('#site').val().split(' - ')[0];
+    const annees = $('#annee').val(); // tableau des années sélectionnées
+    const releve_ids = $('#releve_id').val(); // tableau des relevés sélectionnés
+    console.log('Type de suivi :', type_suivi);
+    console.log('Site :', site);
+    console.log('Années :', annees);
+    console.log('Relevés :', releve_ids);
+    $.ajax({
+        url: 'sh/analyse/calcul_ind_eco.js.php',
+        type: 'POST',
+        data: {
+            annees: annees,
+            plots: releve_ids,
+            site: site,
+            type_suivi: type_suivi
+        },
+        success: function(data) {
+            console.log(data);
+
+            data.forEach(function(row) {
+                dtInd.row.add([
+                    row.annee,
+                    row.id_releve,
+                    row.site,
+                    row.richesse_specifique,
+                    parseFloat(row.indice_shannon).toFixed(2),
+                    parseFloat(row.equitabilite).toFixed(2)
+                ]).draw();
+            });
+
+        }
+    });
+});
 
 
 
