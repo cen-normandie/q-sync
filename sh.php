@@ -47,6 +47,8 @@ if (in_array($_SESSION['email'], $admins)) {
     <!--Datatable bs5-->
     <link href="css/plugins/twitter_bs5.css" rel="stylesheet">
     <link href="css/plugins/dataTables.bootstrap5.min.css" rel="stylesheet">
+
+
 </head>
 <body>
 
@@ -94,9 +96,9 @@ if (in_array($_SESSION['email'], $admins)) {
                     </button>
                 </div>
             </div>
-            <div class="d-flex flex-column justify-content-start col-9">
+            <div class="d-flex flex-column justify-content-start col-9 p-2">
                 <h4 class="bebas">Indicateurs ecologiques</h4> 
-                <table id="IndicateursEcologiques" class="display">
+                <table id="IndicateursEcologiques" class="display ">
                         <thead>
                             <tr>
                                 <th>Année</th>
@@ -227,9 +229,15 @@ site_param TEXT           -- Nom du site à filtrer
 <!-- HIGHCHARTS -->
 <script type="text/javascript" src="js/plugins/highcharts/code/highstock.js"></script>
 <script type="text/javascript" src="js/plugins/highcharts/code/modules/exporting.js"></script>  
+
 <!--Datatable bs5-->
 <script src="js/plugins/datatable/datatables.min.js"></script>
 <script src="js/plugins/datatable/dataTables.bootstrap5.min.js"></script>
+<!-- <script src="js/plugins/datatable/jquery.datatables.min.js"></script> -->
+<!--<script src="js/plugins/datatable/Buttons-1.7.0/js/dataTables.buttons.min.js"></script>-->
+<script src="js/plugins/datatable/Buttons-1.7.0/js/buttons.bootstrap5.min.js"></script>
+<script src="js/plugins/datatable/pdfmake-0.1.36/vfs_fonts.js"></script>
+<script src="js/plugins/datatable/Buttons-1.7.0/js/buttons.html5.min.js"></script>
 
 
 <script type="text/javascript" src="sh/sh.js"></script>  

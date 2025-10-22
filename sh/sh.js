@@ -1,36 +1,5 @@
 
 $(document).ready(function() {
-
-const dtInd =$('#IndicateursEcologiques').DataTable({
-    "language": {
-        "paginate": {
-            "previous": "Préc.",
-            "next": "Suiv."
-        },
-        "search": "Filtrer :",
-        "sLengthMenu":     "Afficher _MENU_ &eacute;l&eacute;ments",
-        "sInfo":           "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
-        "sInfoEmpty":      "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
-        "sInfoFiltered":   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
-        "sInfoPostFix":    "",
-        "sLoadingRecords": "Chargement en cours...",
-        "sZeroRecords":    "Aucun &eacute;l&eacute;ment &agrave; afficher",
-        "sEmptyTable":     "Aucune donn&eacute;e disponible dans le tableau"
-    },
-    dom: '<"top"<"d-flex justify-content-between align-items-center"f>>t', // export excel -->B :<"top"<"d-flex justify-content-end align-items-center"fB>>t
-    scrollY: '200px',
-    scrollCollapse: true,
-    paging: false,
-    columnDefs: [
-        {
-            target: 0,
-            visible: false
-        }
-    ]
-});
-
-
-
     $('#suivi').on('change', function() {
         const typeSuivi = $(this).val();
         //Releve Phyto
@@ -175,6 +144,42 @@ const dtInd =$('#IndicateursEcologiques').DataTable({
 
 });
 
+const dtInd =$('#IndicateursEcologiques').DataTable({
+    "language": {
+        "paginate": {
+            "previous": "Préc.",
+            "next": "Suiv."
+        },
+        "search": "Filtrer :",
+        "sLengthMenu":     "Afficher _MENU_ &eacute;l&eacute;ments",
+        "sInfo":           "Affichage de l'&eacute;l&eacute;ment _START_ &agrave; _END_ sur _TOTAL_ &eacute;l&eacute;ments",
+        "sInfoEmpty":      "Affichage de l'&eacute;l&eacute;ment 0 &agrave; 0 sur 0 &eacute;l&eacute;ment",
+        "sInfoFiltered":   "(filtr&eacute; de _MAX_ &eacute;l&eacute;ments au total)",
+        "sInfoPostFix":    "",
+        "sLoadingRecords": "Chargement en cours...",
+        "sZeroRecords":    "Aucun &eacute;l&eacute;ment &agrave; afficher",
+        "sEmptyTable":     "Aucune donn&eacute;e disponible dans le tableau"
+    },
+    dom: '<"top"<"d-flex justify-content-between align-items-center"fB>>t', // export excel -->B :<"top"<"d-flex justify-content-end align-items-center"fB>>t
+    buttons: [
+        { 
+        extend: 'excel', 
+        text:'Excel',
+        className: 'btn btn-success my-2'
+        }
+        ],
+    scrollY: '200px',
+    scrollCollapse: true,
+    paging: false,
+    columnDefs: [
+        {
+            target: 0,
+            visible: false
+        }
+    ]
+});
+
+
 function clear(bool) {
     if (bool) {
         document.getElementById("suivi").selectedIndex = 0;
@@ -205,6 +210,7 @@ $('#graphs').on('click', function() {
             site: site,
             type_suivi: type_suivi
         },
+        dataType: 'json',
         success: function(data) {
             console.log(data);
 

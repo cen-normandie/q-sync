@@ -1,4 +1,5 @@
 DROP FUNCTION IF EXISTS sh.ind_eco_releve_phyto(text[], text[], text);
+
 CREATE OR REPLACE FUNCTION sh.ind_eco_releve_phyto(
     annee_param TEXT[],
     id_releve_param TEXT[],
@@ -22,13 +23,13 @@ BEGIN
         r.site,
         COUNT(DISTINCT r.taxon)::INTEGER AS richesse_specifique,
         CASE
-            WHEN SUM(r.coef_relative) > 0 THEN
-                -SUM(r.coef_relative * LOG(r.coef_relative))
+            WHEN SUM(CASE WHEN r.coef_relative > 0 THEN r.coef_relative ELSE 0 END) > 0 THEN
+                -SUM(CASE WHEN r.coef_relative > 0 THEN r.coef_relative * LOG(r.coef_relative) ELSE 0 END)
             ELSE NULL
         END AS indice_shannon,
         CASE
             WHEN COUNT(DISTINCT r.taxon) > 1 THEN
-                (-SUM(r.coef_relative * LOG(r.coef_relative))) / LOG(COUNT(DISTINCT r.taxon))
+                (-SUM(CASE WHEN r.coef_relative > 0 THEN r.coef_relative * LOG(r.coef_relative) ELSE 0 END)) / LOG(COUNT(DISTINCT r.taxon))
             ELSE NULL
         END AS equitabilite
     FROM (
