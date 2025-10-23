@@ -201,6 +201,8 @@ $('#graphs').on('click', function() {
     console.log('Site :', site);
     console.log('Années :', annees);
     console.log('Relevés :', releve_ids);
+    //indices écologiques
+    dtInd.clear().draw();
     $.ajax({
         url: 'sh/analyse/calcul_ind_eco.js.php',
         type: 'POST',
@@ -227,6 +229,8 @@ $('#graphs').on('click', function() {
 
         }
     });
+    //Appartenance phyto
+    
 });
 
 
