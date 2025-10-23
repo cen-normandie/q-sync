@@ -168,7 +168,7 @@ const dtInd =$('#IndicateursEcologiques').DataTable({
         className: 'btn btn-success my-2'
         }
         ],
-    scrollY: '200px',
+    scrollY: '400px',
     scrollCollapse: true,
     paging: false,
     columnDefs: [
