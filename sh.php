@@ -72,7 +72,7 @@ if (in_array($_SESSION['email'], $admins)) {
                 </div>
                 <div class="input-group input-group-sm my-2">
                     <span class="input-group-text" id="">Site</span>
-                    <input id="site" type="text" class="form-control" placeholder="76MAR / Chichebo" aria-label="76MAR / Chichebo "></input>
+                    <input id="site" type="text" class="form-control" placeholder="76MAR / cote" aria-label="76MAR / cote"></input>
                     <button id="clear_site" class="btn btn-outline-secondary" type="button"><i class="fas fa-times"></i></button>
                     <ul id="suggestions"></ul>
                 </div>
@@ -87,17 +87,23 @@ if (in_array($_SESSION['email'], $admins)) {
                     </select>
                 </div>
                 <div class="my-2">
-                    <button id="graphs" class="btn btn-primary align-items-start">Charger les graphiques</button>
+                    <button id="graphs" class="btn btn-success align-items-start">Analyser les relevés --></button>
                 </div>
             </div>
-            <div class="d-flex flex-column col-1 p-2 border border-dark bg-dark ">
+<!--             <div class="d-flex flex-column col-1 p-2 border border-dark bg-dark ">
                 <div class="vr h-100"></div>
+            </div> -->
+            <div id="hide" class="d-flex flex-column col-9 bg-dark">
             </div>
-            <div class="d-flex flex-column col-8 p-2 border border-dark">
-                <div class="d-flex flex-column align-items-center w-100 mb-2">
-                    <h4 class="d-flex bebas ">Indicateurs ecologiques</h4> 
+            <div id="outview" class="d-flex flex-column col-9 border border-dark d-none" style="overflow-y:scroll;">
+                <div class="d-flex flex-column align-items-center justify-content-center bg-dark  w-100 ">
+                    <h4 class="d-flex bebas text-light">Appartenance Phytosociologique</h4> 
                 </div>
-                <table id="IndicateursEcologiques" class="display w-100">
+                <div id="appartenance_graph" style="min-height: 600px;"></div>
+                <div class="d-flex flex-column align-items-center justify-content-center bg-dark  w-100 ">
+                    <h4 class="d-flex bebas text-light">Richesse / Shannon / Equitabilite</h4> 
+                </div>
+                <table id="IndicateursEcologiques" class="display w-100" >
                         <thead>
                             <tr>
                                 <th>Année</th>
@@ -110,8 +116,11 @@ if (in_array($_SESSION['email'], $admins)) {
                         </thead>
                         <tbody></tbody>
                 </table>
-                <div id="appartenance_graph" style="height: 500px; min-width: 600px"></div>
-                
+                <div class="d-flex flex-column align-items-center justify-content-center bg-dark w-100">
+                    <div class="w-100 bg-dark mt-4" >
+                        ...
+                    </div>
+                </div>
             </div>
 
         </div>

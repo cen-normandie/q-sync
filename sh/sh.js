@@ -168,7 +168,7 @@ const dtInd =$('#IndicateursEcologiques').DataTable({
         className: 'btn btn-success my-2'
         }
         ],
-    scrollY: '400px',
+    scrollY: '300px',
     scrollCollapse: true,
     paging: false,
     columnDefs: [
@@ -193,6 +193,11 @@ function clear(bool) {
 
 
 $('#graphs').on('click', function() {
+
+
+    $("#hide").addClass("d-none");
+    $("#outview").removeClass("d-none");
+
     const type_suivi = $('#suivi').val();
     const site = $('#site').val().split(' - ')[0];
     const annees = $('#annee').val(); // tableau des années sélectionnées
@@ -270,21 +275,50 @@ function buildChart(data) {
     const categories = Object.keys(grouped);
     const syntaxons = [...new Set(data.map(d => d.appartenance_phyto))];
 
-    const series = syntaxons.map(syntaxon => {
-        return {
-            name: syntaxon,
-            data: categories.map(annee => {
-                const item = grouped[annee].find(d => d.appartenance_phyto === syntaxon);
-                return item ? parseFloat(item.pourcentage) : 0;
-            }),
-            color: grouped[categories[0]].find(d => d.appartenance_phyto === syntaxon)?.color_etea || '#CCCCCC',
-            stack: 'phyto'
-        };
-    });
+    // Définir une palette de base pour le gradient
+        const gradientColors = [
+            
+            '#630b0bdf', // rouge
+            '#863838df', // rouge-orange
+            '#956232df', // orange
+            '#f5e500df', // jaune
+            '#a8c32fdf', // jaune-vert
+            '#4aa832df', // vert
+            '#32f5cbdf', // vert-bleu
+            '#32a8f5df', // bleu-vert
+            '#3263f5df', // bleu
+            '#8b32f5df', // violet
+            '#dc6fe6df', // rose clair
+            '#f5329ddf', // rose foncé
+            '#50331Bdf', // brun
+            '#808080df',  // gris
+            '#000000df'  // noir
+        ];
+
+
+    const series = syntaxons.map((syntaxon, index) => {
+            const colorIndex = index % gradientColors.length;
+            return {
+                name: syntaxon,
+                data: categories.map(annee => {
+                    const item = grouped[annee].find(d => d.appartenance_phyto === syntaxon);
+                    return item ? parseFloat(item.pourcentage) : 0;
+                }),
+                color: {
+                    linearGradient: { x1: 0, y1: 0, x2: 0, y2: 1 },
+                    stops: [
+                        [0, gradientColors[colorIndex]],
+                        [1, Highcharts.color(gradientColors[colorIndex]).brighten(-0.3).get()]
+                    ]
+                },
+                stack: 'phyto',
+                borderWidth: 0,
+            };
+        });
 
     const chart = Highcharts.chart('appartenance_graph', {
         chart: {
-            height: 1200,
+            height: 600,
             type: 'column'
         },
         title: {
@@ -296,6 +330,9 @@ function buildChart(data) {
         },
         yAxis: {
             min: 0,
+/*             scrollbar: {
+            enabled: true
+            }, */
             title: { text: 'Pourcentage (%)' },
             stackLabels: {
                 enabled: true,
@@ -313,14 +350,17 @@ function buildChart(data) {
                 stacking: 'percent'
             }
         },
-        exporting: {
+        legend: {
+            itemWidth: 400
+        },
+/*         exporting: {
             enabled: true,
             buttons: {
                 contextButton: {
                     menuItems: ['downloadPNG', 'downloadJPEG', 'downloadPDF', 'downloadSVG']
                 }
             }
-        },
+        }, */
         series: series
     });
 }
