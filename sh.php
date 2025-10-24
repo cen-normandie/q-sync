@@ -110,6 +110,7 @@ if (in_array($_SESSION['email'], $admins)) {
                         </thead>
                         <tbody></tbody>
                 </table>
+                <div id="appartenance_graph" style="height: 500px; min-width: 600px"></div>
                 
             </div>
 

@@ -230,64 +230,99 @@ $('#graphs').on('click', function() {
         }
     });
     //Appartenance phyto
+    fetchAppartenance(annees, releve_ids, site, type_suivi)
+        .done(function(data) {
+            console.log('Données d\'appartenance reçues :', data);
+            buildChart(data);
+        })
+        .fail(function(jqXHR, textStatus, errorThrown) {
+            console.error('Erreur lors de la récupération des données d\'appartenance :', textStatus, errorThrown);
+        });
     
 });
 
 
 
 
-    /* const type_suivi = document.getElementById("suivi");
-    const siteSelect = document.getElementById("site");
-    const anneeSelect = document.getElementById("annee");
-    const plotSelect = document.getElementById("plot");
-    const transectSelect = document.getElementById("transect");
-    const idReleveSelect = document.getElementById("releve_id");
-
-    function fetchOptions(endpoint, params, targetSelect) {
-        fetch(endpoint, {
-            method: "POST",
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
-            body: new URLSearchParams(params)
-        })
-        .then(response => response.json())
-        .then(data => {
-            targetSelect.innerHTML = "";
-            data.forEach(item => {
-                const option = document.createElement("option");
-                option.value = item.value;
-                option.textContent = item.label;
-                targetSelect.appendChild(option);
-            });
-        });
-    }
-    type_suivi.addEventListener("change", function () {
-        fetchOptions("filtre/get_sites.php", { type_suivi: type_suivi.value }, siteSelect);
-        anneeSelect.innerHTML = "";
-        plotSelect.innerHTML = "";
-        transectSelect.innerHTML = "";
-        idReleveSelect.innerHTML = "";
+function fetchAppartenance(annees, releve_ids, site, type_suivi) {
+    return $.ajax({
+        url: 'sh/analyse/calcul_appartenance.js.php',
+        method: 'POST',
+        dataType: 'json',
+        data: {
+            annees: annees,
+            plots: releve_ids,
+            site: site,
+            type_suivi: type_suivi
+        }
     });
-    siteSelect.addEventListener("change", function () {
-        fetchOptions("filtre/get_annees.php", { site: siteSelect.value }, anneeSelect);
+}
+
+
+function buildChart(data) {
+    // Regrouper par année
+    const grouped = {};
+    data.forEach(row => {
+        if (!grouped[row.annee]) grouped[row.annee] = [];
+        grouped[row.annee].push(row);
     });
 
-    anneeSelect.addEventListener("change", function () {
-        fetchOptions("filtre/get_plots.php", { site: siteSelect.value, annee: anneeSelect.value }, plotSelect);
+    const categories = Object.keys(grouped);
+    const syntaxons = [...new Set(data.map(d => d.appartenance_phyto))];
+
+    const series = syntaxons.map(syntaxon => {
+        return {
+            name: syntaxon,
+            data: categories.map(annee => {
+                const item = grouped[annee].find(d => d.appartenance_phyto === syntaxon);
+                return item ? parseFloat(item.pourcentage) : 0;
+            }),
+            color: grouped[categories[0]].find(d => d.appartenance_phyto === syntaxon)?.color_etea || '#CCCCCC',
+            stack: 'phyto'
+        };
     });
 
-    plotSelect.addEventListener("change", function () {
-        fetchOptions("filtre/get_transects.php", {
-            site: siteSelect.value,
-            annee: anneeSelect.value,
-            plot: plotSelect.value
-        }, transectSelect);
+    const chart = Highcharts.chart('appartenance_graph', {
+        chart: {
+            height: 1200,
+            type: 'column'
+        },
+        title: {
+            text: 'Profil d’appartenance phyto par année'
+        },
+        xAxis: {
+            categories: categories,
+            title: { text: 'Année' }
+        },
+        yAxis: {
+            min: 0,
+            title: { text: 'Pourcentage (%)' },
+            stackLabels: {
+                enabled: true,
+                formatter: function () {
+                    return this.total + '%';
+                }
+            }
+        },
+        tooltip: {
+            shared: true,
+            pointFormat: '<span style="color:{series.color}">{series.name}</span>: <b>{point.y}%</b><br/>'
+        },
+        plotOptions: {
+            column: {
+                stacking: 'percent'
+            }
+        },
+        exporting: {
+            enabled: true,
+            buttons: {
+                contextButton: {
+                    menuItems: ['downloadPNG', 'downloadJPEG', 'downloadPDF', 'downloadSVG']
+                }
+            }
+        },
+        series: series
     });
+}
 
-    transectSelect.addEventListener("change", function () {
-        fetchOptions("filtre/get_ids.php", {
-            site: siteSelect.value,
-            annee: anneeSelect.value,
-            plot: plotSelect.value,
-            transect: transectSelect.value
-        }, idReleveSelect);
-    }); */
+
