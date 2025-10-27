@@ -50,6 +50,7 @@ include 'php/properties.php';
                     <input id="client_secret" type="text" class="form-control" placeholder="aaaaa-eeeee-bbbbb" aria-label="aaaaa-eeeee-bbbbb"></input>
                 </div>
                 <button id="token" class="btn btn-success align-items-start">generate token</button>
+                <div id="access_token" class="mt-2 p-2 border border-dark bg-light text-break" style="height:200px; overflow:auto; width:100%;"></div>
 
             </div>
 <!--             <div class="d-flex flex-column col-1 p-2 border border-dark bg-dark ">
