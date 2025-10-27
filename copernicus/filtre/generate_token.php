@@ -1,10 +1,12 @@
 
 <?php
+include '../../../properties.php';
 // Paramètres écrits en dur
 //$client_id = 'sh-05b192bf-0bee-4941-b8a0-a49bbce72ab4';
 //$client_secret = '13EAbEUifvlj3QKWQOdit13qg0s7P8dH';
-$client_id  = $_POST['client_id'] ?? 'sh-05b192bf-0bee-4941-b8a0-a49bbce72ab4';
-$client_secret = $_POST['client_secret'] ?? '13EAbEUifvlj3QKWQOdit13qg0s7P8dH';
+//$client_id  = $_POST['client_id'] ?? 'sh-05b192bf-0bee-4941-b8a0-a49bbce72ab4';
+//$client_secret = $_POST['client_secret'] ?? '13EAbEUifvlj3QKWQOdit13qg0s7P8dH';
+
 
 // URL d'authentification Copernicus Data Space
 $url = 'https://identity.dataspace.copernicus.eu/auth/realms/CDSE/protocol/openid-connect/token';
