@@ -17,7 +17,7 @@ $(document).ready(function() {
         },
         success: function(token) {
             console.log('Token reçu : ' + token);
-            $('#access_token').val(token);
+            $('#access_token').html(token);
         },
         error: function(xhr) {
         console.error('Erreur : ' + xhr.responseText);
