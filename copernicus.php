@@ -54,6 +54,42 @@ include 'php/properties.php';
                     <p id="access_token"></p>
                 </div>
 
+
+
+
+  <h2 class="mb-4">Télécharger des liens GeoTIFF</h2>
+  <form id="downloadForm" class="row g-3">
+    <div class="col-md-6">
+      <label for="token" class="form-label">Token</label>
+      <input type="text" class="form-control" id="token" name="token" required>
+    </div>
+    <div class="col-md-6">
+      <label for="collection_id" class="form-label">Collection</label>
+      <select id="collection_id" name="collection_id" class="form-select" multiple required>
+        <option value="CGLS_FCOVER300_V1_GLOBAL">FCOVER 300m</option>
+        <option value="CGLS_FAPAR300_V1_GLOBAL">FAPAR 300m</option>
+        <option value="CGLS_LAI300_V1_GLOBAL">LAI 300m</option>
+      </select>
+      <small class="text-muted">Maintenir CTRL pour sélectionner plusieurs.</small>
+    </div>
+    <div class="col-md-6">
+      <label for="date_from" class="form-label">Date début</label>
+      <input type="date" class="form-control" id="date_from" name="date_from" required>
+    </div>
+    <div class="col-md-6">
+      <label for="date_to" class="form-label">Date fin (optionnel)</label>
+      <input type="date" class="form-control" id="date_to" name="date_to">
+    </div>
+    <div class="col-12">
+      <button type="submit" class="btn btn-primary">Afficher les liens</button>
+    </div>
+  </form>
+  <hr>
+  <div id="result" class="mt-4"></div>
+
+
+
+
             </div>
 <!--             <div class="d-flex flex-column col-1 p-2 border border-dark bg-dark ">
                 <div class="vr h-100"></div>

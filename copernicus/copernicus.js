@@ -18,6 +18,27 @@ $(document).ready(function() {
         success: function(token) {
             console.log('Token reçu : ' + token);
             $('#access_token').html(token);
+            $('#token').val(token);
+
+            $('#downloadForm').submit();
+
+
+            $.ajax({
+                url: 'copernicus/filtre/showLinks.php',
+                method: 'POST',
+                data: $(this).serialize(),
+                success: function(html) {
+                $('#result').html(html);
+                },
+                error: function(xhr) {
+                $('#result').html('<div class="alert alert-danger">Erreur : ' + xhr.responseText + '</div>');
+                }
+            });
+
+
+
+
+
         },
         error: function(xhr) {
         console.error('Erreur : ' + xhr.responseText);
@@ -30,6 +51,26 @@ $(document).ready(function() {
 
 
 });
+
+
+
+$('#downloadForm').on('submit', function(e) {
+  e.preventDefault();
+  $.ajax({
+    url: 'copernicus/filtre/showLinks.php',
+    method: 'POST',
+    data: $(this).serialize(),
+    success: function(html) {
+      $('#result').html(html);
+    },
+    error: function(xhr) {
+      $('#result').html('<div class="alert alert-danger">Erreur : ' + xhr.responseText + '</div>');
+    }
+  });
+});
+
+
+
 
 
 
