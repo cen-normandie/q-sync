@@ -9,9 +9,37 @@ $(document).ready(function() {
             //
         }
         clear(false);
+        $.ajax({
+            url: 'sh/filtre/get_sites.php',
+            method: 'POST',
+            dataType: 'json',
+            data: {
+                type_suivi: typeSuivi
+            },
 
+            success: function(response) {
+                const $list = $('#site_select');
+                $list.empty();
+                const entries = Object.values(response);
 
-        $('#site').off('input').on('input', function() {
+                if (entries.length > 0) {
+                    entries.forEach(function(item) {
+                        $list.append('<option value="' + item.value + '">' + item.label + '</option>');
+                    });
+                    $list.show();
+                } else {
+                    $list.hide();
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Erreur AJAX :', error);
+            }
+        });
+    });
+
+//Autocomplete désactivée temporairement
+/* 
+        $('#site_autocomplete').off('input').on('input', function() {
             const query = $(this).val();
             if (query.length >= 2) {
                 $.ajax({
@@ -35,6 +63,20 @@ $(document).ready(function() {
                         } else {
                             $list.hide();
                         }
+                    }, 
+                    success: function(response) {
+                        const $list = $('#site_select');
+                        $list.empty();
+                        const entries = Object.values(response);
+
+                        if (entries.length > 0) {
+                            entries.forEach(function(item) {
+                                $list.append('<option value="' + item.value + '">' + item.label + '</option>');
+                            });
+                            $list.show();
+                        } else {
+                            $list.hide();
+                        }
                     },
                     error: function(xhr, status, error) {
                         console.error('Erreur AJAX :', error);
@@ -45,13 +87,15 @@ $(document).ready(function() {
                 $('#suggestions').hide();
             }
         });
-    });
+*/
 
-    $('#suggestions').on('click', 'li', function() {
+
+
+/*     $('#suggestions').on('click', 'li', function() {
         const id_site_ = $(this).data('value').split(' - ')[0];
         const nom_complet_site = $(this).data('value');
         const type_suivi_ = $('#suivi').val();
-        $('#site').val(nom_complet_site);
+        $('#site_autocomplete').val(nom_complet_site);
         $('#suggestions').hide();
 
         // Charger les années associées au site sélectionné
@@ -82,10 +126,42 @@ $(document).ready(function() {
             }
         });
     });
+ */
 
+    $('#site_select').on('change', function() {
+        const id_site = $(this).val().split(' - ')[0];
+        const type_suivi = $('#suivi').val();
+        // Charger les années associées au site sélectionné
+        $.ajax({
+            url: 'sh/filtre/get_annees.php',
+            method: 'POST',
+            dataType: 'json',
+            data: {
+                site: id_site,
+                type_suivi: type_suivi
+            },
+            success: function(response) {
+                const $select_annee = $('#annee');
+                $select_annee.empty();
+
+                const annees = Object.values(response);
+
+                if (annees.length > 0) {
+                    annees.forEach(function(item) {
+                        $select_annee.append('<option value="' + item.value + '">' + item.label + '</option>');
+                    });
+                } else {
+                    $select_annee.append('<option value="">Aucune année disponible</option>');
+                }
+            },
+            error: function(xhr, status, error) {
+                console.error('Erreur chargement années :', error);
+            }
+        });
+    });
 
     $('#annee').on('change', function () {
-        const id_site = $('#site').val().split(' - ')[0];
+        const id_site = $('#site_select').val().split(' - ')[0];
         const type_suivi = $('#suivi').val();
         const selected_annees = $(this).val(); // tableau des années sélectionnées
         console.log('Années sélectionnées :', selected_annees);
@@ -184,7 +260,7 @@ function clear(bool) {
     if (bool) {
         document.getElementById("suivi").selectedIndex = 0;
     }
-    document.getElementById("site").value = "";
+    document.getElementById("site_select").value = "";
     document.getElementById("suggestions").innerHTML = "";
     document.getElementById("annee").innerHTML = "";
     document.getElementById("releve_id").innerHTML = "";
@@ -193,13 +269,11 @@ function clear(bool) {
 
 
 $('#graphs').on('click', function() {
-
-
     $("#hide").addClass("d-none");
     $("#outview").removeClass("d-none");
 
     const type_suivi = $('#suivi').val();
-    const site = $('#site').val().split(' - ')[0];
+    const site = $('#site_select').val().split(' - ')[0];
     const annees = $('#annee').val(); // tableau des années sélectionnées
     const releve_ids = $('#releve_id').val(); // tableau des relevés sélectionnés
     console.log('Type de suivi :', type_suivi);
@@ -361,7 +435,10 @@ function buildChart(data) {
                 }
             }
         }, */
-        series: series
+        series: series,
+        credits: {
+            enabled: false
+        }
     });
 }
 

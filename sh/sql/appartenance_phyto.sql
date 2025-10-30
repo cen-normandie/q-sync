@@ -40,12 +40,7 @@ BEGIN
     ORDER BY mapping.annee_mapping, pourcentage DESC;
 END;
 $BODY$;
--- Exemple d'appel de la fonction
-SELECT * FROM sh.calcul_appartenance_carre_contact(
-    ARRAY['2021', '2022'],         -- années
-    ARRAY['R1__11', 'R2__11'],     -- plots
-    '0077_061'                     -- site
-);
+
 
 
 DROP FUNCTION IF EXISTS sh.calcul_appartenance_releve_phyto(text[], text[], text);
@@ -90,9 +85,20 @@ BEGIN
     ORDER BY mapping.annee_mapping, pourcentage DESC;
 END;
 $BODY$;
+
+
+
+
 -- Exemple d'appel de la fonction
 SELECT * FROM sh.calcul_appartenance_releve_phyto(
     ARRAY['2005','2009'],                 -- années
     ARRAY['1A__11', '6H__11'],               -- plots
     '27GAI'                     -- site
+);
+
+-- Exemple d'appel de la fonction
+SELECT * FROM sh.calcul_appartenance_carre_contact(
+    ARRAY['2021', '2022'],         -- années
+    ARRAY['R1__11', 'R2__11'],     -- plots
+    '0077_061'                     -- site
 );

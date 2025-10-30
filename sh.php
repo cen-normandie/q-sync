@@ -59,43 +59,60 @@ if (in_array($_SESSION['email'], $admins)) {
 			<div class="m-2"><span class="text-light"><i class="fas fa-user"></i> <?php echo $_SESSION['email']; ?></span></div>
 			<div class="m-2"><a class="logout text-light" href="php/logout.php" ><i class="fa fa-fw fa-power-off"></i> Déconnexion</a></div>
 		</div>
-        <div class="d-flex" style="">
-            <div class="d-flex flex-column align-items-center col-3 p-2 border border-dark">
-                <h4 class="d-flex bebas align-items-start ">Filtres :</h4>
-                <div class="input-group input-group-sm my-2">
-                    <label class="input-group-text" for="suivi">Suivi</label>
-                    <select id="suivi" name="suivi" class="form-select">
-                        <option value="">--</option>
-                        <option value="releve_phyto">Relevé Phyto</option>
-                        <option value="carre_contact">Carré Contact</option>
-                    </select>
+        <div class="d-flex flex-column" style="">
+            <div class="d-flex flex-column align-items-center justify-content-center bg-dark  w-100 ">
+                    <h4 class="d-flex bebas text-light">Filtres de l'analyse habitat :</h4> 
                 </div>
-                <div class="input-group input-group-sm my-2">
-                    <span class="input-group-text" id="">Site</span>
-                    <input id="site" type="text" class="form-control" placeholder="76MAR / cote" aria-label="76MAR / cote"></input>
-                    <button id="clear_site" class="btn btn-outline-secondary" type="button"><i class="fas fa-times"></i></button>
-                    <ul id="suggestions"></ul>
+            <div class="d-flex align-items-center col-12 p-2">
+                <div class="col-2 px-2">
+                    <div class="input-group input-group-sm my-2">
+                        <label class="input-group-text" for="suivi">Suivi</label>
+                        <select id="suivi" name="suivi" class="form-select">
+                            <option value="">--</option>
+                            <option value="releve_phyto">Relevé Phyto</option>
+                            <option value="carre_contact">Carré Contact</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="input-group input-group-sm my-2">
-                    <label class="input-group-text" for="annee">Année</label>
-                    <select id="annee" name="annee" class="form-select" multiple>
-                    </select>
+                <div class="col-2 px-2">
+                    <div class="input-group input-group-sm my-2 d-none">
+                        <span class="input-group-text" id="">Site</span>
+                        <input id="site_autocomplete" type="text" class="form-control" placeholder="76MAR / cote" aria-label="76MAR / cote"></input>
+                        <ul id="suggestions"></ul>
+                    </div>
+                    <div class="input-group input-group-sm my-2">
+                        <span class="input-group-text" id="">Site</span>
+                        <select id="site_select" class="form-select form-select-sm" >
+                        </select>
+                    </div>
                 </div>
-                <div class="input-group input-group-sm my-2">
-                    <label class="input-group-text" for="releve_id">ID Relevé</label>
-                    <select id="releve_id" name="releve_id" class="form-select" multiple>
-                    </select>
+                <div class="col-2 px-2">
+                    <div class="input-group input-group-sm my-2">
+                        <label class="input-group-text" for="annee">Année</label>
+                        <select id="annee" name="annee" class="form-select" multiple>
+                        </select>
+                    </div>
                 </div>
+                <div class="col-2 px-2">
+                    <div class="input-group input-group-sm my-2">
+                        <label class="input-group-text" for="releve_id">ID Relevé</label>
+                        <select id="releve_id" name="releve_id" class="form-select" multiple>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex align-items-center col-12 p-2">
                 <div class="my-2">
-                    <button id="graphs" class="btn btn-success align-items-start">Analyser les relevés --></button>
+                    <button id="graphs" class="btn btn-sm btn-success align-items-start">Analyser les relevés --></button>
+                    <button id="clear_site" class="btn btn-sm btn-outline-secondary" type="button"><i class="fas fa-times p-1"></i>Effacer les filtres</button>
                 </div>
             </div>
 <!--             <div class="d-flex flex-column col-1 p-2 border border-dark bg-dark ">
                 <div class="vr h-100"></div>
             </div> -->
-            <div id="hide" class="d-flex flex-column col-9 bg-dark">
+            <div id="hide" class="d-flex flex-column col-12 bg-dark">
             </div>
-            <div id="outview" class="d-flex flex-column col-9 border border-dark d-none" style="overflow-y:scroll;">
+            <div id="outview" class="d-flex flex-column col-12 border border-dark d-none" style="overflow-y:scroll;">
                 <div class="d-flex flex-column align-items-center justify-content-center bg-dark  w-100 ">
                     <h4 class="d-flex bebas text-light">Appartenance Phytosociologique</h4> 
                 </div>
