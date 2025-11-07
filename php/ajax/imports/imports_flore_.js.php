@@ -35,7 +35,7 @@ while($row = pg_fetch_row($personne))
                     $photo_file_name = explode("photo/", $row_photo['photo_url'])[1];
                     if ($photo_file_name != '' && file_exists('/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/photo/' . $photo_file_name)) {
                         $cmd_copy_photo = 'cp /var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/photo/' . $photo_file_name . ' /home/geoa/geonature/backend/media/attachments/5/' . $photo_file_name;
-                        echo '</br>' . $cmd_copy_photo . '</br>';
+                        //echo '</br>' . $cmd_copy_photo . '</br>';
                         $output_cp = [];
                         $return_var_cp = 0;
                         $cmd_copy_photo = 'cp /var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/photo/' . $photo_file_name . ' /home/geoa/geonature/backend/media/attachments/5/' . $photo_file_name;
@@ -43,11 +43,11 @@ while($row = pg_fetch_row($personne))
                         // Redirige stderr vers stdout pour capturer les erreurs
                         exec($cmd_copy_photo . ' 2>&1', $output_cp, $return_var_cp);
 
-                        echo '<pre>';
+/*                         echo '<pre>';
                         echo "Commande exécutée : $cmd_copy_photo\n";
                         echo "Code retour : $return_var_cp\n";
                         echo "Sortie :\n" . implode("\n", $output_cp);
-                        echo '</pre>';
+                        echo '</pre>'; */
 
                         if ($return_var_cp == 0) {
                             echo 'Photo copiée avec succès : ' . $photo_file_name . ' </br>';
