@@ -39,6 +39,8 @@ while($row = pg_fetch_row($personne))
                         exec($cmd_copy_photo, $output_cp, $return_var_cp);
                         if ($return_var_cp == 0) {
                             //echo 'Photo copiée avec succès ! </br>';
+                            echo $cmd_copy_photo.'</br>';
+                            echo 'Photo copiée avec succès : '.$photo_file_name.' </br>';
                         } else {
                             echo 'Erreur lors de la copie de la photo ! </br>';
                         }
