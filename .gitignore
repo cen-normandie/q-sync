@@ -1,3 +1,11 @@
 /php/properties.php
 robots.txt
-/_qfield_skeleton/_qfield/photo/*
+/_qfield_skeleton/_qfield/photo/*.png
+/_qfield_skeleton/_qfield/photo/*.jpeg
+/_qfield_skeleton/_qfield/photo/*.PNG
+/_qfield_skeleton/_qfield/photo/*.JPEG
+/_qfield_skeleton/_qfield/photo/*.JPG
+/_qfield_skeleton/_qfield/photo/*.jpg
+/_qfield_skeleton/_qfield/photo/*.tiff
+/_qfield_skeleton/_qfield/photo/*.bmp
+!_qfield_skeleton/_qfield/photo/
