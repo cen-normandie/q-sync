@@ -32,8 +32,8 @@ while($row = pg_fetch_row($personne))
                 foreach ( $results_write_photo_gpkg as $row_photo ) {
                     $photo_file_name = explode("photo/", $row_photo['photo_url'])[1];
                     if ($photo_file_name != '' && file_exists('/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/photo/'.$photo_file_name) ) {
-                        $cmd_copy_photo = 'cp /var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/photo/'.$photo_file_name.' /home/geoa/geonature/backend/media/attachments/5/';
-                        //echo '</br>'.$cmd_copy_photo.'</br>';
+                        $cmd_copy_photo = 'cp /var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/photo/'.$photo_file_name.' /home/geoa/geonature/backend/media/attachments/5/'.$photo_file_name;
+                        echo '</br>'.$cmd_copy_photo.'</br>';
                         $output_cp=[];
                         $return_var_cp=0;
                         exec($cmd_copy_photo, $output_cp, $return_var_cp);
