@@ -36,13 +36,13 @@ if ($results_write_photo_gpkg) {
     echo "Erreur sur le gpkg : " . $db->lastErrorMsg();
 }
 
-$results_write_gpkg = $db->query("UPDATE obs_flore SET date_import = datetime('now') WHERE date_import IS NULL;");
+/* $results_write_gpkg = $db->query("UPDATE obs_flore SET date_import = datetime('now') WHERE date_import IS NULL;");
 if ($results_write_gpkg) {
     echo $db->changes();
     echo ' données mises à jour dans le gpkg ( obs_flore )</br>';
 } else {
     echo "Erreur sur le gpkg : " . $db->lastErrorMsg();
-}
+} */
 
 $db->close();
 
