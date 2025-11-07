@@ -30,21 +30,27 @@ while($row = pg_fetch_row($personne))
             $results_write_photo_gpkg = $db->query("SELECT photo_url FROM $table WHERE date_import is null and photo_url is not null;"); //
             echo '</br>Import des photos associées aux observations flore :</br>';
             if ($results_write_photo_gpkg) {
-                echo '</br>Début de la copie des photos...</br>';
-                echo $results_write_photo_gpkg->numColumns();
-                foreach ( $results_write_photo_gpkg as $row_photo ) {
-                    echo 'Traitement de la photo : '.$row_photo['photo_url'].'</br>';
+                while ($row_photo = $results_write_photo_gpkg->fetchArray(SQLITE3_ASSOC)) {
+                    echo 'Traitement de la photo : ' . $row_photo['photo_url'] . '</br>';
                     $photo_file_name = explode("photo/", $row_photo['photo_url'])[1];
-                    if ($photo_file_name != '' && file_exists('/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/photo/'.$photo_file_name) ) {
-                        $cmd_copy_photo = 'cp /var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/photo/'.$photo_file_name.' /home/geoa/geonature/backend/media/attachments/5/'.$photo_file_name;
-                        echo '</br>'.$cmd_copy_photo.'</br>';
-                        $output_cp=[];
-                        $return_var_cp=0;
-                        exec($cmd_copy_photo, $output_cp, $return_var_cp);
+                    if ($photo_file_name != '' && file_exists('/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/photo/' . $photo_file_name)) {
+                        $cmd_copy_photo = 'cp /var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/photo/' . $photo_file_name . ' /home/geoa/geonature/backend/media/attachments/5/' . $photo_file_name;
+                        echo '</br>' . $cmd_copy_photo . '</br>';
+                        $output_cp = [];
+                        $return_var_cp = 0;
+                        $cmd_copy_photo = 'cp /var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/photo/' . $photo_file_name . ' /home/geoa/geonature/backend/media/attachments/5/' . $photo_file_name;
+
+                        // Redirige stderr vers stdout pour capturer les erreurs
+                        exec($cmd_copy_photo . ' 2>&1', $output_cp, $return_var_cp);
+
+                        echo '<pre>';
+                        echo "Commande exécutée : $cmd_copy_photo\n";
+                        echo "Code retour : $return_var_cp\n";
+                        echo "Sortie :\n" . implode("\n", $output_cp);
+                        echo '</pre>';
+
                         if ($return_var_cp == 0) {
-                            //echo 'Photo copiée avec succès ! </br>';
-                            echo $cmd_copy_photo.'</br>';
-                            echo 'Photo copiée avec succès : '.$photo_file_name.' </br>';
+                            echo 'Photo copiée avec succès : ' . $photo_file_name . ' </br>';
                         } else {
                             echo 'Erreur lors de la copie de la photo ! </br>';
                         }
