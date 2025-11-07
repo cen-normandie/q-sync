@@ -31,6 +31,7 @@ while($row = pg_fetch_row($personne))
             echo '</br>Import des photos associées aux observations flore :</br>';
             if ($results_write_photo_gpkg) {
                 echo '</br>Début de la copie des photos...</br>';
+                echo $results_write_photo_gpkg->numColumns();
                 foreach ( $results_write_photo_gpkg as $row_photo ) {
                     echo 'Traitement de la photo : '.$row_photo['photo_url'].'</br>';
                     $photo_file_name = explode("photo/", $row_photo['photo_url'])[1];
