@@ -19,7 +19,7 @@ if ($results_write_photo_gpkg) {
         echo 'Traitement de la photo : ' . $row_photo['photo_url'] . '</br>';
         $photo_file_name = explode("photo/", $row_photo['photo_url'])[1];
         if ($photo_file_name != '' && file_exists('/var/www/html/nextcloud/data/8ACA0A1C-6E6E-4912-8511-DB8A02F1CA67/files/_qfield/photo/' . $photo_file_name)) {
-            $cmd_copy_photo = 'sudo cp /var/www/html/nextcloud/data/8ACA0A1C-6E6E-4912-8511-DB8A02F1CA67/files/_qfield/photo/' . $photo_file_name . ' /home/geoa/geonature/backend/media/attachments/5/' . $photo_file_name;
+            $cmd_copy_photo = 'cp /var/www/html/nextcloud/data/8ACA0A1C-6E6E-4912-8511-DB8A02F1CA67/files/_qfield/photo/' . $photo_file_name . ' /home/geoa/geonature/backend/media/attachments/5/' . $photo_file_name;
             echo '</br>' . $cmd_copy_photo . '</br>';
             $output_cp = [];
             $return_var_cp = 0;
