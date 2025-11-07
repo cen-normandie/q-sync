@@ -28,8 +28,11 @@ while($row = pg_fetch_row($personne))
             $db = new SQLite3('/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/observations.gpkg');
             $db->loadExtension('mod_spatialite.so');
             $results_write_photo_gpkg = $db->query("SELECT photo_url FROM $table WHERE date_import is null and photo_url is not null;"); //
+            echo '</br>Import des photos associées aux observations flore :</br>';
             if ($results_write_photo_gpkg) {
+                echo '</br>Début de la copie des photos...</br>';
                 foreach ( $results_write_photo_gpkg as $row_photo ) {
+                    echo 'Traitement de la photo : '.$row_photo['photo_url'].'</br>';
                     $photo_file_name = explode("photo/", $row_photo['photo_url'])[1];
                     if ($photo_file_name != '' && file_exists('/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/photo/'.$photo_file_name) ) {
                         $cmd_copy_photo = 'cp /var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/photo/'.$photo_file_name.' /home/geoa/geonature/backend/media/attachments/5/'.$photo_file_name;
