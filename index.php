@@ -44,7 +44,7 @@
 		</div>
         <div class="d-flex flex-column justify-content-end" style="">
 			<div class="d-flex align-items-start flex-column" style="">
-				<div class="p-4 w-100"><h2>Qsync</h2></div>
+				<div class="p-4 w-100"><h2>Qsync v1.1</h2></div>
 				<div class="p-4 col-sm-12 col-md-6 col-lg-4">
 					<form role="form">
 						<div class="input-group w-100">
