@@ -86,7 +86,7 @@ while($row = pg_fetch_row($personne))
   $o_gpkg = '';
   $f_n2k_gpkg = '';
   if (file_exists($n2k_gpkg)) {
-    echo '</br>#########' .$row[0].' - N2K gpkg</br>';
+    /* echo '</br>#########' .$row[0].' - N2K gpkg</br>';
     $f_n2k_gpkg=date('Y-m-d', filemtime($n2k_gpkg));
     $db_n2k = new SQLite3($n2k_gpkg);
     $db_n2k->loadExtension('mod_spatialite.so');
@@ -102,7 +102,29 @@ while($row = pg_fetch_row($personne))
     echo 'Réalisé ligne non importées : '.$r_l.'</br>';
     $r_pol = (int) $db_n2k->query("SELECT coalesce(count(*), 0) as c from n2k_realise_polygone where importe is null ;");
     echo 'Réalisé polygone non importées : '.$r_pol.'</br>';
+    $db_n2k->close(); */
+
+    echo '<br>#########' . $row[0] . ' - N2K gpkg<br>';
+    $f_n2k_gpkg = date('Y-m-d', filemtime($n2k_gpkg));
+    $db_n2k = new SQLite3($n2k_gpkg);
+    $db_n2k->loadExtension('mod_spatialite.so');
+
+    // Correction : Récupère la valeur du compte
+    $result = $db_n2k->query("SELECT coalesce(count(*), 0) as c from n2k_previ_point where importe is null;");
+    $p_p = (int) $result->fetchArray(SQLITE3_ASSOC)['c'];
+    $result = $db_n2k->query("SELECT coalesce(count(*), 0) as c from n2k_previ_ligne where importe is null;");
+    $p_l = (int) $result->fetchArray(SQLITE3_ASSOC)['c'];
+    $result = $db_n2k->query("SELECT coalesce(count(*), 0) as c from n2k_previ_polygone where importe is null;");
+    $p_pol = (int) $result->fetchArray(SQLITE3_ASSOC)['c'];
+    $result = $db_n2k->query("SELECT coalesce(count(*), 0) as c from n2k_realise_point where importe is null;");
+    $r_p = (int) $result->fetchArray(SQLITE3_ASSOC)['c'];
+    $result = $db_n2k->query("SELECT coalesce(count(*), 0) as c from n2k_realise_ligne where importe is null;");
+    $r_l = (int) $result->fetchArray(SQLITE3_ASSOC)['c'];
+    $result = $db_n2k->query("SELECT coalesce(count(*), 0) as c from n2k_realise_polygone where importe is null;");
+    $r_pol = (int) $result->fetchArray(SQLITE3_ASSOC)['c'];
     $db_n2k->close();
+
+
   } else {
     $f_n2k_gpkg = 'ø';
     $p_p = 0;
