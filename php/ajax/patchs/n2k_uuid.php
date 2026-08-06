@@ -24,23 +24,55 @@ while ($row = pg_fetch_row($users)) {
     $n2k_gpkg = '/var/www/html/nextcloud/data/' . $uuid_nx . '/files/_qfield/n2k.gpkg';
 
     if (file_exists($n2k_gpkg)) {
-        // Compter les polygones sans uuid_n2k
         $db = new SQLite3($n2k_gpkg);
         $db->loadExtension('mod_spatialite.so');
 
-        $query = "SELECT COUNT(*) as count FROM n2k_realise_polygone WHERE id_uuid_n2k IS NULL OR id_uuid_n2k = ''";
-        $result = $db->query($query);
+        // 1. Vérifier les polygones avec id_uuid_n2k vide mais importe renseigné
+        $query_empty_uuid_with_importe = "
+            SELECT COUNT(*) as count
+            FROM n2k_realise_polygone
+            WHERE (id_uuid_n2k IS NULL OR id_uuid_n2k = '')
+            AND importe IS NOT NULL
+        ";
+        $result = $db->query($query_empty_uuid_with_importe);
+        $row_count = $result->fetchArray(SQLITE3_ASSOC);
+        $count_empty_uuid_with_importe = $row_count['count'];
 
-        if ($result) {
-            $row_count = $result->fetchArray(SQLITE3_ASSOC);
-            $count = $row_count['count'];
+        // 2. Vérifier les doublons dans id_uuid_n2k avec importe renseigné
+        $query_duplicates_with_importe = "
+            SELECT id_uuid_n2k, COUNT(*) as count
+            FROM n2k_realise_polygone
+            WHERE id_uuid_n2k IS NOT NULL AND id_uuid_n2k <> ''
+            GROUP BY id_uuid_n2k
+            HAVING COUNT(*) > 1
+        ";
+        $result_duplicates = $db->query($query_duplicates_with_importe);
+        $duplicates_with_importe = 0;
 
-            if ($count > 0) {
-                $line = "user $gn_user_name $uuid_nx : $nom_ad nombre de polygones_realises_sans_uuid : $count\n";
-                fwrite($output_file, $line);
+        while ($duplicate_row = $result_duplicates->fetchArray(SQLITE3_ASSOC)) {
+            $id_uuid_n2k = $duplicate_row['id_uuid_n2k'];
+            $query_check_importe = "
+                SELECT COUNT(*) as count_with_importe
+                FROM n2k_realise_polygone
+                WHERE id_uuid_n2k = '$id_uuid_n2k'
+                AND importe IS NOT NULL
+            ";
+            $result_importe = $db->query($query_check_importe);
+            $importe_row = $result_importe->fetchArray(SQLITE3_ASSOC);
+            if ($importe_row['count_with_importe'] > 0) {
+                $duplicates_with_importe += 1;
             }
-        } else {
-            echo "Erreur sur la requête : " . $db->lastErrorMsg();
+        }
+
+        // Écrire les erreurs dans le fichier
+        if ($count_empty_uuid_with_importe > 0) {
+            $line = "user $gn_user_name $uuid_nx : $nom_ad nombre de polygones avec id_uuid_n2k vide mais importe renseigné : $count_empty_uuid_with_importe\n";
+            fwrite($output_file, $line);
+        }
+
+        if ($duplicates_with_importe > 0) {
+            $line = "user $gn_user_name $uuid_nx : $nom_ad nombre de doublons id_uuid_n2k avec importe renseigné : $duplicates_with_importe\n";
+            fwrite($output_file, $line);
         }
 
         $db->close();
