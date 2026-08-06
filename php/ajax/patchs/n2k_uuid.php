@@ -27,11 +27,33 @@ while ($row = pg_fetch_row($users)) {
         $db = new SQLite3($n2k_gpkg);
         $db->loadExtension('mod_spatialite.so');
 
+        // Vérifier si le champ id_uuid_n2k existe dans la table n2k_realise_polygone
+        $check_field_query = $db->query("PRAGMA table_info(n2k_realise_polygone)");
+        $has_id_uuid_n2k = false;
+        $field_name = 'id_uuid_n2k'; // Nom par défaut
+
+        while ($column = $check_field_query->fetchArray(SQLITE3_ASSOC)) {
+            if ($column['name'] === 'id_uuid_n2k') {
+                $has_id_uuid_n2k = true;
+                $field_name = 'id_uuid_n2k';
+                break;
+            } elseif ($column['name'] === 'id_uuid_n2k_up') {
+                $has_id_uuid_n2k = true;
+                $field_name = 'id_uuid_n2k_up';
+                break;
+            }
+        }
+
+        if (!$has_id_uuid_n2k) {
+            $db->close();
+            continue; // Passer à l'utilisateur suivant si le champ n'existe pas
+        }
+
         // 1. Vérifier les polygones avec id_uuid_n2k vide mais importe renseigné
         $query_empty_uuid_with_importe = "
             SELECT COUNT(*) as count
             FROM n2k_realise_polygone
-            WHERE (id_uuid_n2k IS NULL OR id_uuid_n2k = '')
+            WHERE ($field_name IS NULL OR $field_name = '')
             AND importe IS NOT NULL
         ";
         $result = $db->query($query_empty_uuid_with_importe);
@@ -40,21 +62,21 @@ while ($row = pg_fetch_row($users)) {
 
         // 2. Vérifier les doublons dans id_uuid_n2k avec importe renseigné
         $query_duplicates_with_importe = "
-            SELECT id_uuid_n2k, COUNT(*) as count
+            SELECT $field_name, COUNT(*) as count
             FROM n2k_realise_polygone
-            WHERE id_uuid_n2k IS NOT NULL AND id_uuid_n2k <> ''
-            GROUP BY id_uuid_n2k
+            WHERE $field_name IS NOT NULL AND $field_name <> ''
+            GROUP BY $field_name
             HAVING COUNT(*) > 1
         ";
         $result_duplicates = $db->query($query_duplicates_with_importe);
         $duplicates_with_importe = 0;
 
         while ($duplicate_row = $result_duplicates->fetchArray(SQLITE3_ASSOC)) {
-            $id_uuid_n2k = $duplicate_row['id_uuid_n2k'];
+            $id_uuid = $duplicate_row[$field_name];
             $query_check_importe = "
                 SELECT COUNT(*) as count_with_importe
                 FROM n2k_realise_polygone
-                WHERE id_uuid_n2k = '$id_uuid_n2k'
+                WHERE $field_name = '" . SQLite3::escapeString($id_uuid) . "'
                 AND importe IS NOT NULL
             ";
             $result_importe = $db->query($query_check_importe);
@@ -66,12 +88,12 @@ while ($row = pg_fetch_row($users)) {
 
         // Écrire les erreurs dans le fichier
         if ($count_empty_uuid_with_importe > 0) {
-            $line = "user $gn_user_name $uuid_nx : $nom_ad nombre de polygones avec id_uuid_n2k vide mais importe renseigné : $count_empty_uuid_with_importe\n";
+            $line = "user $gn_user_name $uuid_nx : $nom_ad nombre de polygones avec $field_name vide mais importe renseigné : $count_empty_uuid_with_importe\n";
             fwrite($output_file, $line);
         }
 
         if ($duplicates_with_importe > 0) {
-            $line = "user $gn_user_name $uuid_nx : $nom_ad nombre de doublons id_uuid_n2k avec importe renseigné : $duplicates_with_importe\n";
+            $line = "user $gn_user_name $uuid_nx : $nom_ad nombre de doublons $field_name avec importe renseigné : $duplicates_with_importe\n";
             fwrite($output_file, $line);
         }
 
