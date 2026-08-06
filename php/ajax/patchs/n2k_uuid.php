@@ -82,7 +82,7 @@ while ($row = pg_fetch_row($users)) {
     $result_no_importe = $db->query($query_no_importe);
     $no_importe_list = [];
     while ($row_no_importe = $result_no_importe->fetchArray(SQLITE3_ASSOC)) {
-        $no_importe_list[] = $row_no_importe[$field_name];
+        $no_importe_list[] = $row_no_importe[$field_name] . " (x" . $row_no_importe['count'] . ")";
     }
 
     if (!empty($no_importe_list)) {
@@ -133,6 +133,25 @@ while ($row = pg_fetch_row($users)) {
         fwrite($output_file, $line);
         echo "[DEBUG] $line";
         $total_errors += $count_importe_no_uuid;
+    }
+
+    // =============================================
+    // 4. Lister TOUS les id_uuid_n2K VIDES (NULL ou chaîne vide)
+    // =============================================
+    $query_empty_uuid = "
+        SELECT COUNT(*) as count
+        FROM n2k_realise_polygone
+        WHERE $field_name IS NULL OR $field_name = ''
+    ";
+    $result_empty_uuid = $db->query($query_empty_uuid);
+    $row_empty_uuid = $result_empty_uuid->fetchArray(SQLITE3_ASSOC);
+    $count_empty_uuid = $row_empty_uuid['count'];
+
+    if ($count_empty_uuid > 0) {
+        $line = "user $gn_user_name $uuid_nx : $nom_ad | nombre de polygones avec id_uuid_n2K vide : $count_empty_uuid\n";
+        fwrite($output_file, $line);
+        echo "[DEBUG] $line";
+        $total_errors += $count_empty_uuid;
     }
 
     $db->close();
