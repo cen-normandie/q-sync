@@ -28,7 +28,7 @@ while ($row = pg_fetch_row($users)) {
         $db = new SQLite3($n2k_gpkg);
         $db->loadExtension('mod_spatialite.so');
 
-        $query = "SELECT COUNT(*) as count FROM n2k_realise_polygone WHERE uuid_n2k IS NULL OR uuid_n2k = ''";
+        $query = "SELECT COUNT(*) as count FROM n2k_realise_polygone WHERE id_uuid_n2k IS NULL OR id_uuid_n2k = ''";
         $result = $db->query($query);
 
         if ($result) {
