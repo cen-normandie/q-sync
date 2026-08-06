@@ -56,7 +56,7 @@ while ($row = pg_fetch_row($users)) {
     $field_name = null;
     while ($column = $check_field->fetchArray(SQLITE3_ASSOC)) {
         if (strtolower($column['name']) === 'id_uuid_n2k') {
-            $field_name = $column['name']; // Garde la casse exacte (id_uuid_n2k ou id_uuid_n2K)
+            $field_name = $column['name'];
             break;
         }
     }
@@ -69,25 +69,32 @@ while ($row = pg_fetch_row($users)) {
 
     echo "[DEBUG] Champ détecté : $field_name\n";
 
-    // 1. Lignes avec id_uuid_n2k vide mais importe renseigné
-    $query_empty_uuid = "
-        SELECT COUNT(*) as count
+    // =============================================
+    // 1. Lister TOUS les id_uuid_n2K SANS données dans importe
+    // =============================================
+    $query_no_importe = "
+        SELECT $field_name, COUNT(*) as count
         FROM n2k_realise_polygone
-        WHERE ($field_name IS NULL OR $field_name = '')
-        AND importe IS NOT NULL
+        WHERE ($field_name IS NOT NULL AND $field_name <> '')
+        AND (importe IS NULL OR importe = '')
+        GROUP BY $field_name
     ";
-    $result = $db->query($query_empty_uuid);
-    $row_count = $result->fetchArray(SQLITE3_ASSOC);
-    $count_empty_uuid = $row_count['count'];
-
-    if ($count_empty_uuid > 0) {
-        $line = "user $gn_user_name $uuid_nx : $nom_ad nombre de polygones avec $field_name vide mais importe renseigné : $count_empty_uuid\n";
-        fwrite($output_file, $line);
-        echo "[DEBUG] $line";
-        $total_errors += $count_empty_uuid;
+    $result_no_importe = $db->query($query_no_importe);
+    $no_importe_list = [];
+    while ($row_no_importe = $result_no_importe->fetchArray(SQLITE3_ASSOC)) {
+        $no_importe_list[] = $row_no_importe[$field_name];
     }
 
-    // 2. Doublons dans id_uuid_n2k avec importe renseigné
+    if (!empty($no_importe_list)) {
+        $line = "user $gn_user_name $uuid_nx : $nom_ad | id_uuid_n2K sans importe : " . implode(', ', $no_importe_list) . "\n";
+        fwrite($output_file, $line);
+        echo "[DEBUG] $line";
+        $total_errors += count($no_importe_list);
+    }
+
+    // =============================================
+    // 2. Lister les DOUBLONS de id_uuid_n2K
+    // =============================================
     $query_duplicates = "
         SELECT $field_name, COUNT(*) as count
         FROM n2k_realise_polygone
@@ -96,28 +103,36 @@ while ($row = pg_fetch_row($users)) {
         HAVING COUNT(*) > 1
     ";
     $result_duplicates = $db->query($query_duplicates);
-    $duplicates_with_importe = 0;
-
-    while ($duplicate_row = $result_duplicates->fetchArray(SQLITE3_ASSOC)) {
-        $id_uuid = $duplicate_row[$field_name];
-        $query_check_importe = "
-            SELECT COUNT(*) as count_with_importe
-            FROM n2k_realise_polygone
-            WHERE $field_name = '" . SQLite3::escapeString($id_uuid) . "'
-            AND importe IS NOT NULL
-        ";
-        $result_importe = $db->query($query_check_importe);
-        $importe_row = $result_importe->fetchArray(SQLITE3_ASSOC);
-        if ($importe_row['count_with_importe'] > 0) {
-            $duplicates_with_importe++;
-        }
+    $duplicates_list = [];
+    while ($row_duplicates = $result_duplicates->fetchArray(SQLITE3_ASSOC)) {
+        $duplicates_list[] = $row_duplicates[$field_name] . " (x" . $row_duplicates['count'] . ")";
     }
 
-    if ($duplicates_with_importe > 0) {
-        $line = "user $gn_user_name $uuid_nx : $nom_ad nombre de doublons $field_name avec importe renseigné : $duplicates_with_importe\n";
+    if (!empty($duplicates_list)) {
+        $line = "user $gn_user_name $uuid_nx : $nom_ad | doublons id_uuid_n2K : " . implode(', ', $duplicates_list) . "\n";
         fwrite($output_file, $line);
         echo "[DEBUG] $line";
-        $total_errors += $duplicates_with_importe;
+        $total_errors += count($duplicates_list);
+    }
+
+    // =============================================
+    // 3. Lister les données avec importe mais SANS id_uuid_n2K
+    // =============================================
+    $query_importe_no_uuid = "
+        SELECT COUNT(*) as count
+        FROM n2k_realise_polygone
+        WHERE (importe IS NOT NULL AND importe <> '')
+        AND ($field_name IS NULL OR $field_name = '')
+    ";
+    $result_importe_no_uuid = $db->query($query_importe_no_uuid);
+    $row_importe_no_uuid = $result_importe_no_uuid->fetchArray(SQLITE3_ASSOC);
+    $count_importe_no_uuid = $row_importe_no_uuid['count'];
+
+    if ($count_importe_no_uuid > 0) {
+        $line = "user $gn_user_name $uuid_nx : $nom_ad | nombre de polygones avec importe mais sans id_uuid_n2K : $count_importe_no_uuid\n";
+        fwrite($output_file, $line);
+        echo "[DEBUG] $line";
+        $total_errors += $count_importe_no_uuid;
     }
 
     $db->close();
