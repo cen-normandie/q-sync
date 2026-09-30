@@ -4,7 +4,9 @@ include '../../properties.php';
 
 $dbconn_geo = pg_connect("hostaddr=$DBHOST_geonature port=$PORT_geonature dbname=$DBNAME_geonature user=$LOGIN_geonature password=$PASS_geonature") or die ('Connexion impossible :'. pg_last_error());
 $select = pg_prepare($dbconn_geo, "sql_select", "select courriel, gn_user_name, nom_ad, uuid_nx from $nx_users where observations_gpkg <> 'ø' and (obs_faune > 0 ) ;");
-pg_prepare($dbconn_geo, "sql_import_occtax", "select sandbox.import_faune_();");
+
+// desactive import dans géonature
+//pg_prepare($dbconn_geo, "sql_import_occtax", "select sandbox.import_faune_();");
 //$delete = pg_prepare($dbconn_geo, "sql_delete", "delete from sandbox.obs_faune_tmp ;");
 $personne = pg_execute($dbconn_geo, "sql_select",array()) or die ( pg_last_error());
 
@@ -41,13 +43,14 @@ while($row = pg_fetch_row($personne))
 
     }
     
+    //import dans géonature désactivé
     //intégration des données de sandbox.obs_faune dans geonature --> occ_tax
-    $out = pg_execute($dbconn_geo, "sql_import_occtax",array()) or die ( pg_last_error());
+    /* $out = pg_execute($dbconn_geo, "sql_import_occtax",array()) or die ( pg_last_error());
     if ($out) {
         echo 'Import des données faune dans Geonature réussi !</br>';
     } else {
         echo pg_last_error($dbconn_geo).'</br>';
-    }
+    } */
   }
 }
 pg_close($dbconn_geo);
