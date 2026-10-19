@@ -6,7 +6,7 @@ $dbconn_geo = pg_connect("hostaddr=$DBHOST_geonature port=$PORT_geonature dbname
 $select = pg_prepare($dbconn_geo, "sql_select", "select courriel, gn_user_name, nom_ad, uuid_nx from $nx_users where observations_gpkg <> 'ø' and (obs_flore > 0 or obs_flore_polygone > 0 );");
 
 // desactive import dans géonature
-//pg_prepare($dbconn_geo, "sql_import_occtax", "select sandbox.import_flore_();");
+pg_prepare($dbconn_geo, "sql_import_occtax", "select sandbox.import_flore_();");
 
 
 //$delete = pg_prepare($dbconn_geo, "sql_delete", "delete from sandbox.obs_flore_tmp ;");
@@ -31,7 +31,7 @@ while($row = pg_fetch_row($personne))
         if ($return_var == 0) {
             $db = new SQLite3('/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/observations.gpkg');
             $db->loadExtension('mod_spatialite.so');
-            $results_write_photo_gpkg = $db->query("SELECT photo_url FROM $table WHERE date_import is null and photo_url is not null;"); //
+            $results_write_photo_gpkg = $db->query("SELECT photo_url FROM $table WHERE date_import is null and photo_url is not null;");
             echo '</br>Import des photos associées aux observations flore :</br>';
             if ($results_write_photo_gpkg) {
                 while ($row_photo = $results_write_photo_gpkg->fetchArray(SQLITE3_ASSOC)) {
@@ -39,19 +39,11 @@ while($row = pg_fetch_row($personne))
                     $photo_file_name = explode("photo/", $row_photo['photo_url'])[1];
                     if ($photo_file_name != '' && file_exists('/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/photo/' . $photo_file_name)) {
                         $cmd_copy_photo = 'cp /var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/photo/' . $photo_file_name . ' /home/geoa/geonature/backend/media/attachments/5/' . $photo_file_name;
-                        //echo '</br>' . $cmd_copy_photo . '</br>';
+
                         $output_cp = [];
                         $return_var_cp = 0;
-                        $cmd_copy_photo = 'cp /var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/photo/' . $photo_file_name . ' /home/geoa/geonature/backend/media/attachments/5/' . $photo_file_name;
-
                         // Redirige stderr vers stdout pour capturer les erreurs
                         exec($cmd_copy_photo . ' 2>&1', $output_cp, $return_var_cp);
-
-/*                         echo '<pre>';
-                        echo "Commande exécutée : $cmd_copy_photo\n";
-                        echo "Code retour : $return_var_cp\n";
-                        echo "Sortie :\n" . implode("\n", $output_cp);
-                        echo '</pre>'; */
 
                         if ($return_var_cp == 0) {
                             echo 'Photo copiée avec succès : ' . $photo_file_name . ' </br>';
@@ -61,9 +53,8 @@ while($row = pg_fetch_row($personne))
                     }
                 }
             } else {echo "Erreur sur le gpkg : " . $db->lastErrorMsg(); }
-            $results_write_gpkg = $db->query("UPDATE $table set date_import = datetime('now') where date_import is null ;"); //
+            $results_write_gpkg = $db->query("UPDATE $table set date_import = datetime('now') where date_import is null ;");
             if ($results_write_gpkg) {
-                //echo '</br>Données flore ( '.$table.' ) importées avec succès ! </br>';
                 echo $db->changes();
                 echo ' données mises à jour dans le gpkg ( '.$table.' )</br>';
             } else {echo "Erreur sur le gpkg : " . $db->lastErrorMsg(); }
@@ -77,12 +68,12 @@ while($row = pg_fetch_row($personne))
     
     //import dans géonature désactivé
     //intégration des données de sandbox.obs_flore dans geonature --> occ_tax
-    // $out = pg_execute($dbconn_geo, "sql_import_occtax",array()) or die ( pg_last_error());
-    // if ($out) {
-    //     echo 'Import des données flore dans Geonature réussi !</br>';
-    // } else {
-    //     echo pg_last_error($dbconn_geo).'</br>';
-    // }
+     $out = pg_execute($dbconn_geo, "sql_import_occtax",array()) or die ( pg_last_error());
+    if ($out) {
+        echo 'Import des données flore dans Geonature réussi !</br>';
+    } else {
+        echo pg_last_error($dbconn_geo).'</br>';
+    } 
   }
 }
 pg_close($dbconn_geo);
