@@ -33,8 +33,10 @@ $update_users = pg_prepare($dbconn_geo, "update_users",
     n2k_previ_polygone = $9,
     n2k_realise_point = $10,
     n2k_realise_ligne = $11,
-    n2k_realise_polygone = $12
-    where uuid_nx= $13;");
+    n2k_realise_polygone = $12,
+    w_gpkg = $13,
+    nb_w_gpkg = $14
+    where uuid_nx= $15;");
 $insert_s = pg_prepare($dbconn_nx, "sql", "
 with a_ as (
 SELECT id, uid, value as name_
@@ -85,6 +87,9 @@ while($row = pg_fetch_row($personne))
   $n2k_gpkg = '/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/n2k.gpkg';
   $o_gpkg = '';
   $f_n2k_gpkg = '';
+  $w_gpkg_path = '/var/www/html/nextcloud/data/'.$row[3].'/files/_ge/w_.gpkg';
+  $w_gpkg = '';
+  $nb_w_gpkg = 0;
   if (file_exists($n2k_gpkg)) {
     /* echo '</br>#########' .$row[0].' - N2K gpkg</br>';
     $f_n2k_gpkg=date('Y-m-d', filemtime($n2k_gpkg));
@@ -178,7 +183,17 @@ while($row = pg_fetch_row($personne))
     $obs_cc = 0;
   }
 
-  $update_users_ = pg_execute($dbconn_geo, "update_users",array($o_gpkg, $f_n2k_gpkg, $obs_flore, $obs_flore_polygone, $obs_faune, $obs_cc, $p_p, $p_l, $p_pol, $r_p, $r_l, $r_pol, $row[3])) or die ( pg_last_error());
+  if (file_exists($w_gpkg_path)) {
+    $w_gpkg = date('Y-m-d', filemtime($w_gpkg_path));
+    $db_w = new SQLite3($w_gpkg_path);
+    $nb_w_gpkg = (int) $db_w->querySingle("SELECT (SELECT coalesce(count(*),0) FROM w_points) + (SELECT coalesce(count(*),0) FROM w_polygones) + (SELECT coalesce(count(*),0) FROM w_lignes);");
+    $db_w->close();
+  } else {
+    $w_gpkg = 'ø';
+    $nb_w_gpkg = 0;
+  }
+
+  $update_users_ = pg_execute($dbconn_geo, "update_users",array($o_gpkg, $f_n2k_gpkg, $obs_flore, $obs_flore_polygone, $obs_faune, $obs_cc, $p_p, $p_l, $p_pol, $r_p, $r_l, $r_pol, $w_gpkg, $nb_w_gpkg, $row[3])) or die ( pg_last_error());
   //$update_users_ = pg_execute($dbconn_geo, "update_users",array($o_gpkg, $f_n2k_gpkg, $row[3])) or die ( pg_last_error());
 }
 

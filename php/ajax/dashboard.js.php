@@ -12,6 +12,8 @@ SELECT
 	nom_ad as personne, 
 	observations_gpkg,
 	n2k_gpkg,
+	w_gpkg,
+	nb_w_gpkg,
 	obs_flore as flore,
 	obs_faune as faune,
 	obs_flore_polygone as flore_polygone,

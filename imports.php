@@ -76,6 +76,7 @@ if (in_array($_SESSION['email'], $admins)) {
                                     <th>Personne</th>
                                     <th>observations.gpkg</th>
                                     <th>n2k.gpkg</th>
+                                    <th>w_.gpkg</th>
                                     <th>flore</th>
                                     <th>faune</th>
                                     <th>flore polygone</th>
@@ -151,7 +152,7 @@ if (in_array($_SESSION['email'], $admins)) {
 <!-- general.js -->
 <script type="text/javascript" src="js/general/general.js" ></script>
 <!-- Empty.js -->
-<script type="text/javascript" src="js/imports.js" ></script>
+<script type="text/javascript" src="js/imports.js?v=<?php echo filemtime('js/imports.js'); ?>" ></script>
 <script type="text/javascript">
 
 
