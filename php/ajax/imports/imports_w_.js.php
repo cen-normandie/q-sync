@@ -34,6 +34,30 @@ while($row = pg_fetch_row($personne))
 
     }
 
+    // Copie des photos (table w_photos) dans /var/www/html/q-sync/photos
+    // nom de destination : uuid_parent || photo_url
+    $photos_dir = '/var/www/html/q-sync/photos';
+    if (!file_exists($photos_dir)) {
+      mkdir($photos_dir, 0777, true);
+    }
+    $ge_dir = '/var/www/html/nextcloud/data/'.$row[3].'/files/_ge';
+    $db_photos = new SQLite3($w_gpkg);
+    $res_photos = $db_photos->query("SELECT uuid_parent, photo_url FROM w_photos WHERE photo_url IS NOT NULL AND photo_url <> '' ;");
+    while ($p = $res_photos->fetchArray(SQLITE3_ASSOC)) {
+      $src = $ge_dir.'/'.$p['photo_url'];
+      if (file_exists($src)) {
+        $dest = $photos_dir.'/'.$p['uuid_parent'].$p['photo_url'];
+        if (copy($src, $dest)) {
+          echo 'photo copiée : '.$p['uuid_parent'].$p['photo_url'].'</br>';
+        } else {
+          echo 'ERREUR copie photo : '.$src.'</br>';
+        }
+      } else {
+        echo 'photo introuvable : '.$p['photo_url'].'</br>';
+      }
+    }
+    $db_photos->close();
+
   }
 }
 
