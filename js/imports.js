@@ -147,6 +147,23 @@ $('#import_n2k').on('click', function() {
     });
 });
 
+$('#import_w_').on('click', function() {
+    $.ajax({
+        url      : "php/ajax/imports/imports_w_.js.php",
+        data     : {},
+        method   : "POST",
+        dataType : "text",
+        async    : true,
+        error    : function(request, error) { alert("Erreur : responseText: "+request.responseText);change_load();},
+        success  : function(data) {
+            change_load();
+            $('#console').empty();
+            $('#console').append( "<p>"+data+"</p>" );
+            file_scan ('console');
+            }
+    });
+});
+
 $('#file_scan').on('click', function() {
     $('#console').empty();
     $('#console').append( "<p>Scan des fichiers en cours...</p>" );

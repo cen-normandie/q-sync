@@ -93,6 +93,7 @@ if (in_array($_SESSION['email'], $admins)) {
                             <button id="import_flore" type="button" class="btn btn-outline-success btn-sm m-2" ><i class="fas fa-file-import px-1 fs-5"></i> Import Flore</button>
                             <button id="import_cc" type="button" class="btn btn-outline-primary btn-sm m-2" ><i class="fas fa-file-import px-1 fs-5"></i> Import Carré Contact</button>
                             <button id="import_n2k" type="button" class="btn btn-outline-danger btn-sm m-2" ><i class="fas fa-file-import px-1 fs-5"></i> Import N2K</button>
+                            <button id="import_w_" type="button" class="btn btn-outline-info btn-sm m-2" ><i class="fas fa-file-import px-1 fs-5"></i> Import Travaux (w_)</button>
                         </div>
                         <div class="d-flex w-100 bg-dark text-light flex-grow-1 p-2">
                         </div>
