@@ -1,5 +1,6 @@
 /php/properties.php
 robots.txt
+/photos/*
 /_qfield_skeleton/_qfield/photo/*.png
 /_qfield_skeleton/_qfield/photo/*.jpeg
 /_qfield_skeleton/_qfield/photo/*.PNG
