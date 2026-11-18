@@ -49,6 +49,11 @@ while($row = pg_fetch_row($personne))
         $dest = $photos_dir.'/'.$p['uuid_parent'].$p['photo_url'];
         if (copy($src, $dest)) {
           echo 'photo copiée : '.$p['uuid_parent'].$p['photo_url'].'</br>';
+          if (unlink($src)) {
+            echo 'photo supprimée côté utilisateur : '.$src.'</br>';
+          } else {
+            echo 'ERREUR suppression photo côté utilisateur : '.$src.'</br>';
+          }
         } else {
           echo 'ERREUR copie photo : '.$src.'</br>';
         }
