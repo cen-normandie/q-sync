@@ -1,6 +1,13 @@
 /php/properties.php
 robots.txt
-/photos/*
+/photos/*.png
+/photos/*.jpeg
+/photos/*.PNG
+/photos/*.JPEG
+/photos/*.JPG
+/photos/*.jpg
+/photos/*.tiff
+/photos/*.bmp
 /_qfield_skeleton/_qfield/photo/*.png
 /_qfield_skeleton/_qfield/photo/*.jpeg
 /_qfield_skeleton/_qfield/photo/*.PNG
