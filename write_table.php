@@ -45,6 +45,13 @@ if (in_array($_SESSION['email'], $admins)) {
     <!--Datatable bs5-->
     <link href="css/plugins/twitter_bs5.css" rel="stylesheet">
     <link href="css/plugins/dataTables.bootstrap5.min.css" rel="stylesheet">
+    <style>
+        .list-group.list-2col { flex-direction: row; flex-wrap: wrap; }
+        .list-group.list-2col > .list-group-item { flex: 0 0 50%; max-width: 50%; }
+        @media (max-width: 991.98px) {
+            .list-group.list-2col > .list-group-item { flex: 0 0 100%; max-width: 100%; }
+        }
+    </style>
   </head>
   <body>
 <div class="d-flex w-100 h-100 bg-light" style="min-height:100vh;">
@@ -54,8 +61,8 @@ if (in_array($_SESSION['email'], $admins)) {
 			<div class="m-2"><span class="text-light"><i class="fas fa-user"></i> <?php echo $_SESSION['email']; ?></span></div>
 			<div class="m-2"><a class="logout text-light" href="php/logout.php" ><i class="fa fa-fw fa-power-off"></i> Déconnexion</a></div>
 		</div>
-        <div class="d-flex flex-column justify-content-end" style="">
-            <div class="d-flex flex-column w-100">
+        <div class="d-flex flex-column justify-content-end flex-grow-1" style="">
+            <div class="d-flex flex-column w-100 flex-grow-1">
                 <div class="d-flex align-items-center justify-content-start bg-light text-dark m-2">
                     <h4 class="bebas my-0">Gestion du contenu Nextcloud :</h4>
                     <div id="loader" class=" bg-success loader my-0 mx-4 d-flex flex-wrap align-content-center flex-grow-1 visible_s" style="min-height: 1rem;"></div>    
@@ -63,13 +70,13 @@ if (in_array($_SESSION['email'], $admins)) {
                 <div class="d-flex align-items-center justify-content-start bg-light text-dark m-2">
                     <p>Remplacer les tables, les geopackages ou les projets QGIS depuis le dossier _qfield_skeleton pour l'ensemble des utilisateurs nextcloud</p>
                 </div>
-                <div class="d-flex w-100">
-                    <div class="d-flex flex-column col-sm-6 col-md-6 col-lg-3">
+                <div class="d-flex w-100 flex-grow-1">
+                    <div class="d-flex flex-column col-sm-6 col-md-6 col-lg-5">
                         <div class="d-flex align-items-center justify-content-start bg-dark text-light">
                             <h4 class="bebas my-0" >Observations.gpkg</h4>
                         </div>
                         <div class="d-flex flex-column w-100">
-                            <ul class="list-group">
+                            <ul class="list-group list-2col">
                                 <li class="list-group-item d-flex justify-content-between align-items-center"><span class="fw-bolder">remplacer observation.gpkg</span>     <button id="gpkg__observations" type="button" class="btn btn-danger"><i class="fas fa-retweet text-light px-1 fs-5"></i></button></li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center"><span class="fw-bolder">remplacer o_tax.qgz</span>     <button id="qgz__o_tax" type="button" class="btn btn-success"><i class="fas fa-retweet text-light px-1 fs-5"></i></button></li>
                                 <li class="list-group-item d-flex justify-content-between align-items-center"><span class="fw-bolder">remplacer contact.qgz</span>     <button id="qgz__contact" type="button" class="btn btn-success"><i class="fas fa-retweet text-light px-1 fs-5"></i></button></li>
@@ -95,6 +102,15 @@ if (in_array($_SESSION['email'], $admins)) {
                             </ul>
                         </div>
                         <div class="d-flex align-items-center justify-content-start bg-dark text-light">
+                            <h4 class="bebas my-0" >travaux w_.gpkg</h4>
+                        </div>
+                        <div class="d-flex flex-column w-100">
+                            <ul class="list-group">
+                                <li class="list-group-item d-flex justify-content-between align-items-center"><span class="fw-bolder">remplacer w_.gpkg</span>     <button id="gpkg__w_" type="button" class="btn btn-danger"><i class="fas fa-retweet text-light px-1 fs-5"></i></button></li>
+                                <li class="list-group-item d-flex justify-content-between align-items-center"><span class="fw-bolder">remplacer travaux.qgz</span>     <button id="qgz__travaux" type="button" class="btn btn-success"><i class="fas fa-retweet text-light px-1 fs-5"></i></button></li>
+                            </ul>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-start bg-dark text-light">
                             <h4 class="bebas my-0" >Delete files</h4>
                         </div>
                         <div class="d-flex flex-column w-100">
@@ -102,11 +118,11 @@ if (in_array($_SESSION['email'], $admins)) {
                                 <li class="list-group-item d-flex justify-content-between align-items-center"><input id="delete_file_name" type="text" class="fw-bolder" value="" >     <button id="delete_file" type="button" class="btn btn-danger"><i class="fas fa-trash"></i></button></li>
                             </ul>
                         </div>
-                        <div class="d-flex w-100 p-2 text-light bg-dark justify-content-end">
+                        <div class="d-flex w-100 p-2 text-light bg-dark justify-content-end mt-auto">
                             <h4 class="bebas my-0" >...</h4>
                         </div>
                     </div>
-                    <div class="d-flex flex-column col-sm-6 col-md-6 col-lg-9 bg-dark text-light">
+                    <div class="d-flex flex-column col-sm-6 col-md-6 col-lg-7 bg-dark text-light">
                         <div class="d-flex align-items-center justify-content-start bg-dark text-light p-2">
                             <p id="output_" class="d-flex flex-column m-0 " style="overflow-y: auto;max-height: 100%;">
                             </p>
