@@ -39,14 +39,16 @@ while($row = pg_fetch_row($personne))
     echo "status $retval ";
     echo '</br>';
   }
-  if ($gpkg == 'observations.gpkg') {
+  $meta_table = null;
+  if ($gpkg == 'observations.gpkg') { $meta_table = 'meta_qsync'; }
+  if ($gpkg == 'w_.gpkg') { $meta_table = 'w___observations__meta_qsync'; }
+  if ($meta_table !== null) {
     $db = new SQLite3($path_gpkg);
     $db->loadExtension('mod_spatialite.so');
-    //echo "UPDATE meta_qsync set gn_user_id = CAST(".$row[1]." AS integer), nextcloud_user_id = '".$row[3]."', ad_name = '".$row[2]."' ;";
-    $results_write_gpkg = $db->query("UPDATE meta_qsync set gn_user_id = CAST(".$row[1]." AS integer), nextcloud_user_id = '".$row[3]."', ad_name = '".$row[2]."' ;"); //
+    $results_write_gpkg = $db->query("UPDATE ".$meta_table." set gn_user_id = CAST(".$row[1]." AS integer), nextcloud_user_id = '".$row[3]."', ad_name = '".$row[2]."' ;");
     if ($results_write_gpkg) {
         echo $db->changes();
-        echo ' données mises à jour dans le gpkg ( meta_qsync )</br>';
+        echo ' données mises à jour dans le gpkg ( '.$meta_table.' )</br>';
     } else {echo "Erreur sur le gpkg : " . $db->lastErrorMsg(); }
     $db->close();
 
