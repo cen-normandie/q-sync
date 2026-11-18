@@ -46,7 +46,10 @@ if (r==true)
             $.ajax({
             url      : "php/ajax/write_gpkg.js.php",
             type     : "POST",
-            data     : {gpkg_name: $(this).attr("id").replace("gpkg__", "")+".gpkg", dir_nextcloud: $(this).attr("dir_nextcloud")},
+            data     : {
+                gpkg_name: $(this).attr("id").replace("gpkg__", "")+".gpkg", 
+                dir_nextcloud: $(this).attr("dir_nextcloud")
+            },
             async    : false,
             dataType : "text",
             error    : function(request, error) { console.log("not ajax success ");},

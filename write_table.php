@@ -167,7 +167,7 @@ if (in_array($_SESSION['email'], $admins)) {
 <!-- general.js -->
 <script type="text/javascript" src="js/general/general.js" ></script>
 <!-- Empty.js -->
-<script type="text/javascript" src="js/write_table.js" ></script>
+<script type="text/javascript" src="js/write_table.js?v=<?php echo filemtime('js/write_table.js'); ?>" ></script>
 <script type="text/javascript">
 
 
