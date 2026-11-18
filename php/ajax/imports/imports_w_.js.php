@@ -34,31 +34,33 @@ while($row = pg_fetch_row($personne))
 
     }
 
-    // Copie des photos (table w_photos) dans /var/www/html/q-sync/photos
-    // nom de destination : uuid_parent || photo_url
+    // Copie des photos présentes dans le dossier _ge de l'utilisateur vers /var/www/html/q-sync/photos
+    // nom de destination : uuid_parent || photo_url (uuid_parent retrouvé dans w_photos via le nom du fichier)
     $photos_dir = '/var/www/html/q-sync/photos';
-    if (!file_exists($photos_dir)) {
-      mkdir($photos_dir, 0777, true);
+    if (!is_dir($photos_dir)) { @mkdir($photos_dir, 0777, true); }
+    if (!is_writable($photos_dir)) {
+      echo 'ERREUR : le dossier '.$photos_dir.' n\'est pas accessible en écriture par le serveur web</br>';
     }
     $ge_dir = '/var/www/html/nextcloud/data/'.$row[3].'/files/_ge';
     $db_photos = new SQLite3($w_gpkg);
-    $res_photos = $db_photos->query("SELECT uuid_parent, photo_url FROM w_photos WHERE photo_url IS NOT NULL AND photo_url <> '' ;");
-    while ($p = $res_photos->fetchArray(SQLITE3_ASSOC)) {
-      $src = $ge_dir.'/'.$p['photo_url'];
-      if (file_exists($src)) {
-        $dest = $photos_dir.'/'.$p['uuid_parent'].$p['photo_url'];
-        if (copy($src, $dest)) {
-          echo 'photo copiée : '.$p['uuid_parent'].$p['photo_url'].'</br>';
-          if (unlink($src)) {
-            echo 'photo supprimée côté utilisateur : '.$src.'</br>';
-          } else {
-            echo 'ERREUR suppression photo côté utilisateur : '.$src.'</br>';
-          }
+    $photos_files = array_merge(
+      (array) glob($ge_dir.'/*.jpg'), (array) glob($ge_dir.'/*.jpeg'), (array) glob($ge_dir.'/*.png'),
+      (array) glob($ge_dir.'/*.JPG'), (array) glob($ge_dir.'/*.JPEG'), (array) glob($ge_dir.'/*.PNG')
+    );
+    foreach ($photos_files as $src) {
+      $photo_url = basename($src);
+      $uuid_parent = $db_photos->querySingle("SELECT uuid_parent FROM w_photos WHERE photo_url = '".SQLite3::escapeString($photo_url)."' LIMIT 1;");
+      $dest_name = ($uuid_parent) ? $uuid_parent.$photo_url : $photo_url;
+      $dest = $photos_dir.'/'.$dest_name;
+      if (copy($src, $dest)) {
+        echo 'photo copiée : '.$dest_name.'</br>';
+        if (unlink($src)) {
+          echo 'photo supprimée côté utilisateur : '.$src.'</br>';
         } else {
-          echo 'ERREUR copie photo : '.$src.'</br>';
+          echo 'ERREUR suppression photo côté utilisateur : '.$src.'</br>';
         }
       } else {
-        echo 'photo introuvable : '.$p['photo_url'].'</br>';
+        echo 'ERREUR copie photo : '.$src.'</br>';
       }
     }
     $db_photos->close();
