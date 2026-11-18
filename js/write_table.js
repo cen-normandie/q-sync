@@ -10,7 +10,9 @@ if (r==true)
          type     : "POST",
          data     : {
             table_name: $(this).attr('table'), 
-            gpkg_name : $(this).attr('gpkg')},
+            gpkg_name : $(this).attr('gpkg'),
+            dir_nextcloud : $(this).attr('dir_nextcloud')
+         },
          async    : false,
          dataType : "text",
          error    : function(request, error) { console.log("not ajax success ");},
@@ -44,7 +46,7 @@ if (r==true)
             $.ajax({
             url      : "php/ajax/write_gpkg.js.php",
             type     : "POST",
-            data     : {gpkg_name: $(this).attr("id").replace("gpkg__", "")+".gpkg"},
+            data     : {gpkg_name: $(this).attr("id").replace("gpkg__", "")+".gpkg", dir_nextcloud: $(this).attr("dir_nextcloud")},
             async    : false,
             dataType : "text",
             error    : function(request, error) { console.log("not ajax success ");},
@@ -76,7 +78,7 @@ $('#delete_file').click( function () {
         $.ajax({
             url      : "php/ajax/delete_file.js.php",
             type     : "POST",
-            data     : {file_name: $('#delete_file_name').val()},
+            data     : {file_name: $('#delete_file_name').val(), delete_file_dir: $('#delete_file_dir').val()},
             async    : false,
             dataType : "text",
             error    : function(request, error) { console.log("not ajax success ");},
@@ -108,7 +110,7 @@ if (r==true)
             $.ajax({
             url      : "php/ajax/write_qgz.js.php",
             type     : "POST",
-            data     : {qgz_name: $(this).attr("id").replace("qgz__", "")+".qgz"},
+            data     : {qgz_name: $(this).attr("id").replace("qgz__", "")+".qgz", dir_nextcloud: $(this).attr("dir_nextcloud")},
             async    : false,
             dataType : "text",
             error    : function(request, error) { console.log("not ajax success ");},

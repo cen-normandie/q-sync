@@ -5,6 +5,7 @@ $output=null;
 $retval=null;
 
 $filename = $_POST['file_name'];
+$delete_file_dir = $_POST['delete_file_dir'];
 
 $dbconn_geo = pg_connect("hostaddr=$DBHOST_geonature port=$PORT_geonature dbname=$DBNAME_geonature user=$LOGIN_geonature password=$PASS_geonature") or die ('Connexion impossible :'. pg_last_error());
 $dbconn_nx = pg_connect("hostaddr=$DBHOST_nextcloud port=$PORT_nextcloud dbname=$DBNAME_nextcloud user=$LOGIN_nextcloud password=$PASS_nextcloud") or die ('Connexion impossible :'. pg_last_error());
@@ -13,7 +14,7 @@ $select = pg_prepare($dbconn_geo, "sql_select", "select courriel, gn_user_name, 
 $personne = pg_execute($dbconn_geo, "sql_select",array()) or die ( pg_last_error());
 while($row = pg_fetch_row($personne))
 {
-  $path_file = '/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/'.$filename.'';
+  $path_file = '/var/www/html/nextcloud/data/'.$row[3].'/files/'.$delete_file_dir.'/'.$filename.'';
   if (file_exists($path_file)) {
     echo '</br>#########' .$row[0].'</br>';
     echo 'suppression de '.$path_file.' ...</br>';

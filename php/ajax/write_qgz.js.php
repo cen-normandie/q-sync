@@ -5,6 +5,7 @@ $output=null;
 $retval=null;
 
 $qgz = $_POST['qgz_name'];
+$dir_nextcloud = $_POST['dir_nextcloud'];
 
 $dbconn_geo = pg_connect("hostaddr=$DBHOST_geonature port=$PORT_geonature dbname=$DBNAME_geonature user=$LOGIN_geonature password=$PASS_geonature") or die ('Connexion impossible :'. pg_last_error());
 $dbconn_nx = pg_connect("hostaddr=$DBHOST_nextcloud port=$PORT_nextcloud dbname=$DBNAME_nextcloud user=$LOGIN_nextcloud password=$PASS_nextcloud") or die ('Connexion impossible :'. pg_last_error());
@@ -16,22 +17,22 @@ $select = pg_prepare($dbconn_geo, "sql_select", "select courriel, gn_user_name, 
 $personne = pg_execute($dbconn_geo, "sql_select",array()) or die ( pg_last_error());
 while($row = pg_fetch_row($personne))
 {
-  $path_qgz = '/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/'.$qgz.'';
+  $path_qgz = '/var/www/html/nextcloud/data/'.$row[3].'/files/'.$dir_nextcloud.'/'.$qgz.'';
   echo '</br>#########' .$row[0].'</br>';
-  if (!file_exists('/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/')) {
+  if (!file_exists('/var/www/html/nextcloud/data/'.$row[3].'/files/'.$dir_nextcloud.'/')) {
     echo 'Le dossier n\'existe pas. Création en cours...</br>';
-    mkdir('/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/', 0777, true);
+    mkdir('/var/www/html/nextcloud/data/'.$row[3].'/files/'.$dir_nextcloud.'/', 0777, true);
   }
 
   if (file_exists($path_qgz)) {
     echo "Mise à jour du fichier...</br>";
-    exec("cp /var/www/html/q-sync/_qfield_skeleton/_qfield/".$qgz." ".$path_qgz, $output, $retval);
+    exec("cp /var/www/html/q-sync/_qfield_skeleton/".$dir_nextcloud."/".$qgz." ".$path_qgz, $output, $retval);
     echo "status $retval ";
     echo '</br>';
   }
   else {
     echo "Le fichier $path_qgz n'existe pas. Création en cours...</br>";
-    exec("cp /var/www/html/q-sync/_qfield_skeleton/_qfield/".$qgz." ".$path_qgz, $output, $retval);
+    exec("cp /var/www/html/q-sync/_qfield_skeleton/".$dir_nextcloud."/".$qgz." ".$path_qgz, $output, $retval);
     echo "status $retval ";
     echo '</br>';
   }

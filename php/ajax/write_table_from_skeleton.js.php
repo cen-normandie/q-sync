@@ -12,13 +12,18 @@ if (empty($gpkg)) {
     echo "GPKG name is required.";
     exit();
 }
+$dir_nextcloud = $_POST['dir_nextcloud'];
+if (empty($dir_nextcloud)) {
+    echo "Directory name is required.";
+    exit();
+}
 
 //exec("sqlite3 /var/www/html/q-sync/_qfield_skeleton/". $gpkg ." '.dump ".$table."' > /var/www/html/q-sync/_qfield_skeleton/dumps/".$table.".sql", $output, $retval);
 
 echo 'modification de table </br>';
 
 // Création de la sauvegarde d'une table
-$db = new SQLite3('/var/www/html/q-sync/_qfield_skeleton/_qfield/'. $gpkg , SQLITE3_OPEN_READWRITE);
+$db = new SQLite3('/var/www/html/q-sync/_qfield_skeleton/'.$dir_nextcloud.'/'.$gpkg, SQLITE3_OPEN_READWRITE);
 $fichier = "/var/www/html/q-sync/dumps/".$table.".sql";
 $handle = fopen($fichier, 'w');
 // Exporter la structure
@@ -53,7 +58,16 @@ $select = pg_prepare($dbconn_geo, "sql_select", "select courriel, gn_user_name, 
 $personne = pg_execute($dbconn_geo, "sql_select",array()) or die ( pg_last_error());
 while($row = pg_fetch_row($personne))
 {
-  $path_gpkg = '/var/www/html/nextcloud/data/'.$row[3].'/files/_qfield/'. $gpkg;
+  $path_gpkg = '/var/www/html/nextcloud/data/'.$row[3].'/files/'.$dir_nextcloud.'/'.$gpkg;
+  if (!file_exists('/var/www/html/nextcloud/data/'.$row[3].'/files/'.$dir_nextcloud.'/')) {
+    echo 'Le dossier n\'existe pas. Création en cours...</br>';
+    mkdir('/var/www/html/nextcloud/data/'.$row[3].'/files/'.$dir_nextcloud.'/', 0777, true);
+  }
+  if (!file_exists($path_gpkg)) {
+    echo "Le fichier $path_gpkg n'existe pas. Création en cours...</br>";
+    exec("cp /var/www/html/q-sync/_qfield_skeleton/".$dir_nextcloud."/".$gpkg." ".$path_gpkg, $output, $retval);
+    echo "status $retval </br>";
+  }
   if (file_exists($path_gpkg)) {
 
     echo '</br>#########</br>' .$row[0].'</br>';
