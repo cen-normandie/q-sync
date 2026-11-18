@@ -6,7 +6,7 @@ $dbconn_geo = pg_connect("hostaddr=$DBHOST_geonature port=$PORT_geonature dbname
 $select = pg_prepare($dbconn_geo, "sql_select", "select courriel, gn_user_name, nom_ad, uuid_nx from $nx_users where observations_gpkg <> 'ø' and (obs_flore > 0 or obs_flore_polygone > 0 );");
 
 // desactive import dans géonature
-pg_prepare($dbconn_geo, "sql_import_occtax", "select sandbox.import_flore_();");
+gpg_prepare($dbconn_geo, "sql_import_occtax", "select sandbox.import_flore_();");
 
 
 //$delete = pg_prepare($dbconn_geo, "sql_delete", "delete from sandbox.obs_flore_tmp ;");
