@@ -9,6 +9,7 @@ CREATE TABLE IF NOT EXISTS sandbox.w_
     commentaire character varying COLLATE pg_catalog."default",
     date_saisie date,
     action character varying COLLATE pg_catalog."default",
+    liste_action character varying COLLATE pg_catalog."default",
     operateur character varying COLLATE pg_catalog."default",
     etat character varying COLLATE pg_catalog."default",
     projet character varying COLLATE pg_catalog."default",
